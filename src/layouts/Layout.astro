@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content="Kaba Digital Inc. - Transform your digital future with our expert solutions in UX Design, AI Workflows, Cloud Consulting, and SEO Optimization." />
+    <meta name="keywords" content="digital transformation, UX design, AI solutions, cloud consulting, SEO optimization" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Transform your digital future with Kaba Digital Inc." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://kabadigital.com" />
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>

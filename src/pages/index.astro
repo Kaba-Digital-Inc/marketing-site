@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero';
+import Services from '../components/Services';
+import Process from '../components/Process';
+import Contact from '../components/Contact';
+import FloatingContact from '../components/FloatingContact';
+import Navigation from '../components/Navigation';
+import '@/styles/globals.css';
+---
+
+<Layout title="Kaba Digital Inc. | Digital Transformation Experts">
+  <Navigation client:load />
+  <main class="relative">
+    <Hero client:load />
+    <Services client:load />
+    <Process client:load />
+    <Contact client:load />
+    <FloatingContact client:load />
+  </main>
+</Layout>
