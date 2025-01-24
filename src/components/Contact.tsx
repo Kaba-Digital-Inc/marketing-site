@@ -29,7 +29,7 @@ export default function Contact() {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          to: "team@kabadigital.com"
+          to: "team@kabadigitalinc.com"
         }),
       });
 
@@ -102,7 +102,7 @@ export default function Contact() {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Mail className="h-5 w-5 mr-3" />
-                  <span>team@kabadigital.com</span>
+                  <span>team@kabadigitalinc.com</span>
                 </div>
                 <div className="flex items-start">
                   <MapPin className="h-5 w-5 mr-3 mt-1" />
