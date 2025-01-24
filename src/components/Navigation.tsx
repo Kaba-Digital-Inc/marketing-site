@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "Home", href: "#hero" },
   { label: "Services", href: "#services" },
-  { label: "Tech Stack", href: "#tech-stack" },
+  { label: "Our Process", href: "#process" },
   { label: "Contact", href: "#contact" }
 ];
 
@@ -27,7 +27,7 @@ export default function Navigation() {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <a href="#" className="text-2xl font-bold text-white">KABA</a>
+          <a href="#" className="text-xl font-bold text-white">Kaba Digital Inc.</a>
           
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
@@ -39,7 +39,6 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
-            <Button>Get Started</Button>
           </div>
 
           <Button
@@ -66,7 +65,6 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
-            <Button className="w-full mt-4">Get Started</Button>
           </div>
         </div>
       )}
