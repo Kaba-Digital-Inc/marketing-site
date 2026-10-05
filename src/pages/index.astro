@@ -1,19 +1,38 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/site/Hero.astro";
-import StackStrip from "@/components/site/StackStrip.astro";
+import Doors from "@/components/site/Doors.astro";
 import ServicesGrid from "@/components/site/ServicesGrid.astro";
-import CloudflareBand from "@/components/site/CloudflareBand.astro";
 import ProductsSection from "@/components/site/ProductsSection.astro";
+import OfferLadder from "@/components/site/OfferLadder.astro";
 import ProcessTimeline from "@/components/site/ProcessTimeline.astro";
-import EngagementModels from "@/components/site/EngagementModels.astro";
+import FAQ from "@/components/site/FAQ.astro";
 import CTA from "@/components/site/CTA.astro";
+
+const faqs = [
+  {
+    q: "What does an AI engineering studio do?",
+    a: "We design, build, and run production AI systems: agents that do real work inside your operations, voice and retrieval systems, and AI features in products. We also help decide where AI is worth using, and where it is not.",
+  },
+  {
+    q: "How is this different from a typical AI consultancy?",
+    a: "We build the systems, not only the plan. Our work ships with evaluation, guardrails, and monitoring, and we hand over documentation your team can own. The engineers who scope the work are the ones who build it.",
+  },
+  {
+    q: "Do you work with small businesses, or only large companies?",
+    a: "Both, and startups too. Small and mid-sized businesses usually begin with a fixed-scope AI-Native Audit. Larger organisations typically need help taking pilots into production, with governance and security review.",
+  },
+  {
+    q: "Where are you based?",
+    a: "Toronto, Canada. We work with teams worldwide, remotely and by video.",
+  },
+];
 ---
 
-<Layout title="AI agents and apps, built on Cloudflare">
+<Layout title="AI engineering studio: become AI-native">
   <Hero />
 
-  <StackStrip />
+  <Doors />
 
   <section class="border-t border-line py-20 lg:py-28">
     <div class="shell">
@@ -33,18 +52,13 @@ import CTA from "@/components/site/CTA.astro";
     </div>
   </section>
 
-  <CloudflareBand />
+  <OfferLadder />
 
   <ProductsSection />
 
   <ProcessTimeline />
 
-  <EngagementModels />
+  <FAQ items={faqs} heading="About the studio" />
 
   <CTA />
 </Layout>
-
-<script>
-  import LogRocket from "logrocket";
-  LogRocket.init("mp0ois/kaba-digital-inc");
-</script>

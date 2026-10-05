@@ -1,0 +1,56 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTA from "@/components/site/CTA.astro";
+import { getCollection, render } from "astro:content";
+import { site } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("insights");
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) => d.toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const minutes = Math.max(2, Math.round((post.body ?? "").split(/\s+/).length / 210));
+const url = new URL(`/insights/${post.id}/`, site.url).href;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  dateModified: post.data.date.toISOString(),
+  mainEntityOfPage: url,
+  image: new URL("/og.png", site.url).href,
+  author: { "@id": site.url + "/#organization" },
+  publisher: { "@id": site.url + "/#organization" },
+};
+---
+
+<Layout
+  title={post.data.seoTitle ?? post.data.title}
+  description={post.data.description}
+  ogType="article"
+  schema={[articleSchema]}
+  crumbLabel={post.data.title}
+>
+  <article class="border-b border-line">
+    <header class="shell pt-14 lg:pt-20">
+      <a href="/insights/" class="link-underline text-[14px] text-ink-mute">← All insights</a>
+      <p class="label-mono mt-8">{post.data.category}</p>
+      <h1 class="text-title mt-4 max-w-[22ch] font-display font-semibold text-ink text-balance">{post.data.title}</h1>
+      <p class="mt-6 text-[14px] text-ink-mute">
+        <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time> · {minutes} min read · {site.shortName}
+      </p>
+    </header>
+    <div class="shell pb-16 pt-10 lg:pb-24">
+      <div class="prose-kaba max-w-[68ch]">
+        <Content />
+      </div>
+    </div>
+  </article>
+  <CTA />
+</Layout>

@@ -1,29 +1,51 @@
 ---
-import StackDiagram from "./StackDiagram.astro";
+import Figure from "@/components/Figure";
+import { audit } from "@/lib/site";
 
 const steps = [
   {
-    title: "A user talks to your agent",
-    body: "Browser, mobile app, or a plain HTTP call. The request lands on a Worker, which is the only entry point you need.",
+    title: "Something arrives",
+    body: "An email, a form, a call, a file. The trigger is whatever your team already handles by hand today.",
   },
   {
-    title: "The agent holds the conversation",
-    body: "Every agent is a Durable Object with its own identity, memory, and SQLite. It wakes on a message and sleeps when idle.",
+    title: "The agent does the work",
+    body: "It reads, checks, decides, and acts across your tools, following rules you wrote and can read.",
   },
   {
-    title: "It reaches your data and tools",
-    body: "Vectorize for retrieval, D1 and R2 for state and files, Workflows for long jobs, MCP for the systems you already run.",
+    title: "A person approves what matters",
+    body: "Routine cases run alone. Anything above a threshold you set waits for a human, with the reasoning attached.",
   },
   {
-    title: "Inference runs where the app does",
-    body: "Workers AI and AI Gateway handle models, routing, caching, and fallback, so quality and cost stay observable.",
+    title: "Everything is logged and measured",
+    body: "Each step is recorded and replayable, so you can audit it, improve it, and show the result.",
   },
 ];
 
-const links = [
-  { label: "See what we build", href: "/services" },
-  { label: "Cloudflare engineering", href: "/cloudflare" },
+// Illustrative workflow, not a real client system.
+const code = [
+  { n: 1, t: [["k", "workflow"], ["p", ": "], ["s", "invoice-triage"]] },
+  { n: 2, t: [["k", "trigger"], ["p", ": "], ["s", "email.received"]] },
+  { n: 3, t: [["k", "steps"], ["p", ":"]] },
+  { n: 4, t: [["p", "  - "], ["k", "read"], ["p", ": "], ["s", "attachments"], ["p", " → "], ["s", "extract(fields)"]] },
+  { n: 5, t: [["p", "  - "], ["k", "check"], ["p", ": "], ["s", "total matches purchase order"]] },
+  { n: 6, t: [["p", "  - "], ["k", "approve"], ["p", ": "], ["s", "human"], ["p", " if "], ["n", "amount > 5000"]] },
+  { n: 7, t: [["p", "  - "], ["k", "write"], ["p", ": "], ["s", "accounting.create_bill"]] },
+  { n: 8, t: [["k", "audit"], ["p", ": "], ["s", "every step logged, replayable"]] },
 ];
+
+const log = [
+  { time: "09:14:02", mark: "✓", color: "text-emerald-400", step: "read", msg: "6 fields extracted from invoice.pdf" },
+  { time: "09:14:03", mark: "!", color: "text-[#f2b35e]", step: "check", msg: "total differs from PO by $42.10" },
+  { time: "09:14:03", mark: "→", color: "text-signal", step: "approve", msg: "sent to Finance, reasoning attached" },
+  { time: "09:21:40", mark: "✓", color: "text-emerald-400", step: "write", msg: "approved, bill created in accounting" },
+];
+
+const tone: Record<string, string> = {
+  k: "text-signal",
+  p: "text-chalk-mute",
+  s: "text-chalk",
+  n: "text-[#f2b35e]",
+};
 ---
 
 <section class="relative overflow-hidden">
@@ -33,35 +55,93 @@ const links = [
   >
   </div>
 
-  <div class="shell relative pt-16 lg:pt-24">
-    <span class="kicker">AI engineering studio</span>
+  <div class="shell relative pt-14 lg:pt-20">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-6">
+      <div>
+        <span class="kicker">AI engineering studio</span>
 
-    <h1 class="text-display mt-7 max-w-[16ch] font-display font-semibold text-chalk text-balance">
-      We build AI agents and apps on Cloudflare.
-    </h1>
+        <h1 class="text-display mt-6 max-w-[15ch] font-display font-semibold text-chalk text-balance">
+          We help businesses become AI-native.
+        </h1>
 
-    <div class="mt-9 grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-      <p class="measure text-[17px] leading-relaxed text-chalk-soft text-pretty">
-        Kaba Digital Inc. designs and ships production AI systems end to end: agent orchestration, inference,
-        retrieval, storage, and the security around them. Cloudflare is the whole platform, not just the front door.
-      </p>
-      <div class="flex flex-col gap-3 sm:flex-row lg:justify-end">
-        <a href="/contact" class="btn-solid">Start a project</a>
-        <a href="/services" class="btn-quiet">See what we build</a>
+        <p class="measure mt-7 text-[17px] leading-relaxed text-chalk-soft text-pretty">
+          Production AI agents, automation, and products, engineered to enterprise standards and delivered at
+          small-team speed. From your first workflow to your whole operation.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="/ai-native#audit" class="btn-solid">Book an {audit.name}</a>
+          <a href="/ai-native" class="btn-quiet">See how it works</a>
+        </div>
+
+        <p class="label-mono mt-8">Built in regulated enterprise environments · Used by startups to large teams</p>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-[460px] origin-center sm:scale-[1.15] lg:max-w-none lg:scale-[1.35]">
+        <Figure
+          client:visible
+          name="exploded"
+          label="An application shown in four separated layers, standing for the layers of an AI system"
+          intensity={0.7}
+          plate="#08090a"
+        />
       </div>
     </div>
   </div>
 
-  <!-- The one orchestrated moment: the request path through the stack -->
-  <div class="shell relative pb-20 pt-14 lg:pb-24">
+  <div class="shell relative pb-20 pt-12 lg:pb-24">
     <div class="panel relative overflow-hidden">
-      <div class="grid lg:grid-cols-[0.95fr_1.05fr]">
-        <div class="px-7 py-10 sm:px-10 lg:py-14">
-          <h2 class="font-display text-[30px] font-semibold leading-tight tracking-tight text-chalk sm:text-[34px]">
-            <span class="text-signal">How</span> it works
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr]">
+        <div class="border-b border-line lg:border-b-0 lg:border-r">
+          <div class="flex items-center gap-2 border-b border-line px-5 py-3">
+            <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
+            <span class="label-mono ml-3 normal-case tracking-normal">workflow.yaml</span>
+            <span class="label-mono ml-auto">example</span>
+          </div>
+          <div
+            class="overflow-x-auto px-5 py-6 font-mono text-[13px] leading-[1.9] sm:px-7 sm:text-[13.5px]"
+            role="img"
+            aria-label="Example AI workflow definition: an invoice triage workflow that reads attachments, checks totals against the purchase order, asks a human to approve large amounts, writes the bill, and logs every step."
+          >
+            {
+              code.map((line) => (
+                <div class="flex gap-4">
+                  <span class="w-4 shrink-0 select-none text-right text-chalk-mute/60">{line.n}</span>
+                  <span class="whitespace-pre">
+                    {line.t.map(([c, s]) => (
+                      <span class={tone[c]}>{s}</span>
+                    ))}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="border-t border-line px-5 py-5 font-mono text-[12.5px] leading-[1.9] sm:px-7">
+            <p class="label-mono mb-3">Run log · example</p>
+            <ul class="space-y-0.5 overflow-x-auto">
+              {
+                log.map((l) => (
+                  <li class="flex gap-3 whitespace-nowrap">
+                    <span class="text-chalk-mute/60">{l.time}</span>
+                    <span class={l.color}>{l.mark}</span>
+                    <span class="w-[4.5rem] text-chalk-mute">{l.step}</span>
+                    <span class="text-chalk-soft">{l.msg}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div class="px-7 py-10 sm:px-10 lg:py-12">
+          <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight text-chalk sm:text-[32px]">
+            <span class="text-signal">How</span> an AI-native workflow runs
           </h2>
 
-          <ol class="mt-9 space-y-8">
+          <ol class="mt-8 space-y-7">
             {
               steps.map((step, i) => (
                 <li class="flex gap-5">
@@ -85,33 +165,6 @@ const links = [
             }
           </ol>
         </div>
-
-        <div class="relative min-h-[380px] border-t border-line lg:border-l lg:border-t-0">
-          <StackDiagram />
-        </div>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-3 border-t border-line px-7 py-6 sm:px-10">
-        <a
-          href="/services"
-          class="inline-flex items-center gap-2 rounded-lg border border-line-2 px-4 py-2.5 text-[14px] text-chalk-soft transition-colors hover:border-chalk-mute hover:text-chalk"
-        >
-          <svg viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M5 3h8l3 3v11H5z" />
-            <path d="M8 9h5M8 12h5" />
-          </svg>
-          What we do
-          <span class="text-chalk-mute">↗</span>
-        </a>
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class="inline-flex items-center gap-2 rounded-lg border border-line-2 px-4 py-2.5 text-[14px] text-chalk-soft transition-colors hover:border-chalk-mute hover:text-chalk"
-          >
-            {link.label}
-            <span class="text-chalk-mute">↗</span>
-          </a>
-        ))}
       </div>
     </div>
   </div>

@@ -1,0 +1,73 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import CTA from "@/components/site/CTA.astro";
+import { site } from "@/lib/site";
+
+const steps = [
+  ["Local rules", "Privacy, data residency, and sector rules differ by country, province, and state. We account for them when we design a system."],
+  ["Local industries", "The best first workflow depends on what dominates the local economy, so we tailor examples and starting points."],
+  ["Local presence", "We add a dedicated page only when we can say something specific and true about a market."],
+];
+---
+
+<Layout
+  title="Where we work: Toronto and worldwide"
+  description="Kaba Digital is based in Toronto, Canada and works with teams worldwide. How we adapt AI engineering to local rules and industries."
+>
+  <PageHero
+    kicker="Locations"
+    title="Based in Toronto. Working worldwide."
+    lede="We work remotely with teams in many countries. Where a market has its own rules and industries, we publish a page that covers them."
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Our approach</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            AI engineering adapts to where you operate.
+          </h2>
+          <dl class="mt-9 border-t border-line">
+            {
+              steps.map(([k, v]) => (
+                <div class="border-b border-line py-5">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="mt-1.5 text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div>
+          <span class="kicker">Markets</span>
+          <ul class="mt-8 border-t border-line">
+            <li>
+              <a href="/locations/toronto/" class="group flex items-center justify-between gap-6 border-b border-line py-6">
+                <div>
+                  <h3 class="font-display text-[22px] font-semibold text-ink transition-colors group-hover:text-signal">
+                    Toronto, Canada
+                  </h3>
+                  <p class="mt-1.5 text-[14.5px] text-ink-mute">Headquarters. In person by appointment, remote by default.</p>
+                </div>
+                <span class="text-signal transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li class="border-b border-line py-6">
+              <h3 class="font-display text-[22px] font-semibold text-ink">Everywhere else</h3>
+              <p class="mt-1.5 text-[14.5px] text-ink-mute">
+                Remote engagements by video. Tell us where you operate and we will account for local data and privacy
+                rules.
+              </p>
+              <a href={`mailto:${site.email}`} class="link-underline mt-4 inline-block text-[15px]">Ask about your market</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

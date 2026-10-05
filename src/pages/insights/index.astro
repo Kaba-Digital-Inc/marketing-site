@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import CTA from "@/components/site/CTA.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("insights")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const minutes = (body: string | undefined) => Math.max(2, Math.round((body ?? "").split(/\s+/).length / 210));
+---
+
+<Layout
+  title="Insights: AI guides for business"
+  description="Practical guides on adopting AI: where to start, build versus buy, and governance. Written by the engineers who build the systems."
+>
+  <PageHero
+    kicker="Insights"
+    title="Practical guides on putting AI to work."
+    lede="Plain-language writing from the engineers who build these systems, for owners, operators, and technology leaders."
+    figure="terminal"
+    figureLabel="A terminal window with its history in rows"
+  />
+
+  <section class="py-16 lg:py-24">
+    <div class="shell">
+      <ul class="border-t border-line">
+        {
+          posts.map((p) => (
+            <li class="border-b border-line">
+              <a href={`/insights/${p.id}/`} class="group grid gap-4 py-8 sm:grid-cols-[0.35fr_1fr] sm:gap-10">
+                <div class="text-[13.5px] text-ink-mute">
+                  <p class="label-mono">{p.data.category}</p>
+                  <p class="mt-2">{fmt(p.data.date)} · {minutes(p.body)} min read</p>
+                </div>
+                <div>
+                  <h2 class="font-display text-[24px] font-semibold leading-snug text-ink transition-colors group-hover:text-signal">
+                    {p.data.title}
+                  </h2>
+                  <p class="measure mt-3 text-[16px] leading-relaxed text-ink-soft text-pretty">{p.data.description}</p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

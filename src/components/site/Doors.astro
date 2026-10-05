@@ -1,0 +1,77 @@
+---
+import Figure from "@/components/Figure";
+
+const doors = [
+  {
+    kicker: "Small and mid-sized business",
+    title: "Become AI-native",
+    body: "Find the workflows AI should take over, ship the first one in weeks, and build from there. Practical, measured, no jargon.",
+    href: "/ai-native",
+    cta: "See the path",
+    figure: "laptop" as const,
+    label: "A laptop with its lid opening, standing for a business getting started",
+    featured: true,
+  },
+  {
+    kicker: "Startups, seed to Series B",
+    title: "Ship the AI product",
+    body: "An agent or AI feature in users' hands without hiring a team first. Built to survive your next stage of growth.",
+    href: "/startups",
+    cta: "Build with us",
+    figure: "terrain" as const,
+    label: "A field of pillars rising, standing for growth",
+    featured: false,
+  },
+  {
+    kicker: "Enterprise teams",
+    title: "Take pilots to production",
+    body: "Architecture, guardrails, evaluation, and integration that pass security review and keep working at scale.",
+    href: "/enterprise",
+    cta: "Talk to us",
+    figure: "vault" as const,
+    label: "A vault door, standing for security and governance",
+    featured: false,
+  },
+];
+---
+
+<section class="border-t border-line py-20 lg:py-28">
+  <div class="shell">
+    <div class="max-w-2xl">
+      <span class="kicker">Who we help</span>
+      <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+        The same engineering standard, whatever your size.
+      </h2>
+      <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+        We have shipped AI inside regulated enterprise environments and for fast-moving startups. Smaller businesses
+        get that rigor without the enterprise price tag or timeline.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
+      {
+        doors.map((d) => (
+          <a
+            href={d.href}
+            class={`group panel flex flex-col overflow-hidden transition-colors hover:border-line-2 ${
+              d.featured ? "lg:-mt-2 lg:border-signal/40" : ""
+            }`}
+          >
+            <div class="border-b border-line bg-void">
+              <Figure client:visible name={d.figure} label={d.label} intensity={0.55} plate="#08090a" followParent=".group" />
+            </div>
+            <div class="flex flex-1 flex-col p-7">
+              <span class="label-mono">{d.kicker}</span>
+              <h3 class="mt-3 font-display text-[24px] font-semibold leading-tight text-chalk">{d.title}</h3>
+              <p class="mt-3 flex-1 text-[15px] leading-relaxed text-chalk-soft text-pretty">{d.body}</p>
+              <span class="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-signal">
+                {d.cta}
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

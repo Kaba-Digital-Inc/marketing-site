@@ -241,6 +241,13 @@
     transition-property: transform, opacity;
   }
 
+  /* Touch target: expands the clickable area to at least 44px without moving anything */
+  .link-underline::before {
+    content: "";
+    position: absolute;
+    inset: -12px -6px;
+  }
+
   .link-underline:hover::after {
     transform: scaleX(0);
     transform-origin: right;
@@ -342,5 +349,89 @@
   .pulse-out,
   .dash-drift {
     animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Long-form reading: Markdown articles in /insights
+--------------------------------------------------------------------------- */
+@layer components {
+  .prose-kaba {
+    color: var(--color-chalk-soft);
+    font-size: 17.5px;
+    line-height: 1.75;
+  }
+
+  .prose-kaba > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .prose-kaba h2 {
+    margin-top: 2.75rem;
+    font-size: 1.65rem;
+    line-height: 1.2;
+    color: var(--color-chalk);
+  }
+
+  .prose-kaba h3 {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    color: var(--color-chalk);
+  }
+
+  .prose-kaba strong {
+    color: var(--color-chalk);
+    font-weight: 600;
+  }
+
+  .prose-kaba a {
+    color: var(--color-signal);
+    text-decoration: underline;
+    text-decoration-color: rgba(53, 214, 245, 0.4);
+    text-underline-offset: 3px;
+  }
+
+  .prose-kaba a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .prose-kaba ul,
+  .prose-kaba ol {
+    padding-left: 1.4rem;
+  }
+
+  .prose-kaba ul {
+    list-style: disc;
+  }
+
+  .prose-kaba ol {
+    list-style: decimal;
+  }
+
+  .prose-kaba li + li {
+    margin-top: 0.5rem;
+  }
+
+  .prose-kaba li::marker {
+    color: var(--color-signal);
+  }
+
+  .prose-kaba table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  .prose-kaba th,
+  .prose-kaba td {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .prose-kaba th {
+    color: var(--color-chalk);
+    font-weight: 500;
   }
 }

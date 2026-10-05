@@ -3,9 +3,11 @@ import { services } from "@/lib/services";
 
 interface Props {
   limit?: number;
+  /** Heading level for service titles; use "h2" when the grid sits directly under the page h1. */
+  heading?: "h2" | "h3";
 }
 
-const { limit } = Astro.props;
+const { limit, heading: Heading = "h3" } = Astro.props;
 const list = typeof limit === "number" ? services.slice(0, limit) : services;
 ---
 
@@ -14,7 +16,7 @@ const list = typeof limit === "number" ? services.slice(0, limit) : services;
     list.map((service) => (
       <li class="grid gap-4 py-8 sm:grid-cols-[0.9fr_1.1fr] sm:gap-12 lg:py-9">
         <div>
-          <h3 class="font-display text-[21px] font-semibold leading-snug text-ink">{service.title}</h3>
+          <Heading class="font-display text-[21px] font-semibold leading-snug text-ink">{service.title}</Heading>
           <p class="mt-2 text-[14px] text-ink-mute">{service.outcome}</p>
         </div>
         <div>

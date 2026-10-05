@@ -1,0 +1,184 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import OfferLadder from "@/components/site/OfferLadder.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import Figure from "@/components/Figure";
+import { audit, site } from "@/lib/site";
+
+const problems = [
+  ["Repetitive work eats the week", "Quotes, invoices, scheduling, follow-ups, reports. Skilled people spend hours on tasks a system could do."],
+  ["It is unclear where AI applies", "Most owners are told to use AI, and few are shown which of their own processes it should touch first."],
+  ["Past tools did not stick", "Subscriptions piled up, nobody owned them, and the work still runs the old way."],
+  ["Worry about data and accuracy", "Customer data in the wrong place, or an answer that is confidently wrong, is a real risk, not a hypothetical."],
+];
+
+const included = [
+  "Workflow mapping with the people who do the work",
+  "A shortlist of opportunities ranked by return and effort",
+  "Build versus buy advice, favouring tools you already pay for",
+  "A data and security review before anything touches customer data",
+  "A costed roadmap in plain language",
+];
+
+const notIncluded = [
+  "A 40-page strategy deck nobody reads",
+  "Custom software where a configured tool would do",
+  "A promise that AI fixes everything",
+];
+
+const principles = [
+  ["Buy first, build second", "If a configured off-the-shelf tool solves it, we say so. We build custom only where it earns its cost."],
+  ["Measured, not magical", "Every automation ships with a number: hours saved, errors avoided, response time. If it does not move, we change it."],
+  ["Humans stay in charge", "Routine work runs alone. Judgment calls go to a person, with the reasoning shown."],
+  ["Yours to keep", "Documented systems, your accounts, your data. No lock-in to us."],
+];
+
+const faqs = [
+  {
+    q: "What does it mean to be AI-native?",
+    a: "An AI-native business designs its everyday work around AI from the start: routine tasks run automatically, people focus on judgment and relationships, and systems get measurably better over time. It is different from adding a chatbot to an old process.",
+  },
+  {
+    q: "How do we know where to start with AI in a small business?",
+    a: "Start with a workflow that is frequent, rule-based, and painful, such as invoicing, intake, scheduling, or reporting. An AI-Native Audit ranks your candidates by return and effort so the first project is a safe win.",
+  },
+  {
+    q: "Is our customer data safe with AI tools?",
+    a: "It depends on the tool and how it is configured. We review where data goes, what each vendor retains, and what can stay in your own accounts, then recommend setups that fit your privacy obligations. We design for least access by default.",
+  },
+  {
+    q: "Should we build custom AI or buy existing tools?",
+    a: "Usually buy and configure first. Custom builds make sense when no tool fits your process, when you need tight control over data, or when the workflow is a competitive advantage. We tell you which case you are in.",
+  },
+  {
+    q: "How long until we see results?",
+    a: "The audit takes one to two weeks. A first automation typically ships in four to eight weeks, depending on how many systems it touches. We agree the success measure before building.",
+  },
+  {
+    q: "Do you work with businesses outside Canada?",
+    a: "Yes. We are based in Toronto and work with teams worldwide, remotely and by video. We account for local data and privacy rules where you operate.",
+  },
+];
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI-Native Audit and automation for small business",
+  serviceType: "AI consulting",
+  description: "A fixed-scope AI-Native Audit, first automation, and ongoing AI operations for small and mid-sized businesses.",
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: "Worldwide",
+  audience: { "@type": "Audience", audienceType: "Small and mid-sized businesses" },
+};
+---
+
+<Layout
+  schema={[serviceSchema]}
+  title="AI consulting for small business"
+  description="Practical AI consulting for small and mid-sized businesses. Start with a fixed-scope AI-Native Audit and ship your first automation in weeks."
+>
+  <PageHero
+    kicker="Small and mid-sized business"
+    figure="phone"
+    figureLabel="A phone shown in layers, standing for the parts of an everyday business workflow"
+    title="Become AI-native, one workflow at a time."
+    lede="You do not need an AI team or a year-long programme. You need the right first workflow, built properly, and a partner who stays until it works."
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+        <div>
+          <span class="kicker">The problem</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            AI is everywhere. Useful AI in your business is rare.
+          </h2>
+          <dl class="mt-10 border-t border-line">
+            {
+              problems.map(([k, v]) => (
+                <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.8fr_1.2fr] sm:gap-8">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div class="panel overflow-hidden bg-void">
+          <Figure
+            client:visible
+            name="keyboard"
+            label="A keyboard whose keys sink under the pointer, standing for everyday manual work"
+            intensity={0.6}
+            plate="#08090a"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <OfferLadder />
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <span class="kicker">Inside the {audit.name}</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            What you get, and what you do not.
+          </h2>
+          <ul class="mt-8 space-y-3">
+            {
+              included.map((i) => (
+                <li class="flex gap-3 text-[15.5px] leading-relaxed text-ink-soft">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal"></span>
+                  {i}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <span class="label-mono">Not included</span>
+          <ul class="mt-6 space-y-3">
+            {
+              notIncluded.map((i) => (
+                <li class="flex gap-3 text-[15.5px] leading-relaxed text-ink-mute">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-line-2"></span>
+                  {i}
+                </li>
+              ))
+            }
+          </ul>
+          <p class="measure mt-8 text-[15px] leading-relaxed text-ink-soft text-pretty">
+            Saying what we will not do is deliberate. A good audit sometimes concludes that a process should not be
+            automated yet, and we will tell you that.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">How we work</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">Four principles we hold to.</h2>
+      </div>
+      <dl class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        {
+          principles.map(([k, v]) => (
+            <div class="hairline pt-6">
+              <dt class="font-display text-[20px] font-semibold text-ink">{k}</dt>
+              <dd class="mt-2.5 text-[15.5px] leading-relaxed text-ink-soft text-pretty">{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+  <CTA />
+</Layout>

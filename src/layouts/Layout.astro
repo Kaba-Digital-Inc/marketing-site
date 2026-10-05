@@ -2,37 +2,83 @@
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/site/Footer.astro";
 import { Toaster } from "@/components/ui/toaster";
+import ConsentBanner from "@/components/ConsentBanner";
 import { site } from "@/lib/site";
 import "@/styles/globals.css";
 
 interface Props {
   title: string;
   description?: string;
+  /** Open Graph type. Use "article" for posts. */
+  ogType?: "website" | "article";
+  /** Extra JSON-LD objects for this page (Service, Article, FAQ, ...). */
+  schema?: Record<string, unknown>[];
+  /** Label for the last breadcrumb. Defaults to the segment label. */
+  crumbLabel?: string;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, ogType = "website", schema = [], crumbLabel } = Astro.props;
 
 const path = Astro.url.pathname;
 const canonical = new URL(path, site.url).href;
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 
+const ogImage = new URL("/og.png", site.url).href;
+
+const segmentLabels: Record<string, string> = {
+  "ai-native": "AI-native",
+  startups: "Startups",
+  enterprise: "Enterprise",
+  services: "Services",
+  work: "Work",
+  stack: "Technology",
+  about: "About",
+  contact: "Contact",
+  privacy: "Privacy policy",
+  terms: "Terms",
+  insights: "Insights",
+  locations: "Locations",
+  toronto: "Toronto",
+};
+
+const segments = path.split("/").filter(Boolean);
+const breadcrumb =
+  segments.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: site.url + "/" },
+          ...segments.map((seg, i) => ({
+            "@type": "ListItem",
+            position: i + 2,
+            name: i === segments.length - 1 && crumbLabel ? crumbLabel : (segmentLabels[seg] ?? seg),
+            item: new URL("/" + segments.slice(0, i + 1).join("/") + "/", site.url).href,
+          })),
+        ],
+      }
+    : null;
+
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": site.url + "/#organization",
   name: site.name,
   description: site.description,
   url: site.url,
   email: site.email,
+  logo: new URL("/favicon.png", site.url).href,
+  image: ogImage,
+  sameAs: [site.linkedin],
   areaServed: "Worldwide",
   knowsAbout: [
-    "AI agent engineering",
-    "Cloudflare Workers",
-    "Cloudflare Agents SDK",
-    "Workers AI",
-    "AI Gateway",
-    "Vectorize",
-    "Durable Objects",
+    "AI agent development",
+    "AI automation for small business",
+    "Enterprise AI governance",
+    "Voice agents",
     "Retrieval-augmented generation",
+    "AI evaluation and observability",
+    "AI product engineering",
   ],
   address: {
     "@type": "PostalAddress",
@@ -43,6 +89,8 @@ const orgSchema = {
     addressCountry: "CA",
   },
 };
+
+const jsonLd = [orgSchema, ...(breadcrumb ? [breadcrumb] : []), ...schema];
 ---
 
 <!doctype html>
@@ -58,14 +106,20 @@ const orgSchema = {
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#08090a" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kaba Digital: we help businesses become AI-native" />
+    <meta property="og:locale" content="en_CA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -74,16 +128,7 @@ const orgSchema = {
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
     />
 
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EY38M8ZEBX"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-EY38M8ZEBX');
-    </script>
+    {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
   </head>
   <body>
     <a
@@ -98,5 +143,6 @@ const orgSchema = {
     </main>
     <Footer />
     <Toaster client:load />
+    <ConsentBanner client:idle />
   </body>
 </html>

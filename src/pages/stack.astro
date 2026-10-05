@@ -1,0 +1,142 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import Figure from "@/components/Figure";
+
+const layers = [
+  {
+    name: "Models",
+    note: "We pick per task and stay vendor-neutral",
+    items: ["Claude", "Gemini", "OpenAI-compatible models", "Open-weight models", "Model routing and fallback"],
+  },
+  {
+    name: "Agents and orchestration",
+    note: "How the work gets coordinated",
+    items: ["Vercel AI SDK", "Mastra", "LiveKit Agents (voice)", "Cloudflare Agents SDK", "MCP tool servers"],
+  },
+  {
+    name: "Data and memory",
+    note: "Where context lives",
+    items: ["Postgres and Supabase", "Vector search", "Object storage", "Durable state", "Your existing systems"],
+  },
+  {
+    name: "Platform and delivery",
+    note: "Where it runs",
+    items: ["Cloudflare", "Vercel", "AWS", "Your own cloud account"],
+  },
+  {
+    name: "Quality and operations",
+    note: "How we know it works",
+    items: ["Evaluation suites", "Tracing and monitoring", "PostHog analytics", "Sentry error tracking", "Cost tracking"],
+  },
+];
+
+const principles = [
+  ["Fit the problem", "The right stack is the smallest one that does the job and that your team can run."],
+  ["Buy before build", "Off-the-shelf tools first. Custom engineering where it earns its cost."],
+  ["No lock-in", "Your accounts, your data, your repositories. Systems are documented so you can leave us."],
+  ["Security by default", "Least-privilege access, secrets handled properly, and audit trails on anything an agent can do."],
+];
+
+const faqs = [
+  {
+    q: "Which AI models do you work with?",
+    a: "We are model-agnostic. We work with Claude, Gemini, OpenAI-compatible models, and open-weight models, and we route between them by task, quality, latency, and cost. Models change quickly, so we build in the ability to swap them.",
+  },
+  {
+    q: "Why do you use Cloudflare?",
+    a: "For many agent workloads it puts inference, state, storage, and security on one platform with low operational overhead. It is one option among several, and we recommend it when it fits, not by default.",
+  },
+  {
+    q: "Can you build on our existing cloud?",
+    a: "Yes. We regularly build inside a client's own AWS, Google Cloud, or Azure environment when policy or existing investment calls for it.",
+  },
+];
+---
+
+<Layout
+  title="Technology: model-agnostic AI engineering"
+  description="How Kaba Digital chooses AI tools: model-agnostic and vendor-neutral. Buy before build, no lock-in, security by default."
+>
+  <PageHero
+    kicker="Technology"
+    figure="router"
+    figureLabel="A router with its antennas up, standing for connected systems"
+    title="The right tools for the job, not the same stack every time."
+    lede="We are model-agnostic and platform-flexible. This is what we reach for, and how we decide."
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <div>
+          <span class="kicker">How we decide</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Four rules behind every stack choice.
+          </h2>
+          <dl class="mt-9 border-t border-line">
+            {
+              principles.map(([k, v]) => (
+                <div class="border-b border-line py-5">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="mt-1.5 text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <div class="panel mt-10 overflow-hidden bg-void">
+            <Figure
+              client:visible
+              name="patch"
+              label="A patch panel of ports and cables, standing for connecting systems together"
+              intensity={0.6}
+              plate="#08090a"
+            />
+          </div>
+        </div>
+
+        <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+          {
+            layers.map((l) => (
+              <div class="hairline pt-6">
+                <h3 class="font-display text-[18px] font-semibold text-ink">{l.name}</h3>
+                <p class="mt-1 text-[13px] text-ink-mute">{l.note}</p>
+                <ul class="mt-4 space-y-2.5">
+                  {l.items.map((item) => <li class="text-[15px] text-ink-soft">{item}</li>)}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Partners and community</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Where we build alongside the platforms.
+          </h2>
+        </div>
+        <div class="space-y-6 text-[16px] leading-relaxed text-ink-soft">
+          <p class="measure text-pretty">
+            We run ClawBuilders, a Toronto community for people building AI agents, and have co-hosted sessions
+            with platform teams, including a hands-on session on deploying AI agents with Cloudflare.
+          </p>
+          <p class="measure text-pretty">
+            We build on Cloudflare Workers, Durable Objects, and Workers AI where they fit, and we are applying to
+            Cloudflare&rsquo;s PowerUP partner programme. We will list partner status here once it is confirmed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} heading="Questions about our stack" />
+  <CTA />
+</Layout>

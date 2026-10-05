@@ -1,0 +1,140 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import { site } from "@/lib/site";
+import Figure from "@/components/Figure";
+
+const pains = [
+  ["No AI team, and no time to hire one", "You need an agent or AI feature live this quarter, not a recruiting plan."],
+  ["Demos that break in production", "A prototype is easy. Evaluation, cost control, and failure handling are where products are won or lost."],
+  ["Architecture you will regret at the next stage", "Decisions made in a hurry at seed become the rewrite at Series B."],
+  ["Unclear what it will cost to run", "Inference costs surprise teams that did not design for them."],
+];
+
+const offers = [
+  {
+    name: "Agent MVP sprint",
+    span: "4 to 6 weeks",
+    body: "A working agent or AI feature in front of real users, with the evaluation harness that tells you whether it is good.",
+    items: ["Scoped to one core job", "Evals from week one", "Cost model included", "Handover or continued support"],
+  },
+  {
+    name: "Embedded engineering",
+    span: "Ongoing",
+    body: "A senior AI engineer working inside your team on a rolling basis, shipping alongside your product and design.",
+    items: ["Agents and workflows", "Voice and realtime", "Retrieval and knowledge", "Observability and cost"],
+  },
+  {
+    name: "Architecture review",
+    span: "1 to 2 weeks",
+    body: "An independent read of your AI system before you scale it: reliability, security, cost, and what to fix first.",
+    items: ["Failure and abuse paths", "Model and vendor risk", "Cost per user", "A prioritized fix list"],
+  },
+];
+
+const faqs = [
+  {
+    q: "Can you build our AI product if we have no ML engineers?",
+    a: "Yes. Most products today are built on hosted frontier models, so the hard parts are system design, evaluation, cost, and reliability rather than training models. That is the work we do.",
+  },
+  {
+    q: "How fast can you ship an AI MVP?",
+    a: "A focused agent MVP usually takes four to six weeks, depending on integrations and how well the task is defined. We scope tightly to one core job so something real reaches users quickly.",
+  },
+  {
+    q: "Will we own the code?",
+    a: "Yes. The code, prompts, evaluations, and infrastructure live in your accounts and repositories. We document the system so your team can take it over.",
+  },
+  {
+    q: "What stack do you build on?",
+    a: "We choose per project and stay model-agnostic. Common choices include Claude and Gemini models, the Vercel AI SDK, Mastra, LiveKit for voice, Next.js, Postgres, and Cloudflare for edge and agents.",
+  },
+];
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI product development for startups",
+  serviceType: "AI product engineering",
+  description: "Agent MVP sprints, embedded AI engineering, and architecture reviews for seed to Series B startups.",
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: "Worldwide",
+  audience: { "@type": "Audience", audienceType: "Startups" },
+};
+---
+
+<Layout
+  schema={[serviceSchema]}
+  title="AI product development for startups"
+  description="Ship an AI agent or product without building an AI team first. Agent MVP sprints, embedded engineering, and architecture reviews for seed to Series B startups."
+>
+  <PageHero
+    kicker="Startups, seed to Series B"
+    figure="branches"
+    figureLabel="A commit graph with a branch merging back, standing for shipping product"
+    title="Ship the AI product without building an AI team first."
+    lede="Senior AI engineering, scoped to what you need to learn or launch next, and built so it still holds up when you grow."
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+        <div>
+          <span class="kicker">Where startups get stuck</span>
+          <dl class="mt-8 border-t border-line">
+            {
+              pains.map(([k, v]) => (
+                <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.9fr_1.1fr] sm:gap-8">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div class="panel overflow-hidden bg-void">
+          <Figure
+            client:visible
+            name="elevator"
+            label="An elevator travelling between floors, standing for moving through stages of growth"
+            intensity={0.6}
+            plate="#08090a"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">How we work with startups</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Three ways to engage, sized to your stage.
+        </h2>
+      </div>
+      <ul class="mt-12 border-t border-line">
+        {
+          offers.map((o) => (
+            <li class="grid gap-4 border-b border-line py-8 sm:grid-cols-[0.75fr_1.25fr] sm:gap-12">
+              <div>
+                <h3 class="font-display text-[21px] font-semibold text-ink">{o.name}</h3>
+                <p class="mt-2 text-[13.5px] text-ultra">{o.span}</p>
+              </div>
+              <div>
+                <p class="measure text-[16px] leading-relaxed text-ink-soft text-pretty">{o.body}</p>
+                <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                  {o.items.map((item) => <li class="text-[13.5px] text-ink-mute">{item}</li>)}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+  <CTA />
+</Layout>

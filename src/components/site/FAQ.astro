@@ -1,0 +1,49 @@
+---
+import Figure, { type FigureName } from "@/components/Figure";
+
+interface Props {
+  items: { q: string; a: string }[];
+  heading?: string;
+  figure?: FigureName;
+}
+
+const { items, heading = "Questions we hear most", figure = "cabinet" } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((i) => ({
+    "@type": "Question",
+    name: i.q,
+    acceptedAnswer: { "@type": "Answer", text: i.a },
+  })),
+};
+---
+
+<section class="border-t border-line py-20 lg:py-28">
+  <div class="shell">
+    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div>
+        <span class="kicker">FAQ</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">{heading}</h2>
+        <div class="mt-10 hidden max-w-[340px] lg:block">
+          <Figure client:visible name={figure} label="Decorative isometric illustration" intensity={0.55} plate="#08090a" />
+        </div>
+      </div>
+      <div class="border-t border-line">
+        {
+          items.map((i) => (
+            <details class="group border-b border-line py-5">
+              <summary class="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 text-[17px] font-medium text-ink">
+                {i.q}
+                <span class="text-signal transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="measure mt-3 text-[15.5px] leading-relaxed text-ink-soft text-pretty">{i.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>

@@ -24,11 +24,19 @@ export const services: Service[] = [
     outcome: "Workflows that run unattended and degrade gracefully.",
   },
   {
+    id: "voice",
+    title: "Voice & Realtime Agents",
+    summary:
+      "Conversational agents that talk and listen in real time, for customer service, intake, and operations, with the same approvals and audit trails as everything else we build.",
+    capabilities: ["Realtime speech", "Telephony & web voice", "Handoff to humans", "Call analytics"],
+    outcome: "Calls and conversations handled around the clock, with a person one step away.",
+  },
+  {
     id: "knowledge",
     title: "Knowledge & RAG Systems",
     summary:
       "Retrieval that answers from your documents, tickets, and databases with citations, not confident guesses.",
-    capabilities: ["Chunking & embedding", "Vectorize + D1", "Hybrid search", "Citation & grounding"],
+    capabilities: ["Chunking & embedding", "Vector search", "Hybrid search", "Citation & grounding"],
     outcome: "Answers your team can verify and trust.",
   },
   {
@@ -41,19 +49,19 @@ export const services: Service[] = [
   },
   {
     id: "platform",
-    title: "Cloudflare Platform & Migration",
+    title: "Cloud Platform & Migration",
     summary:
-      "Move workloads onto Cloudflare without re-architecting from scratch: Workers, Pages, R2, D1, and the data plane.",
+      "Move workloads onto a modern edge and serverless platform without re-architecting from scratch. We work in Cloudflare, Vercel, AWS, or your own cloud account.",
     capabilities: ["Architecture review", "Migration & cutover", "Performance tuning", "Cost engineering"],
     outcome: "Lower latency, lower egress cost, fewer moving parts.",
   },
   {
     id: "managed",
-    title: "Managed Cloudflare Services",
+    title: "Managed AI Operations",
     summary:
-      "We run Cloudflare for you: multi-tenant accounts, consolidated billing, Zero Trust rollout, monitoring, and incident response.",
-    capabilities: ["Multi-tenant admin", "Consolidated billing", "Zero Trust rollout", "Monitoring & alerting"],
-    outcome: "One partner accountable for your platform and security.",
+      "We run your AI systems for you: watching quality and cost, tuning models and prompts, handling upgrades and incidents, with a named engineer on your account.",
+    capabilities: ["Quality monitoring", "Cost controls", "Model upgrades", "Incident response"],
+    outcome: "One partner accountable for your AI systems in production.",
   },
   {
     id: "evals",
@@ -68,7 +76,7 @@ export const services: Service[] = [
     title: "Enablement & Training",
     summary:
       "Bring your engineers and operators up to speed so the capability stays inside the company after we leave.",
-    capabilities: ["Team upskilling", "Playbooks & runbooks", "Architecture handover", "Cloudflare-aligned training"],
+    capabilities: ["Team upskilling", "Playbooks & runbooks", "Architecture handover", "Team training"],
     outcome: "An internal team that can run and extend what we built.",
   },
 ];

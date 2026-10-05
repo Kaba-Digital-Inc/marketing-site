@@ -1,0 +1,85 @@
+---
+import { audit } from "@/lib/site";
+
+interface Props {
+  heading?: string;
+  intro?: string;
+}
+
+const {
+  heading = "Four steps, each one worth doing on its own.",
+  intro = "Start small, prove the value, then decide how far to go. Every step has a fixed scope and a written deliverable, so there are no surprises halfway through.",
+} = Astro.props;
+
+const steps = [
+  {
+    n: "01",
+    name: audit.name,
+    when: audit.duration,
+    price: audit.price ?? "Fixed price",
+    body: "We map how your business actually runs, find the three to five workflows where AI pays back fastest, and hand you a prioritized, costed roadmap.",
+    gets: "A written roadmap and a go or no-go on each opportunity",
+    id: "audit",
+  },
+  {
+    n: "02",
+    name: "First Automation",
+    when: "4 to 8 weeks",
+    price: "Scoped to the workflow",
+    body: "We build and ship the highest-value workflow. We use off-the-shelf tools where they fit and custom engineering only where they do not.",
+    gets: "One workflow in production, with measured results",
+  },
+  {
+    n: "03",
+    name: "AI-Native Operations",
+    when: "Quarterly",
+    price: "Scoped per quarter",
+    body: "More workflows, agents that coordinate, staff training, and governance. The business starts running on AI by default.",
+    gets: "Several workflows live and a team that can use them",
+  },
+  {
+    n: "04",
+    name: "Managed AI",
+    when: "Monthly",
+    price: "Monthly retainer",
+    body: "We monitor quality and cost, tune what drifts, and keep up with the models. A named engineer stays on your account.",
+    gets: "Reliable systems and a named contact",
+  },
+];
+---
+
+<section class="border-t border-line py-20 lg:py-28">
+  <div class="shell">
+    <div class="max-w-2xl">
+      <span class="kicker">The path</span>
+      <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">{heading}</h2>
+      <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">{intro}</p>
+    </div>
+
+    <ol class="mt-12 border-t border-line">
+      {
+        steps.map((s) => (
+          <li id={s.id} class="grid gap-5 border-b border-line py-8 lg:grid-cols-[0.5fr_1.1fr_0.9fr] lg:gap-10">
+            <div>
+              <span class="font-mono text-[13px] text-signal">{s.n}</span>
+              <h3 class="mt-2 font-display text-[22px] font-semibold text-ink">{s.name}</h3>
+              <p class="mt-2 text-[13.5px] text-ink-mute">
+                {s.when} · {s.price}
+              </p>
+            </div>
+            <p class="measure text-[16px] leading-relaxed text-ink-soft text-pretty">{s.body}</p>
+            <p class="text-[14.5px] leading-relaxed text-ink">
+              <span class="label-mono block">You get</span>
+              <span class="mt-1.5 block text-ink-soft">{s.gets}</span>
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <a href="/contact" class="btn-solid">Book an {audit.name}</a>
+      <a href="/contact" class="btn-quiet">Ask a question first</a>
+    </div>
+  </div>
+</section>

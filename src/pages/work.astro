@@ -25,16 +25,18 @@ const patterns = [
   ["Document and knowledge agents", "Retrieval over contracts, tickets, and internal wikis with citations and access controls."],
   ["Operational workflow automation", "Agents that triage, route, draft, and act inside the tools a team already uses."],
   ["AI features in live products", "Search, summarisation, and assistants added to a shipping product without a rewrite."],
-  ["Platform migration and modernisation", "Moving workloads onto Cloudflare for cost, latency, and fewer moving parts."],
+  ["Platform migration and modernisation", "Moving workloads onto modern edge and serverless platforms for cost, latency, and fewer moving parts."],
 ];
 ---
 
 <Layout
   title="Work: products we build and systems we ship"
-  description="ClawBuilders.club and OffloadVault, plus the AI and Cloudflare engineering engagements Kaba Digital Inc. delivers for clients."
+  description="ClawBuilders.club and OffloadVault, plus the AI agent, automation, and product engineering engagements Kaba Digital Inc. delivers for clients."
 >
   <PageHero
     kicker="Work"
+    figure="laptop"
+    figureLabel="A laptop with its lid open"
     title="Products we build, and systems we ship."
     lede="We build our own products on the stack we recommend. It keeps the advice honest and the architecture tested against real users."
   />
@@ -62,6 +64,16 @@ const patterns = [
                     <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-mute">{s}</li>
                   ))}
                 </ul>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabindex="-1"
+                  aria-hidden="true"
+                  class="panel mt-8 block overflow-hidden transition-colors hover:border-line-2"
+                >
+                  <img src={p.image} alt={p.imageAlt} width="1280" height="800" loading="lazy" decoding="async" class="block h-auto w-full" />
+                </a>
               </div>
 
               <div class="space-y-8">

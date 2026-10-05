@@ -15,8 +15,8 @@ const principles = [
     body: "Every system ships with evaluations and cost telemetry, so quality is a number rather than an opinion.",
   },
   {
-    name: "Platform over glue",
-    body: "We keep the stack on Cloudflare wherever it fits, because fewer moving parts is the real performance win.",
+    name: "Fewer moving parts",
+    body: "We buy before we build and keep the stack as small as the job allows, because fewer moving parts is the real reliability win.",
   },
   {
     name: "Built to hand over",
@@ -33,18 +33,20 @@ const notFit = [
 ---
 
 <Layout
-  title="Services: AI agents, product engineering, and Cloudflare delivery"
-  description="AI strategy, agent and workflow engineering, retrieval systems, AI product engineering, Cloudflare platform work, evaluations, and enablement."
+  title="AI services: agents, voice, and RAG"
+  description="AI strategy, agent and workflow engineering, voice agents, retrieval systems, AI product engineering, managed AI operations, evaluations, and team enablement."
 >
   <PageHero
     kicker="Services"
+    figure="terminal"
+    figureLabel="A terminal window with its history in rows"
     title="AI consulting, from first question to running system."
-    lede="Eight connected services covering the full arc of an AI initiative, and the Cloudflare platform it runs on. You can start at any point and we will meet you there."
+    lede="Nine connected services covering the full arc of an AI initiative, from the first question to a system that runs and improves. You can start at any point and we will meet you there."
   />
 
   <section class="py-20 lg:py-24">
     <div class="shell">
-      <ServicesGrid />
+      <ServicesGrid heading="h2" />
     </div>
   </section>
 

@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Figure from "@/components/Figure";
+---
+
+<Layout title="Page not found" description="The page you were looking for does not exist.">
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid items-center gap-12 lg:grid-cols-[1fr_0.8fr]">
+        <div>
+          <span class="kicker">Error 404</span>
+          <h1 class="text-title mt-6 max-w-[16ch] font-display font-semibold text-ink text-balance">
+            That page does not exist.
+          </h1>
+          <p class="measure mt-6 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            It may have moved, or the link may be wrong. These are the places most people are looking for.
+          </p>
+          <ul class="mt-8 flex flex-wrap gap-3">
+            <li><a href="/" class="btn-solid">Home</a></li>
+            <li><a href="/ai-native" class="btn-quiet">Become AI-native</a></li>
+            <li><a href="/services" class="btn-quiet">Services</a></li>
+            <li><a href="/contact" class="btn-quiet">Contact</a></li>
+          </ul>
+        </div>
+        <div class="hidden lg:block">
+          <Figure client:visible name="vault" label="A vault door, closed" intensity={0.6} plate="#08090a" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

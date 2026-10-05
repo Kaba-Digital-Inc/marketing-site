@@ -1,0 +1,169 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import { site } from "@/lib/site";
+import Figure from "@/components/Figure";
+
+const blockers = [
+  ["The pilot works, production stalls", "Security review, data residency, and integration work were never part of the proof of concept."],
+  ["Nobody can say if it is accurate", "Without evaluation, \"it seems fine\" is the only measure, and it does not survive an audit."],
+  ["Agents with too much access", "Autonomy without least-privilege, approvals, and logging is a liability, not a feature."],
+  ["Governance arrives last", "Policy, ownership, and monitoring bolted on after launch are expensive and incomplete."],
+];
+
+const capabilities = [
+  {
+    name: "Architecture and integration",
+    body: "Agents and retrieval systems that fit your identity, data, and network, designed with security review in mind from day one.",
+  },
+  {
+    name: "Evaluation and quality",
+    body: "Test sets, regression checks, and acceptance thresholds so quality is measured before and after every change.",
+  },
+  {
+    name: "Guardrails and governance",
+    body: "Least-privilege tool access, human approval for sensitive actions, audit trails, and policy mapped to your obligations.",
+  },
+  {
+    name: "Observability and cost",
+    body: "Tracing, quality monitoring, and per-use cost visibility, so operations and finance can both see what is happening.",
+  },
+  {
+    name: "Voice and realtime agents",
+    body: "Low-latency conversational systems for service and operations, built with the same controls as everything else.",
+  },
+  {
+    name: "Enablement",
+    body: "Documentation, runbooks, and training so your internal team can own and extend what we build.",
+  },
+];
+
+const process = [
+  ["Discover", "Map the use case, data, stakeholders, and constraints with security and legal at the table."],
+  ["Prove", "Build the smallest version that can pass your real acceptance criteria."],
+  ["Harden", "Evaluation, guardrails, integration, and the review artefacts your risk teams need."],
+  ["Operate", "Roll out in stages with monitoring, and hand over or stay on to run it."],
+];
+
+const faqs = [
+  {
+    q: "How do you take an AI pilot to production in an enterprise?",
+    a: "We treat production requirements as part of the pilot: identity and access, data handling, evaluation thresholds, audit logging, and integration. That way the proof of concept is not thrown away when security review begins.",
+  },
+  {
+    q: "What does an enterprise AI governance framework need?",
+    a: "At minimum: clear ownership, an inventory of AI systems and their data, risk tiering, evaluation and monitoring standards, human approval rules for sensitive actions, and an incident process. We help translate these into controls that engineers can implement.",
+  },
+  {
+    q: "Can you work inside our cloud and security requirements?",
+    a: "Yes. We design to your environment, whether that is your cloud accounts, private networking, or specific vendor and model approvals, and we work with your security and compliance teams throughout.",
+  },
+  {
+    q: "Which models and platforms do you use?",
+    a: "We are model-agnostic and choose per use case and per your approved vendor list. We have experience across frontier hosted models, open-weight models, and several cloud platforms.",
+  },
+];
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Enterprise AI agents from pilot to production",
+  serviceType: "AI engineering and governance",
+  description: "Architecture, evaluation, guardrails, governance, and integration to take enterprise AI pilots to production.",
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: "Worldwide",
+  audience: { "@type": "Audience", audienceType: "Enterprise teams" },
+};
+---
+
+<Layout
+  schema={[serviceSchema]}
+  title="Enterprise AI agents: pilot to production"
+  description="Take enterprise AI pilots to production with architecture, evaluation, guardrails, governance, and integration that pass security review."
+>
+  <PageHero
+    kicker="Enterprise teams"
+    figure="cabinet"
+    figureLabel="A rack of server blades, standing for enterprise infrastructure"
+    title="Take AI pilots to production, and keep them there."
+    lede="Engineering that passes security review: evaluated, governed, observable, and integrated with the systems you already run."
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+        <div>
+          <span class="kicker">Why pilots stall</span>
+          <dl class="mt-8 border-t border-line">
+            {
+              blockers.map(([k, v]) => (
+                <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.9fr_1.1fr] sm:gap-8">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div class="panel overflow-hidden bg-void">
+          <Figure
+            client:visible
+            name="padlock"
+            label="A padlock whose shackle lifts as the pointer approaches, standing for security and access control"
+            intensity={0.6}
+            plate="#08090a"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">What we deliver</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          The unglamorous parts that make AI trustworthy.
+        </h2>
+      </div>
+      <div class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((c) => (
+            <div class="hairline pt-6">
+              <h3 class="font-display text-[19px] font-semibold text-ink">{c.name}</h3>
+              <p class="mt-2.5 text-[15px] leading-relaxed text-ink-soft text-pretty">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">How an engagement runs</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Four stages, with your risk teams involved from the first.
+        </h2>
+      </div>
+      <ol class="mt-12 border-t border-line">
+        {
+          process.map(([k, v], i) => (
+            <li class="grid gap-3 border-b border-line py-6 sm:grid-cols-[0.5fr_1.5fr] sm:gap-10">
+              <h3 class="font-display text-[20px] font-semibold text-ink">
+                <span class="mr-3 font-mono text-[13px] text-signal">0{i + 1}</span>
+                {k}
+              </h3>
+              <p class="measure text-[15.5px] leading-relaxed text-ink-soft text-pretty">{v}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+  <CTA />
+</Layout>

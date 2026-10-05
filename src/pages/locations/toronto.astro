@@ -1,0 +1,153 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import OfferLadder from "@/components/site/OfferLadder.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import { site } from "@/lib/site";
+
+const industries = [
+  ["Finance and insurance", "Document intake, reconciliation, and client communications, with strict approval and audit trails."],
+  ["Healthcare and clinics", "Scheduling, intake, and administrative work, handled with Ontario's health privacy rules in mind."],
+  ["Professional services", "Law, accounting, and consulting firms drowning in drafting, review, and time-entry work."],
+  ["Logistics and trade", "Quotes, customs paperwork, shipment updates, and the email traffic around them."],
+  ["Construction and real estate", "Bids, permits, site reports, and tenant or client communication."],
+  ["Retail and hospitality", "Inventory, customer messages, staff scheduling, and reporting."],
+];
+
+const rules = [
+  ["PIPEDA", "Canada's federal private-sector privacy law. It governs how many businesses collect, use, and disclose personal information, including through AI tools."],
+  ["PHIPA", "Ontario's Personal Health Information Protection Act. It matters if your workflows touch patient or health records."],
+  ["Provincial laws", "If you serve customers in Quebec, Alberta, or British Columbia, provincial privacy laws, including Quebec's Law 25, may also apply."],
+];
+
+const faqs = [
+  {
+    q: "Do you work with Toronto businesses in person?",
+    a: "We are based in Toronto and work mostly remotely, which keeps projects fast and costs down. We are glad to meet Toronto and GTA clients in person by appointment, for example for a workflow mapping session with your team.",
+  },
+  {
+    q: "Is it safe to use AI tools with customer data under Canadian privacy law?",
+    a: "It depends on the tool, the data, and how it is configured. In an audit we review where data goes and what each vendor retains, then recommend setups that fit your privacy obligations. For legal advice about PIPEDA, PHIPA, or provincial laws, speak with your counsel.",
+  },
+  {
+    q: "How much does AI consulting cost for a small business in Toronto?",
+    a: "It depends on scope. We start with a fixed-price AI-Native Audit so you know the cost up front, then scope any build separately once you can see the expected return.",
+  },
+  {
+    q: "Do you only serve Toronto?",
+    a: "No. We work with teams worldwide. This page covers how we work with businesses in Toronto and the Greater Toronto Area.",
+  },
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI consulting and engineering in Toronto",
+  serviceType: "AI consulting",
+  description: "AI audits, automation, and AI product engineering for Toronto and Greater Toronto Area businesses.",
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: { "@type": "City", name: "Toronto" },
+};
+---
+
+<Layout
+  title="AI consulting in Toronto"
+  description="AI consulting and engineering for Toronto businesses. Start with a fixed-scope AI-Native Audit, then automate your first workflow. Privacy-aware for PIPEDA and PHIPA."
+  schema={[serviceSchema]}
+  crumbLabel="Toronto"
+>
+  <PageHero
+    kicker="Toronto, Canada"
+    title="AI consulting for Toronto businesses."
+    lede="We are based in Toronto. We help local businesses find the workflows AI should take over, then build and run them, with privacy and approvals designed in from the start."
+    figure="elevator"
+    figureLabel="An elevator moving between floors, standing for a growing business"
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Where it pays back</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Industries we see in Toronto and the GTA.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Toronto's economy is broad, so the best first workflow differs by sector. These are common starting
+            points, not a fixed menu.
+          </p>
+        </div>
+        <dl class="border-t border-line">
+          {
+            industries.map(([k, v]) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.75fr_1.25fr] sm:gap-8">
+                <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Privacy and regulation</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Canadian privacy rules shape how AI should be set up.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            We design for least access by default and review where data goes before connecting any tool. This is
+            engineering guidance, not legal advice, so confirm obligations with your counsel.
+          </p>
+        </div>
+        <dl class="border-t border-line">
+          {
+            rules.map(([k, v]) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.5fr_1.5fr] sm:gap-8">
+                <dt class="font-mono text-[14px] text-signal">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Local community</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Part of Toronto's AI builder scene.
+          </h2>
+        </div>
+        <div class="measure space-y-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+          <p>
+            We run <a href="https://clawbuilders.club/" target="_blank" rel="noopener noreferrer" class="link-underline">ClawBuilders</a>,
+            a Toronto community for people building AI agents, with hands-on build nights and sessions with platform
+            teams. It keeps our advice grounded in what builders are actually shipping.
+          </p>
+          <p>
+            We meet clients in the Toronto area by appointment. Most of the work happens remotely, so distance is
+            never a barrier.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <OfferLadder
+    heading="Start with a fixed-scope audit."
+    intro="For most Toronto businesses the first step is the AI-Native Audit: we map how your business runs, rank the opportunities, and give you a costed roadmap."
+  />
+
+  <FAQ items={faqs} heading="Toronto questions" figure="elevator" />
+  <CTA />
+</Layout>
