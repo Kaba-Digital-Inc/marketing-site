@@ -1,0 +1,53 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import { site } from "@/lib/site";
+
+const sections = [
+  [
+    "Use of this website",
+    "The content on this site is provided for general information. You agree not to misuse the site or attempt to access it in a way that disrupts its normal operation.",
+  ],
+  [
+    "Services",
+    `Consulting and engineering services are provided under a separate written agreement or statement of work between you and ${site.name}. That agreement governs scope, deliverables, fees, and liability. Nothing on this site is a binding offer of services.`,
+  ],
+  [
+    "Third-party platforms",
+    "We may recommend or integrate third-party platforms, including Cloudflare. Your use of those platforms is governed by their own terms and policies, and pricing, availability, and features are set by those providers rather than by us.",
+  ],
+  [
+    "Intellectual property",
+    "Unless otherwise agreed in writing, ownership of project deliverables is set out in the applicable statement of work. Trademarks, product names, and logos referenced on this site belong to their respective owners.",
+  ],
+];
+---
+
+<Layout title="Terms of service" description="The terms that govern use of the Kaba Digital Inc. website and services.">
+  <PageHero kicker="Legal" title="Terms of service" lede="The terms that govern use of this website and our services." />
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        {
+          sections.map(([title, body]) => (
+            <div class="border-t border-line py-8">
+              <h2 class="font-display text-[21px] font-semibold text-ink">{title}</h2>
+              <p class="mt-4 text-[16px] leading-relaxed text-ink-soft text-pretty">{body}</p>
+            </div>
+          ))
+        }
+        <div class="border-t border-line py-8">
+          <h2 class="font-display text-[21px] font-semibold text-ink">Contact</h2>
+          <p class="mt-4 text-[16px] leading-relaxed text-ink-soft">
+            Questions about these terms? Email{" "}
+            <a href={`mailto:${site.email}`} class="link-underline">{site.email}</a>.
+          </p>
+        </div>
+        <p class="border-t border-line pt-6 text-[13px] text-ink-mute">
+          Last updated {new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long" })}
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

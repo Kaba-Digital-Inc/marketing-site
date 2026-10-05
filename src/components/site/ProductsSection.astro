@@ -1,0 +1,52 @@
+---
+import { products } from "@/lib/site";
+---
+
+<section class="py-20 lg:py-28">
+  <div class="shell">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div class="max-w-xl">
+        <span class="kicker">Shipped work</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          We run our own products on the same stack.
+        </h2>
+      </div>
+      <a href="/work" class="link-underline shrink-0 text-[15px]">More on how we build</a>
+    </div>
+
+    <div class="mt-14 space-y-16">
+      {
+        products.map((p, i) => (
+          <article class={`grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-16 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <div>
+              <div class="flex items-center gap-3">
+                <span class={`inline-block h-2 w-2 rounded-full ${p.status === "In production" ? "bg-emerald-500" : "bg-ultra"}`} />
+                <span class="text-[13px] font-medium text-ink-mute">{p.status}</span>
+              </div>
+              <h3 class="mt-4 font-display text-[34px] font-semibold leading-none tracking-tight text-ink sm:text-[42px]">
+                {p.name}
+              </h3>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-underline mt-5 inline-block text-[15px]"
+              >
+                Visit {p.name}
+              </a>
+            </div>
+
+            <div class="hairline pt-6 lg:pt-7">
+              <p class="measure text-[17px] leading-relaxed text-ink-soft text-pretty">{p.summary}</p>
+              <ul class="mt-6 flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-mute">{t}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

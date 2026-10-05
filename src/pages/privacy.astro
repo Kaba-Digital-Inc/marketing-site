@@ -1,0 +1,53 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import { site } from "@/lib/site";
+
+const sections = [
+  [
+    "Information we collect",
+    "When you contact us or book a call, we collect the details you provide, typically your name, email address, company, and the context of your enquiry. The site also uses privacy-respecting analytics to understand aggregate traffic patterns.",
+  ],
+  [
+    "How we use it",
+    "We use your information to respond to enquiries, prepare proposals, deliver services, and improve this site. We do not sell personal information, and we share it only with service providers that help us operate, such as scheduling and email tools, under appropriate confidentiality terms.",
+  ],
+  [
+    "Retention and security",
+    "We keep enquiry and engagement records only as long as needed for the purpose they were collected, and we apply reasonable technical and organisational measures to protect them.",
+  ],
+  [
+    "Your choices",
+    "You can request access to, correction of, or deletion of the personal information we hold about you by emailing us. We will respond within a reasonable timeframe.",
+  ],
+];
+---
+
+<Layout title="Privacy policy" description="How Kaba Digital Inc. collects, uses, and protects personal information.">
+  <PageHero kicker="Legal" title="Privacy policy" lede="How we handle the information you share with us." />
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        {
+          sections.map(([title, body]) => (
+            <div class="border-t border-line py-8">
+              <h2 class="font-display text-[21px] font-semibold text-ink">{title}</h2>
+              <p class="mt-4 text-[16px] leading-relaxed text-ink-soft text-pretty">{body}</p>
+            </div>
+          ))
+        }
+        <div class="border-t border-line py-8">
+          <h2 class="font-display text-[21px] font-semibold text-ink">Contact</h2>
+          <p class="mt-4 text-[16px] leading-relaxed text-ink-soft">
+            Questions about this policy? Email{" "}
+            <a href={`mailto:${site.email}`} class="link-underline">{site.email}</a>.
+          </p>
+        </div>
+        <p class="border-t border-line pt-6 text-[13px] text-ink-mute">
+          Last updated {new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long" })}
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

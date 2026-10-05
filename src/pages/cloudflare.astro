@@ -1,0 +1,174 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import CatalogTabs from "@/components/CatalogTabs";
+import CTA from "@/components/site/CTA.astro";
+import { site } from "@/lib/site";
+
+const program = [
+  ["Self-serve partner", "Multi-tenant account and user administration from one dashboard or API"],
+  ["Consolidated billing", "A single billing profile across every managed customer account"],
+  ["Full catalog", "Application services, Zero Trust, and the developer platform including Workers"],
+  ["Partner pricing", "Volume discounts passed through on eligible subscriptions"],
+  ["No minimum", "Start without an enterprise commitment or upfront spend"],
+  ["Enablement", "Onboarding and training aligned with Cloudflare's own material"],
+];
+
+const tiers = [
+  {
+    name: "Platform foundations",
+    body: "Get the account, domains, environments, and deploy pipeline set up properly before anything clever gets built on top.",
+    items: ["Zones & DNS", "Environments", "Bindings & secrets", "CI/CD to Workers"],
+    span: "2–4 weeks",
+  },
+  {
+    name: "Zero Trust rollout",
+    body: "Replace VPNs and exposed admin panels with identity-aware access across applications, devices, and networks.",
+    items: ["Access policies", "Gateway & WARP", "Tunnels", "Team onboarding"],
+    span: "3–6 weeks",
+  },
+  {
+    name: "Agent & app engineering",
+    body: "Build the actual product: agent logic, inference, retrieval, storage, evaluation, and the interface around it.",
+    items: ["Agents SDK", "Workers AI + AI Gateway", "Vectorize + D1", "Evals & observability"],
+    span: "6–16 weeks",
+  },
+  {
+    name: "Managed operations",
+    body: "We stay on the account: account administration, monitoring, incident response, cost review, and upgrades.",
+    items: ["Multi-account admin", "Monitoring & alerting", "Incident response", "Cost management"],
+    span: "Monthly",
+  },
+];
+
+const operations = [
+  ["Access", "Least privilege, scoped per customer account"],
+  ["Change control", "Documented, reviewed, and reversible"],
+  ["Audit", "Account-level audit logs enabled by default"],
+  ["Reporting", "Consolidated account and spend reporting"],
+  ["Escalation", "A named contact with defined response windows"],
+];
+---
+
+<Layout
+  title="Cloudflare engineering: agents, apps, Zero Trust, and managed operations"
+  description="Kaba Digital Inc. builds AI agents and apps on Cloudflare's full stack, and manages Cloudflare accounts, Zero Trust, and platform operations as a self-serve partner."
+>
+  <PageHero
+    kicker="Cloudflare engineering"
+    title="We build on Cloudflare end to end, or we run it for you."
+    lede="Cloudflare is the platform we reach for first, because an AI product needs inference, orchestration, data, and security in one place. Two offers: we engineer on it, or we manage it."
+  />
+
+  <!-- What we build with -->
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="max-w-xl">
+        <span class="kicker">The catalog</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Everything we build with, in one place.
+        </h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+          Cloudflare's surface is large. These are the areas we work in most, and what we actually do inside each.
+        </p>
+      </div>
+      <div class="mt-12">
+        <CatalogTabs client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- Managed partner model -->
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Managed Cloudflare</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            One account, one invoice, every customer.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            {site.shortName} operates as a Cloudflare self-serve partner. For companies we manage, that means
+            accounts are provisioned and administered properly, billing is consolidated, and the full self-serve
+            catalog is available under one relationship.
+          </p>
+          <a href="/contact" class="btn-solid mt-8">Talk to us about managing it</a>
+        </div>
+
+        <dl class="border-t border-line">
+          {
+            program.map(([k, v]) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.7fr_1.3fr] sm:gap-8">
+                <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery tiers -->
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-xl">
+        <span class="kicker">Delivery</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Four engagements, in the order most teams need them.
+        </h2>
+      </div>
+
+      <ul class="mt-12 border-t border-line">
+        {
+          tiers.map((t) => (
+            <li class="grid gap-4 border-b border-line py-8 sm:grid-cols-[0.75fr_1.25fr] sm:gap-12">
+              <div>
+                <h3 class="font-display text-[21px] font-semibold text-ink">{t.name}</h3>
+                <p class="mt-2 text-[13.5px] text-ultra">{t.span}</p>
+              </div>
+              <div>
+                <p class="measure text-[16px] leading-relaxed text-ink-soft text-pretty">{t.body}</p>
+                <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                  {t.items.map((item) => (
+                    <li class="text-[13.5px] text-ink-mute">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Operations -->
+  <section class="border-t border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">How we operate</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Accountable, auditable, reversible.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Looking after someone's platform and security is an operational promise, not a project. These are the
+            practices we hold to from day one.
+          </p>
+        </div>
+        <dl class="border-t border-line">
+          {
+            operations.map(([k, v]) => (
+              <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-line py-4">
+                <dt class="text-[15px] font-medium text-ink">{k}</dt>
+                <dd class="max-w-md text-[15px] text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

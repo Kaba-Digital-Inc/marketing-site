@@ -1,0 +1,33 @@
+---
+import { site } from "@/lib/site";
+---
+
+<section class="py-20 lg:py-28">
+  <div class="shell">
+    <div class="panel relative overflow-hidden px-7 py-14 sm:px-12 lg:px-16 lg:py-20">
+      <div
+        class="pointer-events-none absolute -right-24 -top-32 h-[420px] w-[420px] rounded-full opacity-[0.13] blur-3xl"
+        style="background: radial-gradient(circle at center, #35d6f5 0%, transparent 65%);"
+      >
+      </div>
+
+      <div class="relative grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
+        <div>
+          <p class="label-mono">Next step</p>
+          <h2 class="text-display mt-5 max-w-[20ch] font-display font-semibold text-chalk text-balance">
+            Bring us the thing you keep postponing.
+          </h2>
+          <p class="measure mt-6 text-[17px] leading-relaxed text-chalk-soft text-pretty">
+            Tell us the workflow, the bottleneck, or the idea nobody has scoped yet. We will tell you honestly
+            whether it is worth building on AI, and what it takes to run.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <a href="/contact" class="btn-solid w-full">Book a strategy call</a>
+          <a href={`mailto:${site.email}`} class="btn-quiet w-full">{site.email}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

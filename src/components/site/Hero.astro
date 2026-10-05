@@ -1,0 +1,118 @@
+---
+import StackDiagram from "./StackDiagram.astro";
+
+const steps = [
+  {
+    title: "A user talks to your agent",
+    body: "Browser, mobile app, or a plain HTTP call. The request lands on a Worker, which is the only entry point you need.",
+  },
+  {
+    title: "The agent holds the conversation",
+    body: "Every agent is a Durable Object with its own identity, memory, and SQLite. It wakes on a message and sleeps when idle.",
+  },
+  {
+    title: "It reaches your data and tools",
+    body: "Vectorize for retrieval, D1 and R2 for state and files, Workflows for long jobs, MCP for the systems you already run.",
+  },
+  {
+    title: "Inference runs where the app does",
+    body: "Workers AI and AI Gateway handle models, routing, caching, and fallback, so quality and cost stay observable.",
+  },
+];
+
+const links = [
+  { label: "See what we build", href: "/services" },
+  { label: "Cloudflare engineering", href: "/cloudflare" },
+];
+---
+
+<section class="relative overflow-hidden">
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-[0.5]"
+    style="background: radial-gradient(60% 60% at 50% 0%, rgba(53,214,245,0.12) 0%, transparent 70%);"
+  >
+  </div>
+
+  <div class="shell relative pt-16 lg:pt-24">
+    <span class="kicker">AI engineering studio</span>
+
+    <h1 class="text-display mt-7 max-w-[16ch] font-display font-semibold text-chalk text-balance">
+      We build AI agents and apps on Cloudflare.
+    </h1>
+
+    <div class="mt-9 grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+      <p class="measure text-[17px] leading-relaxed text-chalk-soft text-pretty">
+        Kaba Digital Inc. designs and ships production AI systems end to end: agent orchestration, inference,
+        retrieval, storage, and the security around them. Cloudflare is the whole platform, not just the front door.
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row lg:justify-end">
+        <a href="/contact" class="btn-solid">Start a project</a>
+        <a href="/services" class="btn-quiet">See what we build</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- The one orchestrated moment: the request path through the stack -->
+  <div class="shell relative pb-20 pt-14 lg:pb-24">
+    <div class="panel relative overflow-hidden">
+      <div class="grid lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="px-7 py-10 sm:px-10 lg:py-14">
+          <h2 class="font-display text-[30px] font-semibold leading-tight tracking-tight text-chalk sm:text-[34px]">
+            <span class="text-signal">How</span> it works
+          </h2>
+
+          <ol class="mt-9 space-y-8">
+            {
+              steps.map((step, i) => (
+                <li class="flex gap-5">
+                  <span
+                    class={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border text-[13px] font-medium ${
+                      i === 0
+                        ? "border-signal bg-signal text-[#04222a]"
+                        : "border-line-2 text-chalk-mute"
+                    }`}
+                  >
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 class="font-display text-[17px] font-semibold leading-snug text-chalk">{step.title}</h3>
+                    <p class="measure mt-1.5 text-[14.5px] leading-relaxed text-chalk-mute text-pretty">
+                      {step.body}
+                    </p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <div class="relative min-h-[380px] border-t border-line lg:border-l lg:border-t-0">
+          <StackDiagram />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 border-t border-line px-7 py-6 sm:px-10">
+        <a
+          href="/services"
+          class="inline-flex items-center gap-2 rounded-lg border border-line-2 px-4 py-2.5 text-[14px] text-chalk-soft transition-colors hover:border-chalk-mute hover:text-chalk"
+        >
+          <svg viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M5 3h8l3 3v11H5z" />
+            <path d="M8 9h5M8 12h5" />
+          </svg>
+          What we do
+          <span class="text-chalk-mute">↗</span>
+        </a>
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="inline-flex items-center gap-2 rounded-lg border border-line-2 px-4 py-2.5 text-[14px] text-chalk-soft transition-colors hover:border-chalk-mute hover:text-chalk"
+          >
+            {link.label}
+            <span class="text-chalk-mute">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

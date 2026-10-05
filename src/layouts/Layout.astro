@@ -1,36 +1,102 @@
 ---
+import SiteNav from "@/components/SiteNav";
+import Footer from "@/components/site/Footer.astro";
+import { Toaster } from "@/components/ui/toaster";
+import { site } from "@/lib/site";
+import "@/styles/globals.css";
+
 interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = site.description } = Astro.props;
+
+const path = Astro.url.pathname;
+const canonical = new URL(path, site.url).href;
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  email: site.email,
+  areaServed: "Worldwide",
+  knowsAbout: [
+    "AI agent engineering",
+    "Cloudflare Workers",
+    "Cloudflare Agents SDK",
+    "Workers AI",
+    "AI Gateway",
+    "Vectorize",
+    "Durable Objects",
+    "Retrieval-augmented generation",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postal,
+    addressCountry: "CA",
+  },
+};
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content="Kaba Digital Inc. - Transform your digital future with our expert solutions in UX Design, AI Workflows, Cloud Consulting, and SEO Optimization." />
-    <meta name="keywords" content="digital transformation, UX design, AI solutions, cloud consulting, SEO optimization" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content="Transform your digital future with Kaba Digital Inc." />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#08090a" />
+
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EY38M8ZEBX"></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-EY38M8ZEBX');
     </script>
-    <link rel="canonical" href="https://kabadigital.com" />
   </head>
-  <body class="antialiased">
-    <slot />
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-signal focus:px-4 focus:py-2 focus:text-sm focus:text-[#04222a]"
+    >
+      Skip to content
+    </a>
+    <SiteNav client:load currentPath={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <Toaster client:load />
   </body>
 </html>

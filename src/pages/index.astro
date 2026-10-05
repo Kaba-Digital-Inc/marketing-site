@@ -1,23 +1,50 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero';
-import Services from '../components/Services';
-import Process from '../components/Process';
-import Contact from '../components/Contact';
-import Navigation from '../components/Navigation';
-import '@/styles/globals.css';
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/site/Hero.astro";
+import StackStrip from "@/components/site/StackStrip.astro";
+import ServicesGrid from "@/components/site/ServicesGrid.astro";
+import CloudflareBand from "@/components/site/CloudflareBand.astro";
+import ProductsSection from "@/components/site/ProductsSection.astro";
+import ProcessTimeline from "@/components/site/ProcessTimeline.astro";
+import EngagementModels from "@/components/site/EngagementModels.astro";
+import CTA from "@/components/site/CTA.astro";
 ---
-<script>
-import LogRocket from 'logrocket';
-LogRocket.init('mp0ois/kaba-digital-inc');
-</script>
 
-<Layout title="Kaba Digital Inc. | Ai Agents Consulting, UX Design, Cloud Consulting & SEO Optimization">
-  <Navigation client:load />
-  <main class="relative">
-    <Hero client:load />
-    <Services client:load />
-    <Process client:load />
-    <Contact client:load />
-  </main>
+<Layout title="AI agents and apps, built on Cloudflare">
+  <Hero />
+
+  <StackStrip />
+
+  <section class="border-t border-line py-20 lg:py-28">
+    <div class="shell">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div class="max-w-xl">
+          <span class="kicker">What we do</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Consulting that ends in working software.
+          </h2>
+        </div>
+        <a href="/services" class="link-underline shrink-0 text-[15px]">All services</a>
+      </div>
+
+      <div class="mt-12">
+        <ServicesGrid limit={6} />
+      </div>
+    </div>
+  </section>
+
+  <CloudflareBand />
+
+  <ProductsSection />
+
+  <ProcessTimeline />
+
+  <EngagementModels />
+
+  <CTA />
 </Layout>
+
+<script>
+  import LogRocket from "logrocket";
+  LogRocket.init("mp0ois/kaba-digital-inc");
+</script>

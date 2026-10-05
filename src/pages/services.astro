@@ -1,0 +1,100 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import ServicesGrid from "@/components/site/ServicesGrid.astro";
+import ProcessTimeline from "@/components/site/ProcessTimeline.astro";
+import CTA from "@/components/site/CTA.astro";
+
+const principles = [
+  {
+    name: "Outcome before tooling",
+    body: "We start from the business result and work backwards. If a simpler fix beats an AI system, we will say so.",
+  },
+  {
+    name: "Measure, then trust",
+    body: "Every system ships with evaluations and cost telemetry, so quality is a number rather than an opinion.",
+  },
+  {
+    name: "Platform over glue",
+    body: "We keep the stack on Cloudflare wherever it fits, because fewer moving parts is the real performance win.",
+  },
+  {
+    name: "Built to hand over",
+    body: "Documentation, runbooks, and training are part of the deliverable, not a phase we bill for later.",
+  },
+];
+
+const notFit = [
+  "You want a strategy deck with no engineering behind it",
+  "You need a large team filling seats rather than a small, focused one",
+  "You want a model in production with no evaluation or guardrails",
+  "You are shopping for the lowest hourly rate",
+];
+---
+
+<Layout
+  title="Services: AI agents, product engineering, and Cloudflare delivery"
+  description="AI strategy, agent and workflow engineering, retrieval systems, AI product engineering, Cloudflare platform work, evaluations, and enablement."
+>
+  <PageHero
+    kicker="Services"
+    title="AI consulting, from first question to running system."
+    lede="Eight connected services covering the full arc of an AI initiative, and the Cloudflare platform it runs on. You can start at any point and we will meet you there."
+  />
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <ServicesGrid />
+    </div>
+  </section>
+
+  <ProcessTimeline />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-xl">
+        <span class="kicker">Principles</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          The rules we make decisions by.
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        {
+          principles.map((p) => (
+            <div class="border-t border-chalk/25 pt-6">
+              <h3 class="font-display text-[20px] font-semibold text-ink">{p.name}</h3>
+              <p class="mt-3 text-[16px] leading-relaxed text-ink-soft text-pretty">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Honest fit</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            We are not the right partner for everyone.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Being clear about scope is the fastest way to earn trust. If any of these describes what you need, we
+            will happily point you somewhere better suited.
+          </p>
+        </div>
+        <ul class="border-t border-line">
+          {
+            notFit.map((item) => (
+              <li class="border-b border-line py-5 text-[16.5px] leading-relaxed text-ink-soft">{item}</li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

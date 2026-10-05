@@ -1,0 +1,122 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import CTA from "@/components/site/CTA.astro";
+import { site } from "@/lib/site";
+
+const traits = [
+  ["Small and direct", "The people who scope your engagement are the people who build it. No layers, no hand-off."],
+  ["Platform-minded", "We would rather use one platform well than stitch six together. Cloudflare is usually that platform."],
+  ["Product-led", "We build our own products, so interface quality is argued about as hard as architecture."],
+  ["Measurement-first", "If quality and cost are not observable, the system is not finished."],
+];
+
+const steps = [
+  [
+    "Where we started",
+    "Kaba Digital Inc. began as a digital and cloud consultancy, delivering web, cloud, and automation work for growing businesses.",
+  ],
+  [
+    "What changed",
+    "Clients stopped asking for experiments and started asking for systems. We reorganised around AI engineering, agents, and evaluation.",
+  ],
+  [
+    "Where we are",
+    "We build AI products on Cloudflare's full stack, and we manage Cloudflare for teams that would rather not run it themselves.",
+  ],
+];
+---
+
+<Layout
+  title="About: an AI engineering studio in Toronto"
+  description="Kaba Digital Inc. is an AI engineering studio based in Toronto, Canada, building production AI agents and apps on Cloudflare's full stack."
+>
+  <PageHero
+    kicker="About"
+    title="A small studio with a bias for shipping."
+    lede="Kaba Digital Inc. is a Toronto-based AI engineering studio. We exist for the gap between an AI idea and a system that survives real users."
+  />
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+        <div>
+          <h2 class="text-title font-display font-semibold text-ink text-balance">
+            We build the thing, not only the plan for it.
+          </h2>
+          <div class="measure mt-6 space-y-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            <p>
+              Too much AI work stops at the demo. Our practice is organised around the parts that decide whether a
+              system survives contact with real users: data quality, evaluation, cost, security, and the operational
+              discipline to keep it healthy.
+            </p>
+            <p>
+              We are deliberately small, which means direct communication and no capacity sold that we cannot staff
+              well. When a project ends, we hand over something your team can own.
+            </p>
+          </div>
+
+          <dl class="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8">
+            <div>
+              <dt class="text-[13px] text-ink-mute">Legal entity</dt>
+              <dd class="mt-1.5 text-[15px] text-ink">{site.name}</dd>
+            </div>
+            <div>
+              <dt class="text-[13px] text-ink-mute">Based in</dt>
+              <dd class="mt-1.5 text-[15px] text-ink">{site.address.city}, {site.address.country}</dd>
+            </div>
+            <div>
+              <dt class="text-[13px] text-ink-mute">Focus</dt>
+              <dd class="mt-1.5 text-[15px] text-ink">AI engineering on Cloudflare</dd>
+            </div>
+            <div>
+              <dt class="text-[13px] text-ink-mute">Working model</dt>
+              <dd class="mt-1.5 text-[15px] text-ink">Remote-first, worldwide</dd>
+            </div>
+          </dl>
+        </div>
+
+        <ul class="space-y-8 lg:pt-2">
+          {
+            traits.map(([name, body]) => (
+              <li class="border-t border-chalk/25 pt-5">
+                <h3 class="font-display text-[19px] font-semibold text-ink">{name}</h3>
+                <p class="mt-2.5 text-[16px] leading-relaxed text-ink-soft text-pretty">{body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-xl">
+        <span class="kicker">Trajectory</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          From digital consultancy to AI engineering.
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-3">
+        {
+          steps.map(([name, body]) => (
+            <div class="border-t border-line pt-6">
+              <h3 class="font-display text-[19px] font-semibold text-ink">{name}</h3>
+              <p class="mt-3 text-[16px] leading-relaxed text-ink-soft text-pretty">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 flex flex-wrap gap-x-10 gap-y-4">
+        <span class="text-[15px] text-ink-soft">Handover with runbooks</span>
+        <span class="text-[15px] text-ink-soft">Training for your team</span>
+        <span class="text-[15px] text-ink-soft">A named contact, not a queue</span>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

@@ -1,0 +1,93 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import ContactForm from "@/components/ContactForm";
+import BookingEmbed from "@/components/BookingEmbed";
+import { site } from "@/lib/site";
+
+const next = [
+  "A 30-minute call to understand the problem and the constraints.",
+  "A short written read: whether it is worth building, and what it takes.",
+  "A scoped proposal if there is a fit, with no obligation.",
+];
+---
+
+<Layout
+  title="Contact: start with a conversation"
+  description="Talk to Kaba Digital Inc. about AI agents, AI product engineering, Cloudflare engineering, or managed Cloudflare operations. Based in Toronto, working worldwide."
+>
+  <PageHero
+    kicker="Contact"
+    title="Start with a conversation."
+    lede="Tell us what you are trying to build or fix. We will come back with a straight answer about whether we can help, what it takes, and what it costs to run."
+  />
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <div>
+          <dl class="border-t border-line">
+            <div class="border-b border-line py-5">
+              <dt class="text-[13px] text-ink-mute">Email</dt>
+              <dd class="mt-1.5">
+                <a href={`mailto:${site.email}`} class="link-underline text-[16px]">{site.email}</a>
+              </dd>
+            </div>
+            <div class="border-b border-line py-5">
+              <dt class="text-[13px] text-ink-mute">Office</dt>
+              <dd class="mt-2 text-[16px] leading-relaxed text-ink-soft">
+                {site.address.street}<br />
+                {site.address.city}, {site.address.region} {site.address.postal}<br />
+                {site.address.country}
+              </dd>
+            </div>
+            <div class="border-b border-line py-5">
+              <dt class="text-[13px] text-ink-mute">LinkedIn</dt>
+              <dd class="mt-1.5">
+                <a href={site.linkedin} target="_blank" rel="noopener noreferrer" class="link-underline text-[16px]">
+                  Kaba Digital Inc.
+                </a>
+              </dd>
+            </div>
+            <div class="border-b border-line py-5">
+              <dt class="text-[13px] text-ink-mute">Response time</dt>
+              <dd class="mt-1.5 text-[16px] text-ink-soft">Within one business day</dd>
+            </div>
+          </dl>
+
+          <div class="mt-10 border-t border-chalk/25 pt-6">
+            <h2 class="font-display text-[19px] font-semibold text-ink">What happens next</h2>
+            <ol class="mt-4 space-y-3">
+              {next.map((step) => <li class="text-[16px] leading-relaxed text-ink-soft">{step}</li>)}
+            </ol>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-line bg-panel-2 p-7 sm:p-9">
+          <h2 class="font-display text-[24px] font-semibold text-ink">Tell us about the project</h2>
+          <p class="mt-2 text-[15px] text-ink-mute">A few lines is enough to start.</p>
+          <div class="mt-8">
+            <ContactForm client:load />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-2 py-20 lg:py-24">
+    <div class="shell">
+      <div class="max-w-xl">
+        <span class="kicker">Booking</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Or pick a time now.
+        </h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft">
+          Choose a 30-minute slot and we will bring the questions.
+        </p>
+      </div>
+      <div class="mt-10 overflow-hidden rounded-2xl border border-line bg-panel-2">
+        <BookingEmbed client:visible />
+      </div>
+    </div>
+  </section>
+</Layout>

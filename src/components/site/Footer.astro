@@ -1,0 +1,79 @@
+---
+import { site, nav, products } from "@/lib/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-panel">
+  <div class="shell py-16 lg:py-20">
+    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <svg viewBox="0 0 28 28" class="h-7 w-7" aria-hidden="true">
+            <rect x="1" y="1" width="26" height="26" rx="7" fill="#f6f5f1" />
+            <circle cx="9.5" cy="9.5" r="2.4" fill="#0d0e11"></circle>
+            <circle cx="18.5" cy="14" r="2.4" fill="#2438e8"></circle>
+            <circle cx="9.5" cy="18.5" r="2.4" fill="#0d0e11"></circle>
+            <path d="M11.4 10.6 16.6 12.9M11.4 17.4 16.6 15.1" stroke="#0d0e11" stroke-width="1.1" opacity="0.5"></path>
+          </svg>
+          <span class="font-display text-[17px] font-semibold tracking-tight">{site.name}</span>
+        </div>
+        <p class="mt-6 max-w-xs text-[15px] leading-relaxed text-chalk-mute">
+          An AI engineering studio. We design, build, and ship AI agents and apps on Cloudflare&rsquo;s full stack.
+        </p>
+        <a
+          href={site.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-underline mt-6 inline-block text-[15px] text-chalk"
+        >
+          Kaba Digital on LinkedIn
+        </a>
+      </div>
+
+      <div>
+        <p class="text-[13px] font-medium text-chalk-mute">Company</p>
+        <ul class="mt-5 space-y-3 text-[15px]">
+          <li><a href="/" class="text-chalk-soft transition-colors hover:text-chalk">Home</a></li>
+          {nav.map((item) => (
+            <li><a href={item.href} class="text-chalk-soft transition-colors hover:text-chalk">{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[13px] font-medium text-chalk-mute">We build</p>
+        <ul class="mt-5 space-y-3 text-[15px]">
+          {products.map((p) => (
+            <li>
+              <a href={p.href} target="_blank" rel="noopener noreferrer" class="text-chalk-soft transition-colors hover:text-chalk">
+                {p.name}
+              </a>
+            </li>
+          ))}
+          <li><a href="/cloudflare" class="text-chalk-soft transition-colors hover:text-chalk">Cloudflare engineering</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[13px] font-medium text-chalk-mute">Contact</p>
+        <ul class="mt-5 space-y-3 text-[15px] text-chalk-soft">
+          <li><a href={`mailto:${site.email}`} class="transition-colors hover:text-chalk">{site.email}</a></li>
+          <li class="leading-relaxed">
+            {site.address.street}<br />
+            {site.address.city}, {site.address.region} {site.address.postal}<br />
+            {site.address.country}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-3 border-t border-chalk/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-[13px] text-chalk-mute">&copy; {year} {site.name} All rights reserved.</p>
+      <div class="flex items-center gap-6 text-[13px] text-chalk-mute">
+        <a href="/privacy" class="transition-colors hover:text-chalk-soft">Privacy</a>
+        <a href="/terms" class="transition-colors hover:text-chalk-soft">Terms</a>
+        <span>Toronto, Canada</span>
+      </div>
+    </div>
+  </div>
+</footer>

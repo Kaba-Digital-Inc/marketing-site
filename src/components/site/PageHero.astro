@@ -1,0 +1,17 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  lede?: string;
+}
+
+const { kicker, title, lede } = Astro.props;
+---
+
+<section class="border-b border-line">
+  <div class="shell py-16 lg:py-24">
+    <span class="kicker">{kicker}</span>
+    <h1 class="text-title mt-6 max-w-[20ch] font-display font-semibold text-ink text-balance">{title}</h1>
+    {lede && <p class="measure mt-7 text-lg leading-relaxed text-ink-soft text-pretty">{lede}</p>}
+  </div>
+</section>
