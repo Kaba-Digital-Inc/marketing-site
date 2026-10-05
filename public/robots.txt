@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kabadigitalinc.com/sitemap.xml
+Sitemap: https://kabadigitalinc.com/sitemap-index.xml
