@@ -29,7 +29,9 @@ const icon = size === "sm" ? "h-6 w-6" : "h-8 w-8";
                 aria-label={p.data.name}
                 title={p.data.name}
               >
-                {p.data.logoIsIcon ? (
+                {!p.data.logo ? (
+                  <span class="font-display text-[17px] font-semibold text-chalk">{p.data.name}</span>
+                ) : p.data.logoIsIcon ? (
                   <>
                     <img src={p.data.logo} alt="" class={icon} loading="lazy" decoding="async" />
                     <span class="font-display text-[17px] font-semibold text-chalk">{p.data.name}</span>

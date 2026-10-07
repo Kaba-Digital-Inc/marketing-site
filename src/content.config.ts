@@ -45,10 +45,11 @@ const partners = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/partners" }),
   schema: z.object({
     name: z.string(),
-    kind: z.enum(["Platform", "Sponsor"]),
+    kind: z.enum(["Platform", "Technology", "Sponsor"]),
     tagline: z.string(),
     description: z.string().max(170),
-    logo: z.string(),
+    // Optional: a partner without written permission to show its logo is shown as a text wordmark.
+    logo: z.string().optional(),
     // Icon-only marks get the company name set beside them.
     logoIsIcon: z.boolean().default(false),
     // Some logo files have more padding than others; scale to even them out visually.

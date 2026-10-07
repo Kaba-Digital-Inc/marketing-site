@@ -1,0 +1,242 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import Figure from "@/components/Figure";
+import { site } from "@/lib/site";
+
+// Layers of an agent, as described on the Cloudflare agents platform page.
+const layers = [
+  {
+    name: "Inputs",
+    note: "How work reaches the agent",
+    items: ["Email Workers", "WebSockets", "Calls", "HTTP and cron triggers"],
+  },
+  {
+    name: "Reasoning",
+    note: "How the agent decides",
+    items: ["Workers AI for hosted models", "AI Gateway for third-party providers", "Model routing and fallback"],
+  },
+  {
+    name: "Execution",
+    note: "How it stays alive and finishes the job",
+    items: ["Durable Objects for state and identity", "Workflows for long-running work", "Scheduled follow-ups"],
+  },
+  {
+    name: "Tools",
+    note: "What the agent can do",
+    items: ["MCP servers", "Browser Rendering", "Vectorize for retrieval", "D1 and R2 for data and files"],
+  },
+];
+
+const builds = [
+  ["Agent MVPs", "A working agent in front of real users, with evaluation and a cost model from week one."],
+  ["MCP servers", "Expose your product or data to AI clients through a remote MCP server that is secured and observable."],
+  ["Retrieval and knowledge", "Answers grounded in your documents and data, with citations, built on Vectorize, D1, and R2."],
+  ["Long-running workflows", "Agents that research, wait, retry, and follow up over hours or days without losing their place."],
+  ["Voice and realtime", "Conversational and live agents with a clear handoff to a person."],
+  ["Migrations to Cloudflare", "Move an existing agent or AI workload onto the platform, with a plan for cutover and cost."],
+];
+
+const whoFor = [
+  ["Startups building agents", "Build the AI core on a platform that scales down to a prototype and up to production.", "/startups/"],
+  ["Small and mid-sized business", "Automations and agents that run reliably without a platform team.", "/ai-native/"],
+  ["Enterprise teams", "Agents with guardrails, approvals, and audit trails that pass security review.", "/enterprise/"],
+];
+
+const faqs = [
+  {
+    q: "Why build AI agents on Cloudflare?",
+    a: "The platform puts the pieces an agent needs in one place: inputs, hosted or third-party models, durable state, long-running workflows, and tools such as MCP servers and vector search. Billing is based on CPU time rather than time spent waiting, which suits agents that spend most of their time waiting on a model or a person. We recommend it when it fits the project.",
+  },
+  {
+    q: "Are you a Cloudflare partner?",
+    a: "Not yet. We are applying to the Cloudflare partner programs and the status is pending. Until Cloudflare confirms otherwise we are not a Cloudflare partner and hold no Cloudflare certification. We will update this page when that changes.",
+  },
+  {
+    q: "Do you only work on Cloudflare?",
+    a: "No. We are model-agnostic and platform-flexible, and we also build on Vercel, AWS, and in clients' own cloud accounts. Cloudflare is our first choice for many agent workloads, and we say so plainly when something else is a better fit.",
+  },
+  {
+    q: "When would you not recommend Cloudflare?",
+    a: "When the team's agent code is mainly Python, since the Agents SDK is written for JavaScript and TypeScript; when data must stay inside your own cloud; or when you already have a deep investment elsewhere that works. We cover this in an audit before anything is built.",
+  },
+  {
+    q: "Can you move our existing agent onto Cloudflare?",
+    a: "Usually, yes. We start with a short review of how the agent holds state, calls tools, and is billed today, then plan the cutover in stages so you can compare quality and cost before committing.",
+  },
+  {
+    q: "What does it cost to run an agent on Cloudflare?",
+    a: "It depends on your model usage, traffic, and how long tasks run, so we estimate it for your workload rather than quote a general number. Cloudflare publishes its own pricing, and we build a cost per conversation or task into every project.",
+  },
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI agent development on Cloudflare",
+  serviceType: "AI agent development",
+  description:
+    "Design, build, migrate, and run AI agents on the Cloudflare developer platform for startups, small businesses, and enterprise teams.",
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: "Worldwide",
+};
+---
+
+<Layout
+  title="AI agents on Cloudflare: build, migrate, run"
+  description="We design, build, and run AI agents on the Cloudflare developer platform for startups, small businesses, and enterprises. Cloudflare partner status: pending."
+  schema={[serviceSchema]}
+>
+  <PageHero
+    kicker="Agents on Cloudflare"
+    title="Build AI agents on Cloudflare, end to end."
+    lede="Cloudflare covers the full path of an agent: inputs, reasoning, durable execution, and tools. We design, build, and run agents on it for startups, small businesses, and larger teams."
+    figure="router"
+    figureLabel="A router with its antennas up, standing for connected agent inputs"
+  />
+
+  <section class="border-b border-line py-8">
+    <div class="shell">
+      <p class="max-w-3xl text-[14.5px] leading-relaxed text-ink-soft">
+        <span class="label-mono mr-2">Status</span>
+        Cloudflare partner programs: application pending. We are not yet a Cloudflare partner and hold no Cloudflare
+        certification.{" "}
+        <a href="/partners/cloudflare/" class="link-underline text-ink">How we work with Cloudflare</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">The agent path on one platform</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Four layers, one place to build and run them.
+        </h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+          Cloudflare describes its platform for building agents as durable execution, serverless inference, and
+          pricing that scales up and down, billed on CPU time rather than time spent waiting. The stateful agents
+          themselves are built with the Agents SDK, a JavaScript and TypeScript SDK.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        {
+          layers.map((l, i) => (
+            <div class="bg-panel p-7">
+              <span class="font-mono text-[13px] text-signal">0{i + 1}</span>
+              <h3 class="mt-2 font-display text-[22px] font-semibold text-chalk">{l.name}</h3>
+              <p class="mt-1 text-[13px] text-chalk-mute">{l.note}</p>
+              <ul class="mt-5 space-y-2.5">
+                {l.items.map((item) => (
+                  <li class="text-[14.5px] leading-snug text-chalk-soft">{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">What we build</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            From a first agent to a migration.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Every engagement ships with evaluation, guardrails, and monitoring, and a cost per task you can see.
+          </p>
+          <div class="panel mt-8 hidden overflow-hidden bg-void lg:block">
+            <Figure
+              client:visible
+              name="patch"
+              label="A patch panel of ports and cables, standing for connecting agents to tools"
+              intensity={0.6}
+              plate="#08090a"
+            />
+          </div>
+        </div>
+        <dl class="border-t border-line">
+          {
+            builds.map(([k, v]) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.8fr_1.2fr] sm:gap-8">
+                <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">Who it is for</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">Three kinds of team.</h2>
+      </div>
+      <ul class="mt-12 grid gap-5 lg:grid-cols-3">
+        {
+          whoFor.map(([k, v, href]) => (
+            <li>
+              <a href={href} class="group panel flex h-full flex-col p-7 transition-colors hover:border-line-2">
+                <h3 class="font-display text-[21px] font-semibold text-chalk">{k}</h3>
+                <p class="mt-3 flex-1 text-[15px] leading-relaxed text-chalk-soft text-pretty">{v}</p>
+                <span class="mt-6 text-[15px] font-medium text-signal">
+                  Learn more <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-line py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <span class="kicker">Cloudflare programs for startups</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Credits may be available for qualifying startups.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Cloudflare runs its own startup program. Eligibility and credit amounts are set by Cloudflare and change
+            over time, so check the current terms on their page before you plan around them.
+          </p>
+          <a
+            href="https://www.cloudflare.com/forstartups/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-underline mt-6 inline-block text-[15px]"
+          >
+            Cloudflare for Startups
+          </a>
+        </div>
+        <div>
+          <span class="kicker">Proof</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">We build and teach it.</h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            We run <a href="/work/clawbuilders/" class="link-underline">ClawBuilders</a>, a community where AI
+            builders ship together. Cloudflare sponsors it, and its workshops include hands-on sessions on deploying
+            AI agents on Cloudflare.
+          </p>
+          <a href="/partners/cloudflare/" class="link-underline mt-6 inline-block text-[15px]">
+            How we work with Cloudflare
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} heading="Questions about agents on Cloudflare" figure="dish" />
+  <CTA />
+</Layout>

@@ -2,7 +2,7 @@
 title: "ClawBuilders.club"
 tagline: "Where AI builders ship, together."
 seoTitle: "ClawBuilders.club: AI agent builder community"
-description: "An agent builder community with an agent directory, an arena, and workshops and labs written and sponsored by AI labs. Founded and run by Kaba Digital."
+description: "An agent builder community with an agent directory, an arena, and workshops and labs written and sponsored by AI labs. Founded and run by Kaba Digital Inc."
 status: live
 visible: true
 featured: true

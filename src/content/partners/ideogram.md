@@ -2,7 +2,7 @@
 name: "Ideogram"
 kind: "Sponsor"
 tagline: "AI image generation."
-description: "Ideogram sponsors ClawBuilders, the agent builder community run by Kaba Digital."
+description: "Ideogram sponsors ClawBuilders, the agent builder community run by Kaba Digital Inc."
 logo: "/partners/ideogram.png"
 url: "https://ideogram.ai/"
 page: false

@@ -44,7 +44,7 @@ export default function StartupApplication() {
         body: JSON.stringify({
           access_key: "4a2c14ab-3913-4287-8cf6-d08aa5c2aaef",
           subject: `Startup partnership application: ${form.company || form.name}`,
-          from_name: "Kaba Digital partnership application",
+          from_name: "Kaba Digital Inc. partnership application",
           to: "team@kabadigitalinc.com",
           name: form.name,
           email: form.email,

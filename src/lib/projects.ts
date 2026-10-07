@@ -13,7 +13,7 @@ export async function getVisibleProjects(): Promise<Project[]> {
 }
 
 export const relationshipNote: Record<Project["data"]["relationship"], string> = {
-  Founded: "Founded and run by Kaba Digital",
+  Founded: "Founded and run by Kaba Digital Inc.",
   "Equity partner": "Startup partnership: engineering for equity and a fee",
   Client: "Client engagement",
 };

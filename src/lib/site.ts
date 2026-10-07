@@ -1,6 +1,6 @@
 export const site = {
   name: "Kaba Digital Inc.",
-  shortName: "Kaba Digital",
+  shortName: "Kaba Digital Inc.",
   tagline: "AI engineering studio",
   description:
     "We build and run production AI agents and automation for small businesses, startups, and enterprises, with equity partnerships for selected startups.",
@@ -25,6 +25,7 @@ export const nav = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
   { label: "Technology", href: "/stack" },
+  { label: "Agents on Cloudflare", href: "/cloudflare" },
   { label: "Insights", href: "/insights" },
   { label: "Partners", href: "/partners" },
   { label: "Locations", href: "/locations" },

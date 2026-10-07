@@ -46,6 +46,7 @@ const segmentLabels: Record<string, string> = {
   insights: "Insights",
   locations: "Locations",
   partners: "Partners",
+  cloudflare: "Agents on Cloudflare",
   toronto: "Toronto",
 };
 
@@ -72,6 +73,7 @@ const orgSchema = {
   "@type": "ProfessionalService",
   "@id": site.url + "/#organization",
   name: site.name,
+  legalName: site.name,
   description: site.description,
   url: site.url,
   email: site.email,
@@ -123,7 +125,7 @@ const jsonLd = [orgSchema, ...(breadcrumb ? [breadcrumb] : []), ...schema];
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Kaba Digital: we help businesses become AI-native" />
+    <meta property="og:image:alt" content="Kaba Digital Inc.: AI agent development and automation" />
     <meta property="og:locale" content="en_CA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />

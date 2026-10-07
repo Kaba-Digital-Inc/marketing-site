@@ -2,7 +2,7 @@
 name: "Rootly AI"
 kind: "Sponsor"
 tagline: "Incident management."
-description: "Rootly AI sponsors ClawBuilders, the agent builder community run by Kaba Digital."
+description: "Rootly AI sponsors ClawBuilders, the agent builder community run by Kaba Digital Inc."
 logo: "/partners/rootly.png"
 logoScale: 1.6
 url: "https://rootly.com/"

@@ -23,6 +23,7 @@ const baseMenus: Menu[] = [
     items: [
       { label: "AI strategy", href: "/services", note: "Where AI pays off, and what it takes" },
       { label: "Agents & workflows", href: "/services", note: "Systems that do real work" },
+      { label: "Agents on Cloudflare", href: "/cloudflare", note: "Build, migrate, and run on the platform" },
       { label: "Voice & realtime agents", href: "/services", note: "Conversations that run 24/7" },
       { label: "Retrieval & knowledge", href: "/services", note: "Answers from your own data" },
       { label: "AI product engineering", href: "/services", note: "Interface through inference" },
@@ -120,7 +121,7 @@ export default function SiteNav({ currentPath = "/", workItems = [] }: Props) {
         <a href="/" className="flex min-h-[44px] items-center gap-2.5" aria-label={`${site.name} home`}>
           <Mark />
           <span className="font-display text-[17px] font-semibold tracking-tight text-chalk">
-            Kaba Digital
+            Kaba Digital Inc.
           </span>
         </a>
 

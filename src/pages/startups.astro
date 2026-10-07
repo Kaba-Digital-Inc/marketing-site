@@ -77,6 +77,10 @@ const faqs = [
     a: "We read the application and reply by email. If it looks like a fit, we schedule an intro call, then a paid working session on a real problem, then agree terms in writing.",
   },
   {
+    q: "Do you help with Cloudflare startup credits?",
+    a: "Cloudflare runs its own startup program, and eligibility and credit amounts are set by Cloudflare and change over time. Check the current terms on the Cloudflare for Startups page. If you are building agents on Cloudflare, we are happy to talk through your stack on a call.",
+  },
+  {
     q: "What do you build with?",
     a: "We stay model-agnostic and choose per project. Common choices include Claude and Gemini models, the Vercel AI SDK, Mastra, LiveKit for voice, Next.js, Postgres, and Cloudflare. See our technology page for how we decide.",
   },
@@ -119,6 +123,12 @@ const serviceSchema = {
           <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
             Most agencies sell hours. We choose a few startups, put engineering behind them, and share in the
             result. The terms are simple and stated up front.
+          </p>
+          <p class="mt-6 text-[14.5px] text-ink-mute">
+            Building agents on Cloudflare? See <a href="/cloudflare/" class="link-underline text-ink">how we build on it</a>,
+            or read the current terms of the
+            <a href="https://www.cloudflare.com/forstartups/" target="_blank" rel="noopener noreferrer" class="link-underline text-ink">Cloudflare for Startups</a>
+            program.
           </p>
           <dl class="mt-8 border-t border-line">
             {
