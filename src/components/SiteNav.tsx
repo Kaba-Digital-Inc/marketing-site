@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
 
-type Props = { currentPath?: string };
+type WorkItem = { label: string; href: string; note: string };
+type Props = { currentPath?: string; workItems?: WorkItem[] };
 
 type MenuItem = { label: string; href: string; note: string };
 type Menu = { label: string; href: string; items: MenuItem[] };
 
-const menus: Menu[] = [
+const baseMenus: Menu[] = [
   {
     label: "Who we help",
-    href: "/ai-native",
+    href: "/startups",
     items: [
+      { label: "Startups", href: "/startups", note: "Selective partnerships: paid plus equity" },
       { label: "Small & mid-sized business", href: "/ai-native", note: "Become AI-native, one workflow at a time" },
-      { label: "Startups", href: "/startups", note: "Ship the AI product without an AI team" },
       { label: "Enterprise", href: "/enterprise", note: "Take pilots to production" },
     ],
   },
@@ -28,21 +29,13 @@ const menus: Menu[] = [
     ],
   },
   {
-    label: "Work",
-    href: "/work",
-    items: [
-      { label: "ClawBuilders.club", href: "/work", note: "Agent evaluation arena" },
-      { label: "OffloadVault", href: "/work", note: "Gallery on your own storage" },
-      { label: "Client engagements", href: "/work", note: "The work behind NDAs" },
-    ],
-  },
-  {
     label: "Studio",
     href: "/about",
     items: [
       { label: "About us", href: "/about", note: "A small, direct studio" },
       { label: "Insights", href: "/insights", note: "Practical guides on AI for business" },
       { label: "Our technology", href: "/stack", note: "Model-agnostic, no lock-in" },
+      { label: "Partners", href: "/partners", note: "Platforms we build on and ClawBuilders sponsors" },
       { label: "Where we work", href: "/locations", note: "Based in Toronto, working worldwide" },
       { label: "Contact", href: "/contact", note: "Start with a conversation" },
     ],
@@ -69,7 +62,19 @@ function Chevron() {
   );
 }
 
-export default function SiteNav({ currentPath = "/" }: Props) {
+function buildMenus(workItems: WorkItem[]): Menu[] {
+  const work: Menu = {
+    label: "Work",
+    href: "/work",
+    items: [...workItems, { label: "All work", href: "/work", note: "Our products, partnerships, and client projects" }],
+  };
+  const out = [...baseMenus];
+  out.splice(2, 0, work); // after Services, before Studio
+  return out;
+}
+
+export default function SiteNav({ currentPath = "/", workItems = [] }: Props) {
+  const menus = buildMenus(workItems);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -165,8 +170,8 @@ export default function SiteNav({ currentPath = "/" }: Props) {
           <a href="/contact" className="btn-quiet">
             Contact
           </a>
-          <a href="/ai-native#audit" className="btn-solid">
-            Book an audit
+          <a href="/contact/" className="btn-solid">
+            Book a call
           </a>
         </div>
 
@@ -202,8 +207,8 @@ export default function SiteNav({ currentPath = "/" }: Props) {
                 ))}
               </div>
             ))}
-            <a href="/ai-native#audit" onClick={() => setOpen(false)} className="btn-solid my-4">
-              Book an audit
+            <a href="/contact/" onClick={() => setOpen(false)} className="btn-solid my-4">
+              Book a call
             </a>
           </nav>
         </div>

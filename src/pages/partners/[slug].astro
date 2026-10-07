@@ -1,0 +1,97 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTA from "@/components/site/CTA.astro";
+import { render } from "astro:content";
+import { getPartners } from "@/lib/partners";
+import { site } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const partners = await getPartners();
+  return partners.filter((p) => p.data.page).map((partner) => ({ params: { slug: partner.id }, props: { partner } }));
+}
+
+const { partner } = Astro.props;
+const { data } = partner;
+const { Content } = await render(partner);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: `${data.name} and Kaba Digital`,
+  description: data.description,
+  url: new URL(`/partners/${partner.id}/`, site.url).href,
+  about: { "@type": "Organization", name: data.name, url: data.url },
+  isPartOf: { "@id": site.url + "/#organization" },
+};
+---
+
+<Layout
+  title={`${data.name} and Kaba Digital`}
+  description={data.description}
+  schema={[schema]}
+  crumbLabel={data.name}
+>
+  <article class="border-b border-line">
+    <header class="shell pt-14 lg:pt-20">
+      <a href="/partners/" class="link-underline text-[14px] text-ink-mute">← All partners</a>
+      <div class="mt-8 flex items-center gap-4">
+        {
+          data.logoIsIcon ? (
+            <img src={data.logo} alt="" class="h-12 w-12" />
+          ) : (
+            <img src={data.logo} alt={data.name} class="h-9 w-auto max-w-[240px]" />
+          )
+        }
+        <span class="label-mono">{data.kind === "Platform" ? "Platform" : "ClawBuilders sponsor"}</span>
+      </div>
+      <h1 class="text-display mt-6 max-w-[16ch] font-display font-semibold text-ink text-balance">{data.name}</h1>
+      <p class="measure mt-5 text-[20px] leading-snug text-ink-soft text-pretty">{data.tagline}</p>
+      {data.status && <p class="mt-5 text-[14px] font-medium text-signal">{data.status}</p>}
+      <a href={data.url} target="_blank" rel="noopener noreferrer" class="btn-quiet mt-8 inline-flex">
+        Visit {new URL(data.url).host.replace("www.", "")}
+      </a>
+    </header>
+
+    <div class="shell pb-16 pt-12 lg:pb-24">
+      <div class="grid gap-12 lg:grid-cols-[1fr_0.5fr] lg:gap-16">
+        <div class="prose-kaba max-w-[68ch]">
+          <Content />
+        </div>
+        <aside>
+          {
+            data.events.length > 0 && (
+              <div class="border-t border-line pt-5">
+                <p class="label-mono">Events together</p>
+                <ul class="mt-4 space-y-5">
+                  {data.events.map((e) => (
+                    <li class="text-[14.5px] leading-relaxed">
+                      <p class="font-medium text-ink">{e.title}</p>
+                      {e.note && <p class="text-ink-soft">{e.note}</p>}
+                      {(e.date || e.place) && <p class="text-ink-mute">{[e.date, e.place].filter(Boolean).join(" · ")}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+          {
+            data.credentials.length > 0 && (
+              <div class="mt-8 border-t border-line pt-5">
+                <p class="label-mono">Credentials</p>
+                <ul class="mt-4 space-y-4">
+                  {data.credentials.map((c) => (
+                    <li class="text-[14.5px] leading-relaxed">
+                      <p class="font-medium text-ink">{c.name}</p>
+                      <p class="text-ink-soft">{c.detail}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </aside>
+      </div>
+    </div>
+  </article>
+  <CTA />
+</Layout>

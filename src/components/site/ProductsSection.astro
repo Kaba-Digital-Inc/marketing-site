@@ -1,78 +1,105 @@
 ---
-import { products } from "@/lib/site";
+import { getVisibleProjects, relationshipNote } from "@/lib/projects";
+import { getPartnersBySlugs } from "@/lib/partners";
+import PartnerLogos from "@/components/site/PartnerLogos.astro";
+
+const projects = await getVisibleProjects();
+const featured = projects.filter((p) => p.data.featured);
+const list = featured.length ? featured : projects;
+const sponsorsById = Object.fromEntries(
+  await Promise.all(list.map(async (p) => [p.id, await getPartnersBySlugs(p.data.partners)] as const)),
+);
 ---
 
-<section class="py-20 lg:py-28">
-  <div class="shell">
-    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-      <div class="max-w-xl">
-        <span class="kicker">Shipped work</span>
-        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
-          We build and run our own products.
-        </h2>
-        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
-          The advice we give is the advice we follow. Both of these are live, built by the same team that would
-          build yours.
-        </p>
-      </div>
-      <a href="/work" class="link-underline shrink-0 text-[15px]">How we built them</a>
-    </div>
+{
+  list.length > 0 && (
+    <section class="border-t border-line py-20 lg:py-28">
+      <div class="shell">
+        <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div class="max-w-xl">
+            <span class="kicker">Portfolio</span>
+            <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+              What we have built and run.
+            </h2>
+            <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+              The advice we give is the advice we follow. These are live, built by the same team that would build
+              yours.
+            </p>
+          </div>
+          <a href="/work/" class="link-underline shrink-0 text-[15px]">
+            All projects
+          </a>
+        </div>
 
-    <div class="mt-14 space-y-20">
-      {
-        products.map((p, i) => (
-          <article class={`grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-14 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-            <div>
-              <div class="flex items-center gap-3">
-                <span class={`inline-block h-2 w-2 rounded-full ${p.status === "In production" ? "bg-emerald-500" : "bg-signal"}`} />
-                <span class="text-[13px] font-medium text-ink-mute">{p.status}</span>
-              </div>
-              <h3 class="mt-4 font-display text-[34px] font-semibold leading-none tracking-tight text-ink sm:text-[42px]">
-                {p.name}
-              </h3>
-              <p class="measure mt-6 text-[16.5px] leading-relaxed text-ink-soft text-pretty">{p.summary}</p>
-              <ul class="mt-6 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-mute">{t}</li>
-                ))}
-              </ul>
-              <a
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="link-underline mt-7 inline-block text-[15px]"
-              >
-                Visit {p.name}
-              </a>
-            </div>
-
-            <a
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              tabindex="-1"
-              aria-hidden="true"
-              class="panel group block overflow-hidden transition-colors hover:border-line-2"
+        <div class="mt-14 space-y-20">
+          {list.map((p, i) => (
+            <article
+              class={`grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-14 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
             >
-              <div class="flex items-center gap-1.5 border-b border-line px-4 py-3">
-                <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-                <span class="label-mono ml-3 truncate normal-case tracking-normal">{new URL(p.href).host}</span>
+              <div>
+                <div class="flex items-center gap-3">
+                  <span
+                    class={`inline-block h-2 w-2 rounded-full ${p.data.status === "live" ? "bg-emerald-500" : "bg-signal"}`}
+                  />
+                  <span class="text-[13px] font-medium text-ink-mute">
+                    {p.data.status === "live" ? "Live" : "In development"} · {relationshipNote[p.data.relationship]}
+                  </span>
+                </div>
+                <h3 class="mt-4 font-display text-[34px] font-semibold leading-none tracking-tight text-ink sm:text-[42px]">
+                  <a href={`/work/${p.id}/`}>{p.data.title}</a>
+                </h3>
+                <p class="mt-4 font-display text-[20px] leading-snug text-ink">{p.data.tagline}</p>
+                <p class="measure mt-4 text-[16.5px] leading-relaxed text-ink-soft text-pretty">{p.data.description}</p>
+                <ul class="mt-6 flex flex-wrap gap-2">
+                  {p.data.tags.map((t) => (
+                    <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-mute">{t}</li>
+                  ))}
+                </ul>
+                <div class="mt-7">
+                  <PartnerLogos partners={sponsorsById[p.id]} label="Supported by" size="sm" />
+                </div>
+                <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                  <a href={`/work/${p.id}/`} class="link-underline inline-block text-[15px]">
+                    Read the case study
+                  </a>
+                  {p.data.url && (
+                    <a href={p.data.url} target="_blank" rel="noopener noreferrer" class="link-underline inline-block text-[15px]">
+                      Visit {new URL(p.data.url).host}
+                    </a>
+                  )}
+                </div>
               </div>
-              <img
-                src={p.image}
-                alt={p.imageAlt}
-                width="1280"
-                height="800"
-                loading="lazy"
-                decoding="async"
-                class="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.015]"
-              />
-            </a>
-          </article>
-        ))
-      }
-    </div>
-  </div>
-</section>
+
+              {p.data.image && (
+                <a
+                  href={`/work/${p.id}/`}
+                  tabindex="-1"
+                  aria-hidden="true"
+                  class="panel group block overflow-hidden transition-colors hover:border-line-2"
+                >
+                  <div class="flex items-center gap-1.5 border-b border-line px-4 py-3">
+                    <span class="h-2.5 w-2.5 rounded-full bg-line-2" />
+                    <span class="h-2.5 w-2.5 rounded-full bg-line-2" />
+                    <span class="h-2.5 w-2.5 rounded-full bg-line-2" />
+                    <span class="label-mono ml-3 truncate normal-case tracking-normal">
+                      {p.data.url ? new URL(p.data.url).host : p.data.title}
+                    </span>
+                  </div>
+                  <img
+                    src={p.data.image}
+                    alt={p.data.imageAlt ?? p.data.title}
+                    width="1280"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                    class="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.015]"
+                  />
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -2,24 +2,11 @@
 import Layout from "@/layouts/Layout.astro";
 import PageHero from "@/components/site/PageHero.astro";
 import CTA from "@/components/site/CTA.astro";
-import { products } from "@/lib/site";
+import { getVisibleProjects, relationshipNote } from "@/lib/projects";
 
-const detail: Record<string, { problem: string; approach: string; stack: string[] }> = {
-  "ClawBuilders.club": {
-    problem:
-      "Agent builders had no neutral, public way to compare harnesses and models. Benchmark claims were unverifiable and the results lived in private spreadsheets.",
-    approach:
-      "A public arena: connect a harness, run a fixed 20-task evaluation, and climb a live ELO ladder against real rivals. Spectator access means anyone can watch a run without signing up.",
-    stack: ["Web frontend", "Evaluation runner", "Rating service", "Multi-tenant accounts", "Live leaderboard"],
-  },
-  OffloadVault: {
-    problem:
-      "Photo libraries lock people into one provider's storage. Anyone keeping their own buckets had no gallery experience close to the big clouds.",
-    approach:
-      "A gallery built on your own object storage. Bring your own bucket across 15 providers, with search, sharing, and organisation, and no lock-in to a single host.",
-    stack: ["Bring-your-own-bucket", "15 storage providers", "Media pipeline", "Zero lock-in", "Fast delivery"],
-  },
-};
+const projects = await getVisibleProjects();
+// One project reads best as a wide side-by-side card; two or more become a grid of vertical cards.
+const single = projects.length === 1;
 
 const patterns = [
   ["Document and knowledge agents", "Retrieval over contracts, tickets, and internal wikis with citations and access controls."],
@@ -30,66 +17,67 @@ const patterns = [
 ---
 
 <Layout
-  title="Work: products we build and systems we ship"
-  description="ClawBuilders.club and OffloadVault, plus the AI agent, automation, and product engineering engagements Kaba Digital Inc. delivers for clients."
+  title="Work: projects we build and systems we ship"
+  description="The products and startup partnerships Kaba Digital builds and runs, plus the AI agent, automation, and product engineering engagements we deliver for clients."
 >
   <PageHero
     kicker="Work"
+    title="Projects we build, back, and ship."
+    lede="Our own products, startups we partner with, and client work. Each one is built to production standards and run for real users."
     figure="laptop"
     figureLabel="A laptop with its lid open"
-    title="Products we build, and systems we ship."
-    lede="We build our own products on the stack we recommend. It keeps the advice honest and the architecture tested against real users."
   />
 
   <section class="py-20 lg:py-24">
-    <div class="shell space-y-20">
-      {
-        products.map((p) => {
-          const d = detail[p.name];
-          return (
-            <article class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-              <div>
-                <div class="flex items-center gap-3">
-                  <span class={`inline-block h-2 w-2 rounded-full ${p.status === "In production" ? "bg-emerald-500" : "bg-ultra"}`} />
-                  <span class="text-[13px] font-medium text-ink-mute">{p.status}</span>
+    <div class="shell">
+      <ul class={`grid gap-6 ${single ? "" : "md:grid-cols-2"}`}>
+        {
+          projects.map((p) => (
+            <li>
+              <a
+                href={`/work/${p.id}/`}
+                class={`group panel overflow-hidden transition-colors hover:border-line-2 ${single ? "grid lg:grid-cols-[1.05fr_1fr]" : "flex h-full flex-col"}`}
+              >
+                {p.data.image && (
+                  <div class={`border-b border-line bg-void ${single ? "lg:order-2 lg:border-b-0 lg:border-l" : ""}`}>
+                    <img
+                      src={p.data.image}
+                      alt={p.data.imageAlt ?? p.data.title}
+                      width="1280"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                      class={`block w-full transition-transform duration-500 group-hover:scale-[1.02] ${single ? "h-auto lg:h-full lg:object-cover lg:object-left-top" : "h-auto"}`}
+                    />
+                  </div>
+                )}
+                <div class={`flex flex-1 flex-col p-7 ${single ? "lg:justify-center lg:p-10" : ""}`}>
+                  <div class="flex items-center gap-3">
+                    <span class={`inline-block h-2 w-2 rounded-full ${p.data.status === "live" ? "bg-emerald-500" : "bg-signal"}`} />
+                    <span class="text-[13px] font-medium text-ink-mute">
+                      {p.data.status === "live" ? "Live" : "In development"} · {p.data.relationship}
+                    </span>
+                  </div>
+                  <h2 class="mt-4 font-display text-[30px] font-semibold leading-tight text-ink">{p.data.title}</h2>
+                  <p class="mt-2 text-[17px] text-ink">{p.data.tagline}</p>
+                  <p class="measure mt-4 flex-1 text-[15.5px] leading-relaxed text-ink-soft text-pretty">{p.data.description}</p>
+                  <ul class="mt-5 flex flex-wrap gap-2">
+                    {p.data.tags.map((t) => (
+                      <li class="rounded-full border border-line px-3 py-1 text-[12.5px] text-ink-mute">{t}</li>
+                    ))}
+                  </ul>
+                  <span class="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-signal">
+                    Read the case study <span class="transition-transform group-hover:translate-x-1">→</span>
+                  </span>
                 </div>
-                <h2 class="mt-4 font-display text-[36px] font-semibold leading-none tracking-tight text-ink sm:text-[46px]">
-                  {p.name}
-                </h2>
-                <a href={p.href} target="_blank" rel="noopener noreferrer" class="link-underline mt-5 inline-block text-[15px]">
-                  Visit {p.name}
-                </a>
-                <ul class="mt-7 flex flex-wrap gap-2">
-                  {d.stack.map((s) => (
-                    <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-mute">{s}</li>
-                  ))}
-                </ul>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  tabindex="-1"
-                  aria-hidden="true"
-                  class="panel mt-8 block overflow-hidden transition-colors hover:border-line-2"
-                >
-                  <img src={p.image} alt={p.imageAlt} width="1280" height="800" loading="lazy" decoding="async" class="block h-auto w-full" />
-                </a>
-              </div>
-
-              <div class="space-y-8">
-                <div class="border-t border-chalk/25 pt-6">
-                  <p class="text-[13px] font-medium text-ultra">The problem</p>
-                  <p class="measure mt-3 text-[17px] leading-relaxed text-ink-soft text-pretty">{d.problem}</p>
-                </div>
-                <div class="border-t border-line pt-6">
-                  <p class="text-[13px] font-medium text-ink-mute">Our approach</p>
-                  <p class="measure mt-3 text-[17px] leading-relaxed text-ink-soft text-pretty">{d.approach}</p>
-                </div>
-              </div>
-            </article>
-          );
-        })
-      }
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-8 text-[14px] text-ink-mute">
+        {relationshipNote.Founded}. Startup partnerships and client projects are added here as they go public.
+      </p>
     </div>
   </section>
 
@@ -119,5 +107,5 @@ const patterns = [
     </div>
   </section>
 
-  <CTA />
+  <CTA variant="startup" />
 </Layout>

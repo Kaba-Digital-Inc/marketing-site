@@ -1,43 +1,42 @@
 ---
 import Figure from "@/components/Figure";
-import { audit } from "@/lib/site";
 
 const steps = [
   {
-    title: "Something arrives",
-    body: "An email, a form, a call, a file. The trigger is whatever your team already handles by hand today.",
+    title: "We scope it",
+    body: "We map the workflow, the data, and the constraints, then say plainly whether AI is the right tool.",
   },
   {
-    title: "The agent does the work",
-    body: "It reads, checks, decides, and acts across your tools, following rules you wrote and can read.",
+    title: "We prove it",
+    body: "A working prototype on your real data, so the riskiest part is tested before the build is committed.",
   },
   {
-    title: "A person approves what matters",
-    body: "Routine cases run alone. Anything above a threshold you set waits for a human, with the reasoning attached.",
+    title: "We build it",
+    body: "Production delivery with evaluation, guardrails, and security, released in stages and measured at each one.",
   },
   {
-    title: "Everything is logged and measured",
-    body: "Each step is recorded and replayable, so you can audit it, improve it, and show the result.",
+    title: "We run it",
+    body: "We watch quality and cost, tune what drifts, and hand over documentation your team can own.",
   },
 ];
 
-// Illustrative workflow, not a real client system.
+// Illustrative release workflow, not a real client system.
 const code = [
-  { n: 1, t: [["k", "workflow"], ["p", ": "], ["s", "invoice-triage"]] },
-  { n: 2, t: [["k", "trigger"], ["p", ": "], ["s", "email.received"]] },
-  { n: 3, t: [["k", "steps"], ["p", ":"]] },
-  { n: 4, t: [["p", "  - "], ["k", "read"], ["p", ": "], ["s", "attachments"], ["p", " → "], ["s", "extract(fields)"]] },
-  { n: 5, t: [["p", "  - "], ["k", "check"], ["p", ": "], ["s", "total matches purchase order"]] },
-  { n: 6, t: [["p", "  - "], ["k", "approve"], ["p", ": "], ["s", "human"], ["p", " if "], ["n", "amount > 5000"]] },
-  { n: 7, t: [["p", "  - "], ["k", "write"], ["p", ": "], ["s", "accounting.create_bill"]] },
-  { n: 8, t: [["k", "audit"], ["p", ": "], ["s", "every step logged, replayable"]] },
+  { n: 1, t: [["k", "release"], ["p", ": "], ["s", "support-agent-v2"]] },
+  { n: 2, t: [["k", "gates"], ["p", ":"]] },
+  { n: 3, t: [["p", "  - "], ["k", "evals"], ["p", ": "], ["s", "pass_rate"], ["n", " >= 0.92"], ["p", " on real cases"]] },
+  { n: 4, t: [["p", "  - "], ["k", "cost"], ["p", ": "], ["s", "per_conversation"], ["n", " <= $0.04"]] },
+  { n: 5, t: [["p", "  - "], ["k", "safety"], ["p", ": "], ["s", "red_team suite clean"]] },
+  { n: 6, t: [["k", "rollout"], ["p", ": "], ["s", "canary"], ["n", " 5% > 25% > 100%"]] },
+  { n: 7, t: [["k", "on_regression"], ["p", ": "], ["s", "roll back, page the team"]] },
+  { n: 8, t: [["k", "audit"], ["p", ": "], ["s", "every decision logged"]] },
 ];
 
 const log = [
-  { time: "09:14:02", mark: "✓", color: "text-emerald-400", step: "read", msg: "6 fields extracted from invoice.pdf" },
-  { time: "09:14:03", mark: "!", color: "text-[#f2b35e]", step: "check", msg: "total differs from PO by $42.10" },
-  { time: "09:14:03", mark: "→", color: "text-signal", step: "approve", msg: "sent to Finance, reasoning attached" },
-  { time: "09:21:40", mark: "✓", color: "text-emerald-400", step: "write", msg: "approved, bill created in accounting" },
+  { time: "09:02:11", mark: "✓", color: "text-emerald-400", step: "evals", msg: "0.94 pass rate on 240 real cases" },
+  { time: "09:02:40", mark: "✓", color: "text-emerald-400", step: "cost", msg: "$0.031 per conversation" },
+  { time: "09:03:05", mark: "!", color: "text-[#f2b35e]", step: "canary", msg: "25% stage: latency up 12%" },
+  { time: "09:03:06", mark: "→", color: "text-signal", step: "hold", msg: "rollout paused, fix queued" },
 ];
 
 const tone: Record<string, string> = {
@@ -60,28 +59,33 @@ const tone: Record<string, string> = {
       <div>
         <span class="kicker">AI engineering studio</span>
 
-        <h1 class="text-display mt-6 max-w-[15ch] font-display font-semibold text-chalk text-balance">
-          We help businesses become AI-native.
+        <h1 class="mt-6 max-w-[19ch] font-display text-[clamp(2.4rem,5.2vw,4.2rem)] font-semibold leading-[1.04] tracking-[-0.03em] text-chalk text-balance">
+          AI agent development and automation, built to work in production.
         </h1>
 
         <p class="measure mt-7 text-[17px] leading-relaxed text-chalk-soft text-pretty">
-          Production AI agents, automation, and products, engineered to enterprise standards and delivered at
-          small-team speed. From your first workflow to your whole operation.
+          For small businesses, startups, and enterprise teams. We run fixed-scope audits, build agents and
+          automations, and operate them after launch. With selected startups, we also partner for equity.
         </p>
 
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-          <a href="/ai-native#audit" class="btn-solid">Book an {audit.name}</a>
-          <a href="/ai-native" class="btn-quiet">See how it works</a>
+          <a href="/contact/" class="btn-solid">Book a call</a>
+          <a href="#how" class="btn-quiet">See how it works</a>
         </div>
 
-        <p class="label-mono mt-8">Built in regulated enterprise environments · Used by startups to large teams</p>
+        <p class="mt-5 text-[14.5px] text-chalk-mute">
+          Building a startup?{" "}
+          <a href="/startups/#apply" class="link-underline text-chalk">Apply for a partnership</a>
+        </p>
+
+        <p class="label-mono mt-7">Fixed scope · Enterprise-grade engineering · Toronto, working worldwide</p>
       </div>
 
       <div class="relative mx-auto w-full max-w-[460px] origin-center sm:scale-[1.15] lg:max-w-none lg:scale-[1.35]">
         <Figure
           client:visible
           name="exploded"
-          label="An application shown in four separated layers, standing for the layers of an AI system"
+          label="An application shown in four separated layers, standing for the layers of an AI product"
           intensity={0.7}
           plate="#08090a"
         />
@@ -89,7 +93,7 @@ const tone: Record<string, string> = {
     </div>
   </div>
 
-  <div class="shell relative pb-20 pt-12 lg:pb-24">
+  <div id="how" class="shell relative scroll-mt-24 pb-20 pt-12 lg:pb-24">
     <div class="panel relative overflow-hidden">
       <div class="grid lg:grid-cols-[1.05fr_0.95fr]">
         <div class="border-b border-line lg:border-b-0 lg:border-r">
@@ -97,13 +101,13 @@ const tone: Record<string, string> = {
             <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
             <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
             <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-            <span class="label-mono ml-3 normal-case tracking-normal">workflow.yaml</span>
+            <span class="label-mono ml-3 normal-case tracking-normal">release.yaml</span>
             <span class="label-mono ml-auto">example</span>
           </div>
           <div
             class="overflow-x-auto px-5 py-6 font-mono text-[13px] leading-[1.9] sm:px-7 sm:text-[13.5px]"
             role="img"
-            aria-label="Example AI workflow definition: an invoice triage workflow that reads attachments, checks totals against the purchase order, asks a human to approve large amounts, writes the bill, and logs every step."
+            aria-label="Example release workflow: an AI support agent must pass quality, cost, and safety gates, rolls out in stages, and rolls back automatically on a regression."
           >
             {
               code.map((line) => (
@@ -138,7 +142,7 @@ const tone: Record<string, string> = {
 
         <div class="px-7 py-10 sm:px-10 lg:py-12">
           <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight text-chalk sm:text-[32px]">
-            <span class="text-signal">How</span> an AI-native workflow runs
+            <span class="text-signal">How</span> an engagement runs
           </h2>
 
           <ol class="mt-8 space-y-7">

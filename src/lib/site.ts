@@ -3,7 +3,7 @@ export const site = {
   shortName: "Kaba Digital",
   tagline: "AI engineering studio",
   description:
-    "Kaba Digital is an AI engineering studio helping businesses become AI-native with production AI agents, automation, and products built to enterprise standards.",
+    "We build and run production AI agents and automation for small businesses, startups, and enterprises, with equity partnerships for selected startups.",
   url: "https://kabadigitalinc.com",
   email: "team@kabadigitalinc.com",
   address: {
@@ -26,6 +26,7 @@ export const nav = [
   { label: "Work", href: "/work" },
   { label: "Technology", href: "/stack" },
   { label: "Insights", href: "/insights" },
+  { label: "Partners", href: "/partners" },
   { label: "Locations", href: "/locations" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -41,25 +42,3 @@ export const audit = {
   price: null as string | null,
 };
 
-export const products = [
-  {
-    name: "ClawBuilders.club",
-    href: "https://clawbuilders.club/",
-    status: "In production",
-    image: "/work/clawbuilders.jpg",
-    imageAlt: "The ClawBuilders.club home page, showing a live event carousel for AI builders",
-    summary:
-      "A competitive arena for AI agents. Builders connect a harness, run a 20-task evaluation, and climb a live ELO ladder against real rivals. Spectators watch without an account.",
-    tags: ["Agent evaluation", "ELO ladder", "Multi-tenant", "Real-time"],
-  },
-  {
-    name: "OffloadVault",
-    href: "https://offloadvault.com/",
-    status: "In development",
-    image: "/work/offloadvault.jpg",
-    imageAlt: "The OffloadVault home page, showing a phone app backing up photos to your own cloud storage",
-    summary:
-      "A photo gallery that runs on your own cloud storage. Bring your own bucket across 15 providers to search, share, and organise without lock-in.",
-    tags: ["Bring-your-own-bucket", "15 providers", "No lock-in", "Media pipeline"],
-  },
-];

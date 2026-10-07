@@ -1,6 +1,12 @@
 ---
 import Figure from "@/components/Figure";
 import { site } from "@/lib/site";
+
+interface Props {
+  /** "startup" leads with the partnership application; the default leads with a strategy call. */
+  variant?: "default" | "startup";
+}
+const { variant = "default" } = Astro.props;
 ---
 
 <section class="py-20 lg:py-28">
@@ -28,8 +34,19 @@ import { site } from "@/lib/site";
           <div class="mb-4 hidden lg:block">
             <Figure client:visible name="dish" label="Decorative isometric illustration of a satellite dish" intensity={0.6} />
           </div>
-          <a href="/contact" class="btn-solid w-full">Book a strategy call</a>
-          <a href={`mailto:${site.email}`} class="btn-quiet w-full">{site.email}</a>
+          {
+            variant === "startup" ? (
+              <>
+                <a href="/startups/#apply" class="btn-solid w-full">Apply for a partnership</a>
+                <a href="/contact/" class="btn-quiet w-full">Book a strategy call</a>
+              </>
+            ) : (
+              <>
+                <a href="/contact/" class="btn-solid w-full">Book a strategy call</a>
+                <a href={`mailto:${site.email}`} class="btn-quiet w-full">{site.email}</a>
+              </>
+            )
+          }
         </div>
       </div>
     </div>

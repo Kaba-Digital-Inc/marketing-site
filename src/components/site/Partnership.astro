@@ -1,0 +1,83 @@
+---
+import Figure from "@/components/Figure";
+
+const model = [
+  ["Paid", "We charge for our work. It keeps our scope honest and your priorities sharp."],
+  ["Plus equity", "We take a small equity stake in the startups we work with, so we are aligned on your outcome, not our hours."],
+  ["A few at a time", "We take on a small number of startups so each one gets focused attention, not a rotating team."],
+];
+
+const core = ["Agents and workflows", "Voice and realtime", "Retrieval and knowledge", "Evaluation and quality", "Cost and reliability"];
+const advisory = ["Technical and AI strategy", "Architecture and vendor choices", "Hiring and team design", "Roadmap and technical review", "Introductions through our network"];
+
+const steps = ["Apply", "Intro call", "Paid working session", "Partnership terms in writing"];
+---
+
+<section class="border-t border-line py-20 lg:py-28">
+  <div class="shell">
+    <div class="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-16">
+      <div>
+        <span class="kicker">Startup partnerships</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          A partner with skin in the game, not a vendor.
+        </h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+          We choose the startups we work with, and we put hands-on AI engineering behind them. The model is simple and
+          stated up front: a paid engagement plus equity, agreed in writing.
+        </p>
+
+        <dl class="mt-9 border-t border-line">
+          {
+            model.map(([k, v]) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.55fr_1.45fr] sm:gap-8">
+                <dt class="font-display text-[18px] font-semibold text-ink">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="mt-9 grid gap-7 sm:grid-cols-2">
+          <div>
+            <p class="label-mono">AI core: what we build</p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {core.map((c) => <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-soft">{c}</li>)}
+            </ul>
+          </div>
+          <div>
+            <p class="label-mono">Advisory: what we advise on</p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {advisory.map((c) => <li class="rounded-full border border-line px-3.5 py-1.5 text-[13px] text-ink-soft">{c}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <ol class="mt-9 flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] text-ink-mute">
+          {
+            steps.map((s, i) => (
+              <li class="flex items-center gap-3">
+                <span class="text-ink-soft">{s}</span>
+                {i < steps.length - 1 && <span aria-hidden="true">→</span>}
+              </li>
+            ))
+          }
+        </ol>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="/startups/#apply" class="btn-solid">Apply for a partnership</a>
+          <a href="/startups/#selection" class="btn-quiet">How we choose</a>
+        </div>
+      </div>
+
+      <div class="panel hidden overflow-hidden bg-void lg:block">
+        <Figure
+          client:visible
+          name="branches"
+          label="A commit graph with a branch merging back, standing for a partnership that ships product"
+          intensity={0.6}
+          plate="#08090a"
+        />
+      </div>
+    </div>
+  </div>
+</section>

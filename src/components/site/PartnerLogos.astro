@@ -1,0 +1,47 @@
+---
+import { partnerHref, type Partner } from "@/lib/partners";
+
+interface Props {
+  partners: Partner[];
+  /** Small caption above the row. */
+  label?: string;
+  size?: "sm" | "md";
+}
+
+const { partners, label, size = "md" } = Astro.props;
+const base = size === "sm" ? 20 : 28;
+const icon = size === "sm" ? "h-6 w-6" : "h-8 w-8";
+---
+
+{
+  partners.length > 0 && (
+    <div>
+      {label && <p class="label-mono">{label}</p>}
+      <ul class={`flex flex-wrap items-center gap-x-8 gap-y-5 ${label ? "mt-4" : ""}`}>
+        {partners.map((p) => {
+          const link = partnerHref(p);
+          return (
+            <li>
+              <a
+                href={link.href}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                class="inline-flex min-h-[44px] items-center gap-2.5 opacity-80 transition-opacity hover:opacity-100"
+                aria-label={p.data.name}
+                title={p.data.name}
+              >
+                {p.data.logoIsIcon ? (
+                  <>
+                    <img src={p.data.logo} alt="" class={icon} loading="lazy" decoding="async" />
+                    <span class="font-display text-[17px] font-semibold text-chalk">{p.data.name}</span>
+                  </>
+                ) : (
+                  <img src={p.data.logo} alt={p.data.name} style={`height:${Math.round(base * p.data.logoScale)}px`} class="w-auto" loading="lazy" decoding="async" />
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )
+}

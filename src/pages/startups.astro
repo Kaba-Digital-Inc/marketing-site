@@ -2,62 +2,93 @@
 import Layout from "@/layouts/Layout.astro";
 import PageHero from "@/components/site/PageHero.astro";
 import FAQ from "@/components/site/FAQ.astro";
-import CTA from "@/components/site/CTA.astro";
-import { site } from "@/lib/site";
 import Figure from "@/components/Figure";
+import StartupApplication from "@/components/StartupApplication";
+import { site } from "@/lib/site";
 
-const pains = [
-  ["No AI team, and no time to hire one", "You need an agent or AI feature live this quarter, not a recruiting plan."],
-  ["Demos that break in production", "A prototype is easy. Evaluation, cost control, and failure handling are where products are won or lost."],
-  ["Architecture you will regret at the next stage", "Decisions made in a hurry at seed become the rewrite at Series B."],
-  ["Unclear what it will cost to run", "Inference costs surprise teams that did not design for them."],
+const model = [
+  ["A paid engagement", "We charge for our work. A fee keeps scope honest, and it means you get our best hours, not leftover ones."],
+  ["Plus a small equity stake", "We take equity in the startups we partner with, so our incentives match yours: the outcome, not the hours."],
+  ["In writing, with counsel", "Scope, fees, and equity terms are agreed in writing, and each side is encouraged to take legal advice."],
 ];
 
-const offers = [
-  {
-    name: "Agent MVP sprint",
-    span: "4 to 6 weeks",
-    body: "A working agent or AI feature in front of real users, with the evaluation harness that tells you whether it is good.",
-    items: ["Scoped to one core job", "Evals from week one", "Cost model included", "Handover or continued support"],
-  },
-  {
-    name: "Embedded engineering",
-    span: "Ongoing",
-    body: "A senior AI engineer working inside your team on a rolling basis, shipping alongside your product and design.",
-    items: ["Agents and workflows", "Voice and realtime", "Retrieval and knowledge", "Observability and cost"],
-  },
-  {
-    name: "Architecture review",
-    span: "1 to 2 weeks",
-    body: "An independent read of your AI system before you scale it: reliability, security, cost, and what to fix first.",
-    items: ["Failure and abuse paths", "Model and vendor risk", "Cost per user", "A prioritized fix list"],
-  },
+const core = [
+  ["Agents and workflows", "Systems that do real work, with approvals, retries, and audit trails."],
+  ["Voice and realtime", "Conversational products with low latency and a clear path to a human."],
+  ["Retrieval and knowledge", "Answers grounded in your data, with citations instead of guesses."],
+  ["Evaluation and quality", "Test sets and release gates, so quality is a number you can track."],
+  ["Cost and reliability", "Model routing, caching, fallbacks, and a cost per user you understand."],
+];
+
+const advisory = [
+  ["Technical and AI strategy", "What to build, what to buy, and what to leave out, tied to where the company is going."],
+  ["Architecture and vendor choices", "Model, platform, and tooling decisions that survive growth, so you do not rewrite at Series B."],
+  ["Hiring and team design", "Which AI roles you need, in what order, and how to assess candidates."],
+  ["Roadmap and technical review", "An honest read of your product and plan, including the technical story you tell investors."],
+  ["Introductions through our network", "Connections across AI labs, platforms, and the ClawBuilders community, where they are useful."],
+];
+
+const criteria = [
+  ["A real problem and a path to real users", "Pilots, early customers, or a clear plan to reach them. We are more interested in learning than in a big number."],
+  ["Founders we want to work with", "Direct, quick to decide, open to challenge, and honest about what is not working."],
+  ["AI is central, not decorative", "The product depends on AI doing a hard job well, where engineering depth changes the outcome."],
+  ["A fit for what we do", "Agents, voice, retrieval, evaluation, and the systems around them. We say so early when we are not the right partner."],
+  ["Ability to pay", "This is a paid engagement. You need funding or revenue to cover a fee, with equity on top."],
+  ["Fair, standard terms", "A clean cap table and standard instruments, agreed with counsel on both sides."],
+];
+
+const process = [
+  ["Apply", "A short form. We read every application and reply by email."],
+  ["Intro call", "Thirty minutes to understand the product, the team, and where you are stuck."],
+  ["Paid working session", "One to two weeks on a real problem, so both sides see how we work before committing."],
+  ["Partnership terms", "Scope, fee, and equity in writing, then we join the team and build."],
+];
+
+const notFor = [
+  "You want a prototype built for equity alone, with no fee",
+  "You are looking for a large team, or the lowest hourly rate",
+  "AI is a feature to add later rather than the core of the product",
+  "You are not yet sure who the customer is",
 ];
 
 const faqs = [
   {
-    q: "Can you build our AI product if we have no ML engineers?",
-    a: "Yes. Most products today are built on hosted frontier models, so the hard parts are system design, evaluation, cost, and reliability rather than training models. That is the work we do.",
+    q: "Do you really take equity in the startups you work with?",
+    a: "Yes. The model is a paid engagement plus a small equity stake, agreed in writing. We are selective because we are investing our time and judgment, not just selling it.",
   },
   {
-    q: "How fast can you ship an AI MVP?",
-    a: "A focused agent MVP usually takes four to six weeks, depending on integrations and how well the task is defined. We scope tightly to one core job so something real reaches users quickly.",
+    q: "Can we pay only in equity?",
+    a: "No. We charge a fee for our work and take equity on top. That keeps the engagement honest on both sides and means our best engineering hours go to your project.",
   },
   {
-    q: "Will we own the code?",
-    a: "Yes. The code, prompts, evaluations, and infrastructure live in your accounts and repositories. We document the system so your team can take it over.",
+    q: "How many startups do you work with?",
+    a: "A small number at a time. We do not publish a number, because each partnership gets hands-on attention and we would rather say no than spread thin.",
   },
   {
-    q: "What stack do you build on?",
-    a: "We choose per project and stay model-agnostic. Common choices include Claude and Gemini models, the Vercel AI SDK, Mastra, LiveKit for voice, Next.js, Postgres, and Cloudflare for edge and agents.",
+    q: "Do you only build, or do you advise too?",
+    a: "Both. Building the AI core of your product is our main work. We also advise on technical and AI strategy, architecture and vendor choices, hiring, and your roadmap, and we introduce founders to people in our network when it helps.",
+  },
+  {
+    q: "What stage do you work with?",
+    a: "Mostly seed to Series B. The deciding factors are whether AI is central to the product, the quality of the team, and whether AI engineering can change the outcome.",
+  },
+  {
+    q: "What happens after I apply?",
+    a: "We read the application and reply by email. If it looks like a fit, we schedule an intro call, then a paid working session on a real problem, then agree terms in writing.",
+  },
+  {
+    q: "What do you build with?",
+    a: "We stay model-agnostic and choose per project. Common choices include Claude and Gemini models, the Vercel AI SDK, Mastra, LiveKit for voice, Next.js, Postgres, and Cloudflare. See our technology page for how we decide.",
   },
 ];
+
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "AI product development for startups",
+  name: "AI engineering partnerships for startups",
   serviceType: "AI product engineering",
-  description: "Agent MVP sprints, embedded AI engineering, and architecture reviews for seed to Series B startups.",
+  description:
+    "Selective, paid-plus-equity partnerships that put AI engineering behind startups, from prototype to production and beyond.",
   provider: { "@id": site.url + "/#organization" },
   areaServed: "Worldwide",
   audience: { "@type": "Audience", audienceType: "Startups" },
@@ -65,27 +96,34 @@ const serviceSchema = {
 ---
 
 <Layout
+  title="AI engineering partnerships for startups"
+  description="We partner with a few startups at a time, paid plus equity: we build the AI core and advise around it. See how we choose and apply."
   schema={[serviceSchema]}
-  title="AI product development for startups"
-  description="Ship an AI agent or product without building an AI team first. Agent MVP sprints, embedded engineering, and architecture reviews for seed to Series B startups."
 >
   <PageHero
     kicker="Startups, seed to Series B"
+    title="We back startups with AI engineering."
+    lede="A few startups at a time, paid plus equity. We build the AI core of your product and advise on everything around it, so you can move faster."
     figure="branches"
     figureLabel="A commit graph with a branch merging back, standing for shipping product"
-    title="Ship the AI product without building an AI team first."
-    lede="Senior AI engineering, scoped to what you need to learn or launch next, and built so it still holds up when you grow."
   />
 
   <section class="py-20 lg:py-28">
     <div class="shell">
       <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
         <div>
-          <span class="kicker">Where startups get stuck</span>
+          <span class="kicker">The model</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            A partner with skin in the game.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Most agencies sell hours. We choose a few startups, put engineering behind them, and share in the
+            result. The terms are simple and stated up front.
+          </p>
           <dl class="mt-8 border-t border-line">
             {
-              pains.map(([k, v]) => (
-                <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.9fr_1.1fr] sm:gap-8">
+              model.map(([k, v]) => (
+                <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.8fr_1.2fr] sm:gap-8">
                   <dt class="text-[16px] font-medium text-ink">{k}</dt>
                   <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
                 </div>
@@ -109,32 +147,131 @@ const serviceSchema = {
   <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
     <div class="shell">
       <div class="max-w-2xl">
-        <span class="kicker">How we work with startups</span>
+        <span class="kicker">What we do for startups</span>
         <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
-          Three ways to engage, sized to your stage.
+          The AI core first, with advice around it.
         </h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+          Our core work is building the AI at the heart of your product. Alongside it, we advise on the decisions
+          that surround it, because the best engineering still fails inside the wrong plan.
+        </p>
       </div>
-      <ul class="mt-12 border-t border-line">
-        {
-          offers.map((o) => (
-            <li class="grid gap-4 border-b border-line py-8 sm:grid-cols-[0.75fr_1.25fr] sm:gap-12">
-              <div>
-                <h3 class="font-display text-[21px] font-semibold text-ink">{o.name}</h3>
-                <p class="mt-2 text-[13.5px] text-ultra">{o.span}</p>
-              </div>
-              <div>
-                <p class="measure text-[16px] leading-relaxed text-ink-soft text-pretty">{o.body}</p>
-                <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-                  {o.items.map((item) => <li class="text-[13.5px] text-ink-mute">{item}</li>)}
-                </ul>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
+
+      <div class="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p class="label-mono">AI core: what we build</p>
+          <dl class="mt-5 border-t border-line">
+            {
+              core.map(([k, v]) => (
+                <div class="border-b border-line py-4">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="mt-1 text-[14.5px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div>
+          <p class="label-mono">Advisory: what we advise on</p>
+          <dl class="mt-5 border-t border-line">
+            {
+              advisory.map(([k, v]) => (
+                <div class="border-b border-line py-4">
+                  <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                  <dd class="mt-1 text-[14.5px] leading-relaxed text-ink-soft">{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
 
-  <FAQ items={faqs} />
-  <CTA />
+  <section id="selection" class="scroll-mt-24 py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <span class="kicker">How we choose</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            We are selective, and we tell you why.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Because we invest our time and take equity, we only work with startups where we can make a real
+            difference. This is what we look for.
+          </p>
+          <div class="mt-9">
+            <p class="label-mono">Probably not a fit if</p>
+            <ul class="mt-4 space-y-3">
+              {
+                notFor.map((n) => (
+                  <li class="flex gap-3 text-[15px] leading-relaxed text-ink-mute">
+                    <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-line-2" />
+                    {n}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+        <dl class="border-t border-line">
+          {
+            criteria.map(([k, v], i) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.1fr_0.9fr_1.1fr] sm:gap-6">
+                <span class="font-mono text-[13px] text-signal">0{i + 1}</span>
+                <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">The process</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Four steps from application to partnership.
+        </h2>
+      </div>
+      <ol class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          process.map(([k, v], i) => (
+            <li class="border-t border-chalk/25 pt-5">
+              <span class="font-mono text-[13px] text-signal">0{i + 1}</span>
+              <h3 class="mt-2 font-display text-[22px] font-semibold text-ink">{k}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-ink-soft text-pretty">{v}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <FAQ items={faqs} heading="Questions founders ask" figure="cabinet" />
+
+  <section id="apply" class="scroll-mt-24 border-t border-line py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <span class="kicker">Apply</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            Tell us what you are building.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            It takes about ten minutes. We read every application and reply by email, even when the answer is not yet.
+          </p>
+          <p class="mt-6 text-[14.5px] leading-relaxed text-ink-mute">
+            Prefer to write? Email <a href={`mailto:${site.email}`} class="link-underline">{site.email}</a>.
+          </p>
+        </div>
+        <div class="panel p-6 sm:p-8">
+          <StartupApplication client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

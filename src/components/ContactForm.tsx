@@ -5,11 +5,11 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
 const interests = [
+  "AI-Native Audit",
   "AI strategy and scoping",
   "Agents and workflow automation",
   "AI product engineering",
-  "Cloudflare engineering",
-  "Managed Cloudflare operations",
+  "Enterprise AI governance",
   "Something else",
 ];
 

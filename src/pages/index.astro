@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/site/Hero.astro";
 import Doors from "@/components/site/Doors.astro";
+import Partnership from "@/components/site/Partnership.astro";
 import ServicesGrid from "@/components/site/ServicesGrid.astro";
 import ProductsSection from "@/components/site/ProductsSection.astro";
 import OfferLadder from "@/components/site/OfferLadder.astro";
@@ -11,16 +12,24 @@ import CTA from "@/components/site/CTA.astro";
 
 const faqs = [
   {
+    q: "What is AI agent development?",
+    a: "AI agent development is building software agents that take on real work: reading requests, using your tools and data, making decisions within rules you set, and asking a person when it matters. We design them with evaluation, guardrails, and monitoring so they keep working after launch.",
+  },
+  {
     q: "What does an AI engineering studio do?",
-    a: "We design, build, and run production AI systems: agents that do real work inside your operations, voice and retrieval systems, and AI features in products. We also help decide where AI is worth using, and where it is not.",
+    a: "We design, build, and run production AI systems: agents that do real work, voice and retrieval systems, and AI features in products. We also help decide where AI is worth using, and where it is not.",
   },
   {
-    q: "How is this different from a typical AI consultancy?",
-    a: "We build the systems, not only the plan. Our work ships with evaluation, guardrails, and monitoring, and we hand over documentation your team can own. The engineers who scope the work are the ones who build it.",
+    q: "How do your startup partnerships work?",
+    a: "We work with a few startups at a time on a paid engagement plus a small equity stake, agreed in writing. We choose carefully, because we are investing our time and judgment. You can see the criteria and apply on our startups page.",
   },
   {
-    q: "Do you work with small businesses, or only large companies?",
-    a: "Both, and startups too. Small and mid-sized businesses usually begin with a fixed-scope AI-Native Audit. Larger organisations typically need help taking pilots into production, with governance and security review.",
+    q: "How is this different from a typical AI consultancy or agency?",
+    a: "We build the systems, not only the plan, and we share in the outcome with the startups we back. Our work ships with evaluation, guardrails, and monitoring, and the engineers who scope the work are the ones who build it.",
+  },
+  {
+    q: "Do you work with small businesses and enterprises too?",
+    a: "Yes. Small and mid-sized businesses usually begin with a fixed-scope AI-Native Audit. Larger organisations typically need help taking pilots into production, with governance and security review.",
   },
   {
     q: "Where are you based?",
@@ -29,7 +38,7 @@ const faqs = [
 ];
 ---
 
-<Layout title="AI engineering studio: become AI-native">
+<Layout title="AI agent development and automation">
   <Hero />
 
   <Doors />
@@ -43,7 +52,7 @@ const faqs = [
             Consulting that ends in working software.
           </h2>
         </div>
-        <a href="/services" class="link-underline shrink-0 text-[15px]">All services</a>
+        <a href="/services/" class="link-underline shrink-0 text-[15px]">All services</a>
       </div>
 
       <div class="mt-12">
@@ -52,7 +61,13 @@ const faqs = [
     </div>
   </section>
 
-  <OfferLadder />
+  <OfferLadder
+    kicker="Start here"
+    heading="A fixed-scope audit is the easiest first step."
+    intro="Whatever your size, you can start small, prove the value, then decide how far to go. Every step has a fixed scope and a written deliverable, so there are no surprises halfway through."
+  />
+
+  <Partnership />
 
   <ProductsSection />
 

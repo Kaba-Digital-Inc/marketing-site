@@ -7,3 +7,7 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Keep the workers.dev preview out of search results so it never competes with the real domain.
+https://kabadigitalinc-marketing.kabadigitalinc.workers.dev/*
+  X-Robots-Tag: noindex, nofollow
