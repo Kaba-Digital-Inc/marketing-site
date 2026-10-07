@@ -11,3 +11,13 @@
 # Keep the workers.dev preview out of search results so it never competes with the real domain.
 https://kabadigitalinc-marketing.kabadigitalinc.workers.dev/*
   X-Robots-Tag: noindex, nofollow
+
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8

@@ -54,8 +54,36 @@ const tone: Record<string, string> = {
   >
   </div>
 
-  <div class="shell relative pt-14 lg:pt-20">
-    <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-6">
+  <div class="shell relative pt-10 lg:pt-14">
+    <!--md-skip-start-->
+    <div class="flex items-center gap-3" role="group" aria-label="Choose how to read this page">
+      <span class="label-mono">View as</span>
+      <span class="inline-flex overflow-hidden rounded-full border border-line-2 bg-panel/60 text-[13px] backdrop-blur">
+        <button type="button" id="view-human" aria-pressed="true" class="min-h-[36px] px-4 text-chalk transition-colors aria-pressed:bg-signal aria-pressed:text-[#04222a]">Human</button>
+        <a id="view-agent" href="/index.md" aria-pressed="false" role="button" class="inline-flex min-h-[36px] items-center px-4 text-chalk-soft transition-colors hover:text-chalk aria-pressed:bg-signal aria-pressed:text-[#04222a]">Agent</a>
+      </span>
+    </div>
+
+    <div id="agent-panel" hidden class="panel mt-8 overflow-hidden">
+      <div class="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
+        <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
+        <span class="label-mono ml-3 normal-case tracking-normal">GET /index.md &middot; text/markdown</span>
+        <span class="ml-auto flex gap-5 text-[13px]">
+          <a href="/index.md" class="link-underline">Raw markdown</a>
+          <a href="/llms.txt" class="link-underline">llms.txt</a>
+        </span>
+      </div>
+      <pre id="agent-text" tabindex="0" class="max-h-[560px] overflow-auto whitespace-pre-wrap break-words px-5 py-6 font-mono text-[12.5px] leading-[1.8] text-chalk-soft sm:px-7">Loading the markdown version of this page&hellip;</pre>
+      <p class="border-t border-line px-5 py-3 text-[13px] text-chalk-mute sm:px-7">
+        This is what an AI agent reads: the same page without the layout. Every page has one, and the whole site is in llms-full.txt.
+      </p>
+    </div>
+
+    <!--md-skip-end-->
+
+    <div id="hero-human" class="mt-8 grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-6">
       <div>
         <span class="kicker">AI engineering studio</span>
 
@@ -173,3 +201,36 @@ const tone: Record<string, string> = {
     </div>
   </div>
 </section>
+
+<script>
+  const human = document.getElementById("view-human");
+  const agent = document.getElementById("view-agent");
+  const panel = document.getElementById("agent-panel");
+  const heroHuman = document.getElementById("hero-human");
+  const text = document.getElementById("agent-text");
+  let loaded = false;
+
+  function show(mode: "human" | "agent") {
+    const isAgent = mode === "agent";
+    human?.setAttribute("aria-pressed", String(!isAgent));
+    agent?.setAttribute("aria-pressed", String(isAgent));
+    if (panel) panel.hidden = !isAgent;
+    if (heroHuman) heroHuman.hidden = isAgent;
+    if (isAgent && !loaded && text) {
+      loaded = true;
+      fetch("/index.md")
+        .then((r) => (r.ok ? r.text() : Promise.reject()))
+        .then((t) => (text.textContent = t))
+        .catch(() => {
+          loaded = false;
+          text.textContent = "Could not load the markdown version here. Open /index.md directly.";
+        });
+    }
+  }
+
+  human?.addEventListener("click", () => show("human"));
+  agent?.addEventListener("click", (e) => {
+    e.preventDefault();
+    show("agent");
+  });
+</script>

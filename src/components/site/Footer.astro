@@ -76,7 +76,14 @@ const year = new Date().getFullYear();
     <div class="mt-14 flex flex-col gap-3 border-t border-chalk/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
       <p class="text-[13px] text-chalk-mute">&copy; {year} {site.name} All rights reserved.</p>
 
-      <div class="flex items-center gap-6 text-[13px] text-chalk-mute">
+      <div class="flex flex-wrap items-center gap-x-6 text-[13px] text-chalk-mute">
+        <div class="inline-flex items-center gap-2" role="group" aria-label="Choose how to read this page">
+          <span class="label-mono">View as</span>
+          <span class="inline-flex overflow-hidden rounded-full border border-chalk/20 text-[12px]">
+            <span aria-current="true" class="bg-chalk/12 px-3 py-1.5 text-chalk">Human</span>
+            <a id="agent-view" href="/index.md" rel="alternate" type="text/markdown" class="inline-flex min-h-[32px] items-center px-3 py-1.5 transition-colors hover:text-chalk">Agent</a>
+          </span>
+        </div>
         <a href="/privacy" class="inline-flex min-h-[44px] items-center transition-colors hover:text-chalk-soft">Privacy</a>
         <a href="/terms" class="inline-flex min-h-[44px] items-center transition-colors hover:text-chalk-soft">Terms</a>
         <button type="button" id="consent-open" class="min-h-[44px] transition-colors hover:text-chalk-soft">Analytics settings</button>
@@ -91,6 +98,11 @@ const year = new Date().getFullYear();
 </footer>
 
 <script>
+  const agent = document.getElementById("agent-view") as HTMLAnchorElement | null;
+  if (agent) {
+    const p = location.pathname;
+    agent.href = p === "/" ? "/index.md" : p.replace(/\/$/, "") + ".md";
+  }
   document.getElementById("consent-open")?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("kaba:consent-open"));
   });

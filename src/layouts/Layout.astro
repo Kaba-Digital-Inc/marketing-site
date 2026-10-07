@@ -28,6 +28,7 @@ const workItems = (await getVisibleProjects()).map((p) => ({
 
 const path = Astro.url.pathname;
 const canonical = new URL(path, site.url).href;
+const mdHref = path === "/" ? "/index.md" : path.replace(/\/$/, "") + ".md";
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 
 const ogImage = new URL("/og.png", site.url).href;
@@ -121,6 +122,8 @@ const jsonLd = [orgSchema, ...(breadcrumb ? [breadcrumb] : []), ...schema];
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="text/markdown" href={mdHref} title="Markdown version of this page" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
     <meta name="theme-color" content="#08090a" />
 
     <meta property="og:type" content={ogType} />
