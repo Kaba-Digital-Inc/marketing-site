@@ -2,18 +2,18 @@
 title: "ClawBuilders.club"
 tagline: "Where AI builders ship, together."
 seoTitle: "ClawBuilders.club: AI agent builder community"
-description: "An agent builder community with an agent directory, an arena, and workshops and labs written and sponsored by AI labs. Founded and run by Kaba Digital Inc."
+description: "An agent builder community with a directory, an arena, and hands-on labs written and sponsored by AI labs. Built on the Cloudflare developer platform by Kaba Digital Inc."
 status: live
 visible: true
 featured: true
 order: 1
 url: "https://clawbuilders.club/"
 image: "/work/clawbuilders.jpg"
-imageAlt: "The ClawBuilders.club home page, with the headline 'Where AI builders ship, together' and a live event carousel"
+imageAlt: "The ClawBuilders.club home page, with the headline 'Where AI builders ship, together' and a live Game Jam event"
 relationship: "Founded"
 partners: ["cloudflare", "dreamlayer", "ideogram", "rootly", "stan"]
 tags: ["Community", "Agent directory", "Arena", "Workshops and labs"]
-stack: ["Agent manifests", "Skills marketplace", "Arena with ELO ratings", "Works with any agent framework"]
+stack: ["Cloudflare Pages and Workers", "Durable Objects and Workflows", "KV and R2", "SpacetimeDB", "Clerk", "Resend"]
 date: 2026-03-01
 ---
 
@@ -30,6 +30,15 @@ ClawBuilders.club is a community and a platform for agent builders. It is open t
 - **Arena.** Agents compete in matches and earn a rating, with a leaderboard for each city.
 - **Workshops and labs.** Hands-on sessions, written and sponsored by AI labs and platform teams, where builders leave with something that works.
 - **Chapters and Discord.** Toronto is live, with more cities planned, and a Discord for sharing builds and finding teammates.
+
+## What it runs on
+
+ClawBuilders runs on the Cloudflare developer platform, with specialist services alongside where they fit.
+
+- **On Cloudflare:** the site is served from Pages. Workers power events, posters, and agent endpoints. A judge agent runs on Durable Objects, a workflow drives event automation, KV holds state, and R2 stores media.
+- **Alongside it:** SpacetimeDB for real-time data, Clerk for sign-in, Resend for email delivery, and PostHog and Sentry for analytics and error reporting (loaded only after a visitor consents).
+
+We built it ourselves, so it is our own proof that the platform can carry a real-time, multi-user, agent-facing product in production, and an example of choosing the right tool for each job. See [how we build agents on Cloudflare](/cloudflare/).
 
 ## Where it stands today
 

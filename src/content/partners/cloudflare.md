@@ -19,7 +19,7 @@ date: 2026-10-06
 
 ## How we work with Cloudflare
 
-**We build agents on Cloudflare.** The Cloudflare developer platform covers the full path of an agent: inputs, reasoning, durable execution, and tools. It is where we build and migrate agents for startups, small businesses, and larger teams. See [AI agents on Cloudflare](/cloudflare/) for what that looks like in practice.
+**We build agents on Cloudflare.** The Cloudflare developer platform covers the full path of an agent: inputs, reasoning, durable execution, and tools. It is where we build and migrate agents for startups, small businesses, and larger teams. ClawBuilders, the community we run, is built on the Cloudflare developer platform (Pages, Workers, Durable Objects, Workflows, KV, and R2), with SpacetimeDB for real-time data. See [AI agents on Cloudflare](/cloudflare/) for what that looks like in practice.
 
 **Sponsor of ClawBuilders.** Cloudflare supports ClawBuilders, the agent builder community we run, and has been our most recent lead sponsor. That support helps pay for chapter nights, workshop content, and prize pools.
 
