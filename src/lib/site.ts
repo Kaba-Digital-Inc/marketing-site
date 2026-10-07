@@ -22,6 +22,7 @@ export const nav = [
   { label: "AI-native", href: "/ai-native" },
   { label: "Startups", href: "/startups" },
   { label: "Enterprise", href: "/enterprise" },
+  { label: "Investors", href: "/investors" },
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
   { label: "Technology", href: "/stack" },

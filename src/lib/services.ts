@@ -4,6 +4,8 @@ export type Service = {
   summary: string;
   capabilities: string[];
   outcome: string;
+  /** Deeper pages for this service, shown as links under the capabilities. */
+  links?: { label: string; href: string }[];
 };
 
 export const services: Service[] = [
@@ -22,6 +24,10 @@ export const services: Service[] = [
       "Autonomous and semi-autonomous agents that do real work inside your operations, with approvals, retries, and audit trails.",
     capabilities: ["Tool use & function calling", "Multi-step orchestration", "Human-in-the-loop", "MCP & integrations"],
     outcome: "Workflows that run unattended and degrade gracefully.",
+    links: [
+      { label: "AI agent development", href: "/services/ai-agent-development/" },
+      { label: "AI automation services", href: "/services/ai-automation/" },
+    ],
   },
   {
     id: "voice",
@@ -78,5 +84,6 @@ export const services: Service[] = [
       "Bring your engineers and operators up to speed so the capability stays inside the company after we leave.",
     capabilities: ["Team upskilling", "Playbooks & runbooks", "Architecture handover", "Team training"],
     outcome: "An internal team that can run and extend what we built.",
+    links: [{ label: "AI workshops and hands-on labs", href: "/services/ai-workshops/" }],
   },
 ];

@@ -1,0 +1,105 @@
+---
+import ServiceLanding from "@/components/site/ServiceLanding.astro";
+---
+
+<ServiceLanding
+  title="AI agent development services"
+  description="We design, build, and run production AI agents with evaluation, guardrails, and monitoring, for small businesses, startups, and enterprises. Based in Toronto."
+  kicker="AI agent development"
+  heading="AI agent development, built to work in production."
+  lede="We design, build, and operate AI agents that take on real work: reading requests, using your tools and data, and asking a person when it matters."
+  figure="exploded"
+  figureLabel="An application shown in four separated layers, standing for the layers of an AI agent"
+  definition={{
+    question: "What is AI agent development?",
+    answer:
+      "AI agent development is the work of building software agents that take on real tasks. An agent reads a request, decides what to do using your data and tools, acts within limits you set, and hands over to a person when it matters. A chatbot answers questions; an agent finishes work. Building one well takes more than connecting a model to an API: it needs evaluation to know it is accurate, guardrails and approvals to keep it safe, and monitoring to keep it that way after launch.",
+  }}
+  audiences={[
+    {
+      name: "Small and mid-sized business",
+      body: "Start with a fixed-scope audit to find the workflow worth automating, then build the first agent in weeks.",
+      href: "/ai-native/",
+    },
+    {
+      name: "Startups",
+      body: "Build the AI core of your product, with advice around it. We partner with a few startups at a time, paid plus equity.",
+      href: "/startups/",
+    },
+    {
+      name: "Enterprise teams",
+      body: "Take pilots to production with architecture, evaluation, and governance that pass security review.",
+      href: "/enterprise/",
+    },
+  ]}
+  builds={[
+    { name: "Workflow agents", body: "Triage, route, draft, and act inside the tools your team already uses, with approval steps for anything sensitive." },
+    { name: "Knowledge agents", body: "Answers grounded in your documents and data, with citations, so people can check what they are told." },
+    { name: "Voice and realtime agents", body: "Conversational agents for service and intake, with a clear hand-off to a person." },
+    { name: "MCP servers and tool integrations", body: "Expose your product and data to AI clients through secured, observable tool servers." },
+    { name: "Multi-agent systems", body: "Specialist agents with a coordinator and clear hand-offs, for work too broad for a single agent." },
+    { name: "Evaluation and monitoring", body: "Test sets, release gates, tracing, and cost tracking for agents you have already built." },
+  ]}
+  process={[
+    { name: "Scope", body: "We map the task, the data, and the risks, say plainly whether an agent is the right tool, and agree how success will be measured." },
+    { name: "Prove", body: "A working prototype on your real data, so the riskiest part is tested before the build is committed." },
+    { name: "Build", body: "Production delivery in stages, with evaluation, guardrails, approvals, and logging built in from the start." },
+    { name: "Run", body: "We watch quality and cost, tune what drifts, and hand over documentation your team can own, or stay on to operate it." },
+  ]}
+  deliverables={[
+    "A written scope and an agreed measure of success",
+    "A working agent in production, not a demo",
+    "An evaluation set and release gates, so quality is a number you can track",
+    "A cost per task, with alerts when it is exceeded",
+    "Documentation and runbooks your team can own",
+    "Optional ongoing operation by a named engineer",
+  ]}
+  notIncluded={[
+    "Training new foundation models from scratch",
+    "Shipping an agent without evaluation, or without approvals for sensitive actions",
+    "Promising full autonomy where a person should make the call",
+    "Recommending a platform because we like it. We say so when something else fits better.",
+  ]}
+  proof={{
+    body: "We run ClawBuilders, a community where AI builders ship agents together, with an agent directory, an arena that rates agents, and hands-on labs written and sponsored by AI labs. It is a live agent-facing product that we built and operate, including a judge agent that runs in production.",
+    links: [
+      { label: "ClawBuilders case study", href: "/work/clawbuilders/" },
+      { label: "How we build agents on Cloudflare", href: "/cloudflare/" },
+      { label: "How we choose technology", href: "/stack/" },
+    ],
+  }}
+  faqs={[
+    {
+      q: "What is the difference between an AI agent and a chatbot or an automation?",
+      a: "A chatbot answers questions in a conversation. A traditional automation follows fixed steps and breaks when the input is messy. An AI agent can read unstructured input, decide among several actions, use tools, and carry a task through to the end, while following rules you set and handing over to a person when needed.",
+    },
+    {
+      q: "How long does it take to build an AI agent?",
+      a: "Scoping and an audit usually take one to two weeks. A first agent typically ships in four to eight weeks, depending on how many systems it has to connect to. We agree the measure of success before we build, so you know what done means.",
+    },
+    {
+      q: "How much does AI agent development cost?",
+      a: "It depends on scope, the systems involved, and how sensitive the actions are. We start with a fixed-scope audit so the cost is known up front, then scope the build with a cost per task you can see. For selected startups we work on a paid-plus-equity basis, described on our startups page.",
+    },
+    {
+      q: "How do you keep an AI agent accurate and safe?",
+      a: "We test it on real cases before launch and on every change after, give it only the access its job needs, require human approval for sensitive actions, and log every decision so it can be replayed and audited. Quality and cost are monitored in production, not just checked once.",
+    },
+    {
+      q: "Which models and platforms do you use?",
+      a: "We are model-agnostic and choose per project. We often build on the Cloudflare developer platform and also work on Vercel, AWS, and inside your own cloud account. We explain the trade-offs in plain terms before you commit.",
+    },
+    {
+      q: "Can you improve an agent we have already built?",
+      a: "Yes. A common starting point is a review of how your agent is evaluated, what it costs per task, how it handles failures, and what it is allowed to do. We then fix the biggest gaps first, often before changing the agent itself.",
+    },
+  ]}
+  related={[
+    { label: "AI automation services", href: "/services/ai-automation/", note: "Take repetitive work off your team" },
+    { label: "AI agents on Cloudflare", href: "/cloudflare/", note: "Build, migrate, and run on the platform" },
+    { label: "Enterprise AI governance", href: "/insights/ai-governance-framework-for-enterprise/", note: "What a framework needs" },
+    { label: "Build or buy AI tools", href: "/insights/build-or-buy-ai-tools/", note: "A decision guide" },
+  ]}
+  serviceName="AI agent development"
+  serviceType="AI agent development"
+/>

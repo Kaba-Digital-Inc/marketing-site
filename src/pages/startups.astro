@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import PageHero from "@/components/site/PageHero.astro";
 import FAQ from "@/components/site/FAQ.astro";
+import Commitments from "@/components/site/Commitments.astro";
 import Figure from "@/components/Figure";
 import StartupApplication from "@/components/StartupApplication";
 import { site } from "@/lib/site";
@@ -25,7 +26,7 @@ const advisory = [
   ["Architecture and vendor choices", "Model, platform, and tooling decisions that survive growth, so you do not rewrite at Series B."],
   ["Hiring and team design", "Which AI roles you need, in what order, and how to assess candidates."],
   ["Roadmap and technical review", "An honest read of your product and plan, including the technical story you tell investors."],
-  ["Introductions through our network", "Connections across AI labs, platforms, and the ClawBuilders community, where they are useful."],
+  ["Introductions, with your consent", "Where there is a strong fit, we may introduce you to investors, platforms, and AI labs we know. Always with your consent, never for a fee, and with no promises about the result."],
 ];
 
 const criteria = [
@@ -66,7 +67,15 @@ const faqs = [
   },
   {
     q: "Do you only build, or do you advise too?",
-    a: "Both. Building the AI core of your product is our main work. We also advise on technical and AI strategy, architecture and vendor choices, hiring, and your roadmap, and we introduce founders to people in our network when it helps.",
+    a: "Both. Building the AI core of your product is our main work. We also advise on technical and AI strategy, architecture and vendor choices, hiring, and your roadmap. Where there is a strong fit, we may also introduce you to people in our network, with your consent.",
+  },
+  {
+    q: "Will you introduce us to investors?",
+    a: "Possibly, but only if our work with you shows a strong fit, and only with your consent. Introductions are optional, we do not charge for them, and we make no promises about what comes of them. We take equity in startups we partner with, and we disclose that to anyone we introduce you to.",
+  },
+  {
+    q: "Do you take a fee or a cut when a startup raises money?",
+    a: "No. Our fee is for the engineering and advisory work, and our equity is part of the partnership terms agreed in writing. We do not charge or accept anything for an introduction, and nothing we earn depends on a financing.",
   },
   {
     q: "What stage do you work with?",
@@ -106,8 +115,8 @@ const serviceSchema = {
 >
   <PageHero
     kicker="Startups, seed to Series B"
-    title="We back startups with AI engineering."
-    lede="A few startups at a time, paid plus equity. We build the AI core of your product and advise on everything around it, so you can move faster."
+    title="We help startups reach their strongest outcome with AI."
+    lede="A few startups at a time, paid plus equity. We build the AI core of your product and advise on everything around it, so you can move faster. We cannot promise results, but we put our best work behind yours."
     figure="branches"
     figureLabel="A commit graph with a branch merging back, standing for shipping product"
   />
@@ -260,6 +269,11 @@ const serviceSchema = {
       </ol>
     </div>
   </section>
+
+  <Commitments
+    heading="Our commitments to founders."
+    intro="We push teams toward their strongest outcome. These are the rules we hold ourselves to, including when we make introductions."
+  />
 
   <FAQ items={faqs} heading="Questions founders ask" figure="cabinet" />
 

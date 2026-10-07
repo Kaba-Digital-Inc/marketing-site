@@ -26,6 +26,17 @@ const list = typeof limit === "number" ? services.slice(0, limit) : services;
               <li class="text-[13.5px] text-ink-mute">{c}</li>
             ))}
           </ul>
+          {service.links && (
+            <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+              {service.links.map((l) => (
+                <li>
+                  <a href={l.href} class="link-underline text-[14.5px]">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </li>
     ))

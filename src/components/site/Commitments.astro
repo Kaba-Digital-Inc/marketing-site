@@ -1,0 +1,42 @@
+---
+interface Props {
+  heading?: string;
+  intro?: string;
+}
+
+const {
+  heading = "How we handle introductions and outcomes.",
+  intro = "We push teams toward their strongest outcome. These are the rules we hold ourselves to while we do it.",
+} = Astro.props;
+
+const items = [
+  ["Consent comes first", "We introduce you to anyone only after you say yes, and we never share your confidential information without your permission."],
+  ["Our interests are disclosed", "We take equity in startups we partner with. Whenever we assess or introduce a company, we say so."],
+  ["No fees for introductions", "We do not charge or accept fees for introductions, and nothing we earn depends on a financing."],
+  ["Not investment advice", "We teach, build, and review technology. We do not recommend that anyone invest in a company."],
+  ["No guarantees", "We cannot promise funding, growth, or any particular result. We can promise our best work and honest feedback."],
+  ["Confidential both ways", "Each side's information stays separate. We do not pass one party's materials or reactions to another."],
+];
+---
+
+<section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+  <div class="shell">
+    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div>
+        <span class="kicker">Our commitments</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">{heading}</h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">{intro}</p>
+      </div>
+      <dl class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+        {
+          items.map(([k, v]) => (
+            <div class="hairline pt-5">
+              <dt class="font-display text-[18px] font-semibold text-ink">{k}</dt>
+              <dd class="mt-2 text-[15px] leading-relaxed text-ink-soft text-pretty">{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,104 @@
+---
+import ServiceLanding from "@/components/site/ServiceLanding.astro";
+---
+
+<ServiceLanding
+  title="AI automation services for business"
+  description="AI automation services that take repetitive work off your team: a fixed-scope audit, a first automation in weeks, and ongoing operations. Small business to enterprise."
+  kicker="AI automation"
+  heading="AI automation that takes repetitive work off your team."
+  lede="We find the workflows worth automating, build the first one in weeks, and keep it working. Practical, measured, and engineered to enterprise standards."
+  figure="keyboard"
+  figureLabel="A keyboard whose keys sink under the pointer, standing for everyday manual work"
+  definition={{
+    question: "What are AI automation services?",
+    answer:
+      "AI automation uses AI to handle tasks that used to need a person's judgment, such as reading an invoice, sorting an email, drafting a quote, or summarising a call, inside a workflow that runs on its own. Unlike older rule-based automation, it can cope with messy, unstructured input. AI automation services cover choosing the right workflow, building it, connecting it to your tools, and keeping it accurate over time.",
+  }}
+  audiences={[
+    {
+      name: "Small and mid-sized business",
+      body: "Practical automation without a technology team. Start with a fixed-scope audit and ship the first workflow in weeks.",
+      href: "/ai-native/",
+    },
+    {
+      name: "Startups",
+      body: "Automate operations early so a small team can do the work of a larger one, or build automation into your product.",
+      href: "/startups/",
+    },
+    {
+      name: "Enterprise teams",
+      body: "Automation with approvals, audit trails, and integration that pass security and risk review.",
+      href: "/enterprise/",
+    },
+  ]}
+  builds={[
+    { name: "Email and request triage", body: "Sort, label, route, and draft replies to incoming messages, with a person approving anything unusual." },
+    { name: "Document intake", body: "Pull data from invoices, forms, and contracts into your accounting or CRM system, and flag what does not match." },
+    { name: "Quotes and proposals", body: "Draft quotes and proposals from a template and a short intake, ready for review." },
+    { name: "Lead qualification and follow-up", body: "Score inbound leads, prepare follow-ups, and keep your pipeline moving." },
+    { name: "Reports and meeting notes", body: "Assemble weekly reports and turn meeting notes into tasks and summaries." },
+    { name: "Support first response", body: "Draft first answers from your own knowledge base, with approval for anything the system is unsure about." },
+  ]}
+  process={[
+    { name: "AI-Native Audit", body: "One to two weeks. We map how the work actually runs and rank the opportunities by return and effort, with build-versus-buy advice." },
+    { name: "First automation", body: "Four to eight weeks. We build and ship the highest-value workflow, using off-the-shelf tools where they fit." },
+    { name: "AI-Native Operations", body: "More workflows, agents that coordinate, training for your team, and governance, so the business runs on AI by default." },
+    { name: "Managed AI", body: "We monitor quality and cost, tune what drifts, and keep up with the models, with a named engineer on your account." },
+  ]}
+  deliverables={[
+    "A written roadmap that ranks opportunities by return and effort",
+    "Build-versus-buy advice that favours tools you already pay for",
+    "A working automation with a measured result: hours saved, errors avoided, or response time",
+    "A data and security review before anything touches customer data",
+    "Training and documentation so your team can use and maintain it",
+  ]}
+  notIncluded={[
+    "Custom software where a configured tool would do",
+    "Automating a process nobody has mapped yet",
+    "A promise that AI fixes everything. Sometimes the answer is not to automate yet.",
+    "Connecting customer data to a tool before we have reviewed where it goes",
+  ]}
+  proof={{
+    body: "Our approach is written down so you can judge it before you hire us: buy and configure first, build custom only where it earns its cost, and measure every automation. Start with how to choose a first project and how to decide between building and buying.",
+    links: [
+      { label: "Where to start with AI", href: "/insights/where-should-a-small-business-start-with-ai/" },
+      { label: "Build or buy AI tools", href: "/insights/build-or-buy-ai-tools/" },
+      { label: "The AI-Native path", href: "/ai-native/" },
+    ],
+  }}
+  faqs={[
+    {
+      q: "How is AI automation different from tools like Zapier or older rule-based automation?",
+      a: "Rule-based automation follows fixed steps and tends to break when the input is messy or unexpected. AI automation can read unstructured input such as emails, documents, and notes, and make a reasonable decision. In exchange it needs evaluation, guardrails, and sometimes a human approval step, which is part of what we build.",
+    },
+    {
+      q: "Which tasks should we automate first?",
+      a: "Start with something frequent, mostly rule-based, disliked by the people who do it, measurable, and recoverable if it goes wrong. Invoice intake, email triage, scheduling, and weekly reporting are common first choices. Our guide to choosing a first project covers the five tests we use.",
+    },
+    {
+      q: "How much does AI automation cost, and when does it pay back?",
+      a: "It depends on the workflow and the systems involved. We begin with a fixed-scope audit so you know the cost up front, and we estimate hours saved and the cost to run before we build anything. We agree the measure of success first, so payback is something you can check.",
+    },
+    {
+      q: "Is our data safe when we automate with AI?",
+      a: "It depends on the tools and how they are configured. We review where data goes and what each vendor retains before connecting anything, design for least access, and keep a person in the loop for sensitive actions. We also look at your privacy obligations in the places you operate.",
+    },
+    {
+      q: "Do you build custom automations or use existing tools?",
+      a: "Both, in that order of preference. Configuring and connecting tools you already pay for is cheaper and easier to reverse. We build custom only where no tool fits, where data control is critical, or where the workflow is a real advantage.",
+    },
+    {
+      q: "Do you work with businesses outside Toronto?",
+      a: "Yes. We are based in Toronto and work with teams worldwide, remotely and by video. See our locations page for how we adapt to local rules and industries.",
+    },
+  ]}
+  related={[
+    { label: "AI agent development", href: "/services/ai-agent-development/", note: "Agents that do real work" },
+    { label: "AI consulting for small business", href: "/ai-native/", note: "The fixed-scope audit and the path" },
+    { label: "AI consulting in Toronto", href: "/locations/toronto/", note: "Local rules, industries, and meeting by appointment" },
+    { label: "Where to start with AI", href: "/insights/where-should-a-small-business-start-with-ai/", note: "Five tests for a first project" },
+  ]}
+  serviceName="AI automation services"
+  serviceType="AI automation"
+/>

@@ -1,0 +1,206 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import Figure, { type FigureName } from "@/components/Figure";
+import { site } from "@/lib/site";
+
+/**
+ * Template for a keyword-focused service page. Structure follows what answer engines and
+ * buyers both look for: a plain definition first, who it is for, what is included, the process,
+ * what is not included, proof, FAQ, and related pages.
+ */
+interface Props {
+  title: string;
+  description: string;
+  kicker: string;
+  heading: string;
+  lede: string;
+  figure: FigureName;
+  figureLabel: string;
+  /** Question and answer-first paragraph, shown right after the hero. */
+  definition: { question: string; answer: string };
+  audiences: { name: string; body: string; href: string }[];
+  builds: { name: string; body: string }[];
+  process: { name: string; body: string }[];
+  deliverables: string[];
+  notIncluded: string[];
+  proof: { body: string; links: { label: string; href: string }[] };
+  faqs: { q: string; a: string }[];
+  related: { label: string; href: string; note: string }[];
+  serviceName: string;
+  serviceType: string;
+}
+
+const p = Astro.props;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: p.serviceName,
+  serviceType: p.serviceType,
+  description: p.description,
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: "Worldwide",
+};
+---
+
+<Layout title={p.title} description={p.description} schema={[serviceSchema]}>
+  <PageHero kicker={p.kicker} title={p.heading} lede={p.lede} figure={p.figure} figureLabel={p.figureLabel} />
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="max-w-3xl">
+        <span class="kicker">The short answer</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">{p.definition.question}</h2>
+        <p class="measure mt-6 text-[18px] leading-relaxed text-ink-soft text-pretty">{p.definition.answer}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">Who it is for</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">Built for how you work.</h2>
+      </div>
+      <ul class="mt-12 grid gap-5 lg:grid-cols-3">
+        {
+          p.audiences.map((a) => (
+            <li>
+              <a href={a.href} class="group panel flex h-full flex-col p-7 transition-colors hover:border-line-2">
+                <h3 class="font-display text-[21px] font-semibold text-chalk">{a.name}</h3>
+                <p class="mt-3 flex-1 text-[15px] leading-relaxed text-chalk-soft text-pretty">{a.body}</p>
+                <span class="mt-6 text-[15px] font-medium text-signal">
+                  Learn more <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <span class="kicker">What we build</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">Examples of the work.</h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            Every one ships with evaluation, guardrails, and monitoring, and with a measure of success agreed before
+            we build.
+          </p>
+        </div>
+        <dl class="border-t border-line">
+          {
+            p.builds.map((b) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.8fr_1.2fr] sm:gap-8">
+                <dt class="text-[16px] font-medium text-ink">{b.name}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{b.body}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">How it works</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Four stages, each with a deliverable.
+        </h2>
+      </div>
+      <ol class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          p.process.map((s, i) => (
+            <li class="border-t border-chalk/25 pt-5">
+              <span class="font-mono text-[13px] text-signal">0{i + 1}</span>
+              <h3 class="mt-2 font-display text-[22px] font-semibold text-ink">{s.name}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-ink-soft text-pretty">{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <p class="label-mono">What you receive</p>
+          <ul class="mt-5 space-y-3">
+            {
+              p.deliverables.map((d) => (
+                <li class="flex gap-3 text-[15.5px] leading-relaxed text-ink-soft">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                  {d}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <p class="label-mono">What we do not do</p>
+          <ul class="mt-5 space-y-3">
+            {
+              p.notIncluded.map((d) => (
+                <li class="flex gap-3 text-[15.5px] leading-relaxed text-ink-mute">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-line-2" />
+                  {d}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-24">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <span class="kicker">Proof</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">We build and run our own.</h2>
+        </div>
+        <div>
+          <p class="measure text-[17px] leading-relaxed text-ink-soft text-pretty">{p.proof.body}</p>
+          <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+            {
+              p.proof.links.map((l) => (
+                <li>
+                  <a href={l.href} class="link-underline text-[15px]">{l.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={p.faqs} heading="Questions about this service" figure="cabinet" />
+
+  <section class="border-t border-line py-16 lg:py-20">
+    <div class="shell">
+      <p class="label-mono">Related</p>
+      <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          p.related.map((r) => (
+            <li>
+              <a href={r.href} class="group block border-t border-line pt-4">
+                <span class="font-display text-[17px] font-semibold text-ink transition-colors group-hover:text-signal">{r.label}</span>
+                <span class="mt-1 block text-[14px] leading-relaxed text-ink-mute">{r.note}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

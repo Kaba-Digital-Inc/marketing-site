@@ -15,6 +15,7 @@ const baseMenus: Menu[] = [
       { label: "Startups", href: "/startups", note: "Selective partnerships: paid plus equity" },
       { label: "Small & mid-sized business", href: "/ai-native", note: "Become AI-native, one workflow at a time" },
       { label: "Enterprise", href: "/enterprise", note: "Take pilots to production" },
+      { label: "Investors & accelerators", href: "/investors", note: "Hands-on AI labs for portfolio teams" },
     ],
   },
   {
@@ -22,7 +23,9 @@ const baseMenus: Menu[] = [
     href: "/services",
     items: [
       { label: "AI strategy", href: "/services", note: "Where AI pays off, and what it takes" },
-      { label: "Agents & workflows", href: "/services", note: "Systems that do real work" },
+      { label: "AI agent development", href: "/services/ai-agent-development", note: "Systems that do real work" },
+      { label: "AI automation", href: "/services/ai-automation", note: "Take repetitive work off your team" },
+      { label: "AI workshops & labs", href: "/services/ai-workshops", note: "Hands-on training for your team" },
       { label: "Agents on Cloudflare", href: "/cloudflare", note: "Build, migrate, and run on the platform" },
       { label: "Voice & realtime agents", href: "/services", note: "Conversations that run 24/7" },
       { label: "Retrieval & knowledge", href: "/services", note: "Answers from your own data" },

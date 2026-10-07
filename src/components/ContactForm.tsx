@@ -10,6 +10,7 @@ const interests = [
   "Agents and workflow automation",
   "AI product engineering",
   "Enterprise AI governance",
+  "Investor or fund inquiry",
   "Something else",
 ];
 

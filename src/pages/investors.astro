@@ -1,0 +1,309 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/site/PageHero.astro";
+import Commitments from "@/components/site/Commitments.astro";
+import FAQ from "@/components/site/FAQ.astro";
+import CTA from "@/components/site/CTA.astro";
+import Figure from "@/components/Figure";
+import { site } from "@/lib/site";
+
+const offers = [
+  {
+    name: "Hands-on AI labs for portfolio teams",
+    tag: "Fee for service",
+    body: "Live, hands-on sessions where your portfolio's engineering and operating teams build with current AI tools and leave with working examples, direction, and ideas.",
+  },
+  {
+    name: "Portfolio engineering support",
+    tag: "Paid engagement",
+    body: "Hands-on AI engineering for companies in your portfolio, as a paid engagement agreed with the company.",
+  },
+  {
+    name: "AI snapshot",
+    tag: "Fee for service",
+    body: "A short, plain-language read on how an AI product is built, based on what the team shows us. Useful as a starting point, and not an audit.",
+  },
+  {
+    name: "Introductions",
+    tag: "Free, with consent",
+    body: "When we meet an AI company that may fit your focus, we may introduce it to you, only with the founders' consent. We do not charge for introductions, and we make no promises about outcomes.",
+  },
+];
+
+const labFormats = [
+  ["Half-day lab", "One focused topic, built together, for a portfolio team or a mixed group."],
+  ["Full-day lab", "A deeper build day, with time to adapt the example to each team's own product."],
+  ["Lab series", "Four to six sessions over several weeks, with office hours between them."],
+  ["Founder and CTO briefing", "A shorter session on what is changing in AI engineering and where to focus."],
+];
+
+const labTopics = [
+  ["Agents on Cloudflare", "Build and deploy an agent on a modern edge platform."],
+  ["AI apps with Next.js", "Vercel AI SDK and Mastra for chat, tools, and workflows."],
+  ["Voice agents", "Realtime voice agents with LiveKit."],
+  ["AI-assisted engineering", "Claude Code, MCP, evaluation, and keeping cost under control."],
+  ["Any web stack", "React, Vite, Next.js, or Dioxus. We are framework-agnostic and adapt to the team."],
+  ["Labs for non-technical teams", "Marketing posters and promotional content with image models, summaries, and simple automations."],
+];
+
+const covers = [
+  ["Which models", "Which models the product appears to use, and how they are accessed."],
+  ["How it is built", "The main parts of the system and how they fit together."],
+  ["Rough cost shape", "What drives inference cost, and what to ask about as usage grows."],
+  ["Dependencies", "How exposed the product looks to a single model provider or platform."],
+  ["Quality practice", "Whether the team tests for accuracy and handles failure."],
+  ["Questions to ask", "A short list of follow-up questions for the founders."],
+];
+
+const notCovers = [
+  "An audit of code, data rights, or intellectual property",
+  "A security, privacy, or legal review",
+  "A valuation, or a view on whether to invest",
+  "A verdict on the company or its team",
+];
+
+const arrangement = [
+  ["Scope", "What we would do, for whom, and what we would not do."],
+  ["Exclusivity", "Whether the arrangement is exclusive. By default we would expect it not to be."],
+  ["Conflicts", "How interests are disclosed, including our equity in startups we work with."],
+  ["Confidentiality", "How each side's information is protected and kept separate."],
+  ["Compensation", "What, if anything, is paid, and that it never depends on a financing."],
+  ["Term and review", "How long it runs, and when either side can end it."],
+];
+
+const faqs = [
+  {
+    q: "Are you a venture scout?",
+    a: "We work as independent advisors and builders. We are open to talking with funds about how a closer arrangement could work. Any arrangement would be agreed in writing, reviewed with counsel, and disclosed to the founders we meet.",
+  },
+  {
+    q: "Do you charge for introductions?",
+    a: "No. We do not charge or accept fees for introductions, and nothing we earn depends on a company raising money. Labs, snapshots, and portfolio support are paid for the work itself.",
+  },
+  {
+    q: "Do you hold equity in the companies you assess or introduce?",
+    a: "We take a small equity stake in startups we partner with as engineers. We disclose that every time we assess or introduce one, and you can decide how much weight to give our view.",
+  },
+  {
+    q: "Is this investment advice?",
+    a: "No. We teach, build, and review technology. We do not recommend that anyone invest in a company, and the investment decision always stays with you. Please take your own legal, tax, and investment advice.",
+  },
+  {
+    q: "Which companies do you introduce?",
+    a: "Only ones we know well, usually through working with them or meeting them through ClawBuilders, and only with the founders' consent. We introduce when we think there is a genuine fit with your focus. We cannot say whether you will invest.",
+  },
+  {
+    q: "How deep is an AI snapshot?",
+    a: "Deliberately light. It is based on what the team shows us, such as a demo, an architecture walkthrough, and a few questions, and we say in writing what we did and did not look at. We are stronger on how a product is built than on legal, financial, or formal security questions, and we say so up front. It is a starting point for your own diligence, not a replacement for it.",
+  },
+  {
+    q: "How do you handle confidentiality when running labs for portfolio teams?",
+    a: "We agree confidentiality in writing first. Labs use the team's own examples only if they choose to share them, and we do not pass one company's materials to another company or to the fund. If a fund also asks us for other work, we keep those engagements and their information separate, and we disclose it.",
+  },
+  {
+    q: "What do portfolio teams leave a lab with?",
+    a: "Working starter code, a recording where everyone agrees, a one-page summary of the main decisions, and office hours for follow-up questions. We cannot promise a business result. The aim is a team that is better informed and moving faster.",
+  },
+  {
+    q: "How do we start?",
+    a: "Tell us about your portfolio, which stacks the teams use, and what you would like them to learn. We agree scope, price, and confidentiality in writing before anything is shared.",
+  },
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI labs for portfolio teams",
+  serviceType: "AI training and workshops",
+  description:
+    "Hands-on AI labs for portfolio teams, engineering support, lightweight AI snapshots, and consented introductions for investors, accelerators, and funds.",
+  provider: { "@id": site.url + "/#organization" },
+  areaServed: "Worldwide",
+  audience: { "@type": "Audience", audienceType: "Investors" },
+};
+---
+
+<Layout
+  title="AI labs and perspective for investors"
+  description="Hands-on AI labs for portfolio teams, engineering support, lightweight AI snapshots, and consented introductions for investors. Disclosed."
+  schema={[serviceSchema]}
+>
+  <PageHero
+    kicker="Investors, accelerators, and funds"
+    title="AI perspective for investors."
+    lede="Hands-on AI labs for your portfolio teams, plus engineering support and introductions, from a team that builds AI products and works with early-stage founders."
+    figure="terrain"
+    figureLabel="A field of pillars rising, standing for companies at different stages of growth"
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div>
+          <span class="kicker">Our focus</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            A close view of early-stage AI.
+          </h2>
+          <div class="measure mt-6 space-y-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            <p>
+              We build AI products and agents for a living, and we work hands-on with early-stage founders. We also
+              run <a href="/work/clawbuilders/" class="link-underline">ClawBuilders</a>, a community where AI agent
+              builders ship together, with a Toronto chapter.
+            </p>
+            <p>
+              That gives us a day-to-day view of what teams are building, what works, and what does not. Our focus is
+              applied AI and agents, mostly from pre-seed to Series A.
+            </p>
+          </div>
+        </div>
+        <div class="panel hidden overflow-hidden bg-void lg:block">
+          <Figure
+            client:visible
+            name="cabinet"
+            label="A rack of blades, standing for a careful review of a company"
+            intensity={0.6}
+            plate="#08090a"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2 py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">How we can help</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">Four ways to work together.</h2>
+      </div>
+      <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          offers.map((o) => (
+            <li class="panel flex flex-col p-7">
+              <span class="label-mono">{o.tag}</span>
+              <h3 class="mt-3 font-display text-[22px] font-semibold text-chalk">{o.name}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-chalk-soft text-pretty">{o.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="kicker">Labs for portfolio teams</span>
+        <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+          Teams learn fastest by building.
+        </h2>
+        <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+          Each lab is a live, hands-on session on a stack your teams use or are considering. We show how it is really
+          built, then the team builds with us. Engineers get direction and ideas; non-technical teams get simple,
+          practical ways to use AI in their daily work.
+        </p>
+      </div>
+
+      <dl class="mt-12 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          labFormats.map(([k, v]) => (
+            <div class="hairline pt-5">
+              <dt class="font-display text-[18px] font-semibold text-ink">{k}</dt>
+              <dd class="mt-2 text-[15px] leading-relaxed text-ink-soft text-pretty">{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <h3 class="mt-16 font-display text-[22px] font-semibold text-ink">Lab topics</h3>
+      <dl class="mt-6 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          labTopics.map(([k, v]) => (
+            <div class="hairline pt-5">
+              <dt class="font-display text-[18px] font-semibold text-ink">{k}</dt>
+              <dd class="mt-2 text-[15px] leading-relaxed text-ink-soft text-pretty">{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <p class="measure mt-10 text-[15px] leading-relaxed text-ink-soft text-pretty">
+        Priced per engagement after a short scoping call. Teams outside a portfolio can find the same labs on our{" "}
+        <a href="/services/ai-workshops/" class="link-underline">AI workshops page</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <span class="kicker">What an AI snapshot covers</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            A short note, with honest limits.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            A snapshot describes how a product appears to be built, based on what the team shows us. We say in writing
+            what we looked at and what we did not. We are stronger on how a product is built than on legal, financial,
+            or formal security questions, and we say so up front.
+          </p>
+          <h3 class="mt-8 font-display text-[18px] font-semibold text-ink">What it is not</h3>
+          <ul class="mt-3 space-y-2 text-[15px] leading-relaxed text-ink-soft">
+            {notCovers.map((n) => <li class="flex gap-3"><span class="text-ink-mute">&ndash;</span>{n}</li>)}
+          </ul>
+        </div>
+        <dl class="grid gap-x-10 gap-y-7 sm:grid-cols-2">
+          {
+            covers.map(([k, v]) => (
+              <div class="hairline pt-5">
+                <dt class="font-display text-[18px] font-semibold text-ink">{k}</dt>
+                <dd class="mt-2 text-[15px] leading-relaxed text-ink-soft text-pretty">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <Commitments />
+
+  <section class="py-20 lg:py-28">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <span class="kicker">A closer arrangement</span>
+          <h2 class="text-title mt-5 font-display font-semibold text-ink text-balance">
+            If you are thinking about working more closely.
+          </h2>
+          <p class="measure mt-5 text-[17px] leading-relaxed text-ink-soft text-pretty">
+            These are the points we would settle together in writing before any work starts. Any arrangement is
+            disclosed to the founders we meet.
+          </p>
+        </div>
+        <dl class="border-t border-line">
+          {
+            arrangement.map(([k, v]) => (
+              <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.5fr_1.5fr] sm:gap-8">
+                <dt class="text-[16px] font-medium text-ink">{k}</dt>
+                <dd class="text-[15px] leading-relaxed text-ink-soft">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} heading="Questions investors ask" figure="vault" />
+
+  <section class="border-t border-line py-10">
+    <div class="shell">
+      <p class="max-w-3xl text-[13px] leading-relaxed text-ink-mute">
+        Nothing on this page is investment, legal, or tax advice. {site.name} is an independent engineering company. We
+        are not affiliated with any fund unless a written agreement says so and we have told the founders involved.
+      </p>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

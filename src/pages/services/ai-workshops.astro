@@ -1,0 +1,104 @@
+---
+import ServiceLanding from "@/components/site/ServiceLanding.astro";
+---
+
+<ServiceLanding
+  title="AI workshops and hands-on labs for teams"
+  description="Hands-on AI workshops and labs for engineering and non-technical teams: build agents, voice, and AI-assisted engineering live, then keep the code. Toronto and remote."
+  kicker="AI workshops and labs"
+  heading="Hands-on AI labs that leave your team building."
+  lede="Live sessions where your team builds with current AI tools, on the stack they use, and leaves with working examples, direction, and ideas. For engineers and for non-technical teams."
+  figure="laptop"
+  figureLabel="A laptop opening, standing for a team building together"
+  definition={{
+    question: "What is a hands-on AI workshop?",
+    answer:
+      "A hands-on AI workshop is a live working session where participants build something with AI tools rather than watch slides. Ours are led by engineers who build and run production AI systems. Teams leave with working starter code or examples they can reuse, a clearer view of the options, and people to ask afterwards. We do not issue certifications, and we do not promise a business result.",
+  }}
+  audiences={[
+    {
+      name: "Engineering teams",
+      body: "Build agents, voice agents, and AI features on your own stack, and learn how to test and run them.",
+      href: "/services/ai-agent-development/",
+    },
+    {
+      name: "Non-technical teams",
+      body: "Marketing, operations, and support teams learn simple, practical uses, from promotional content with image models to summaries and workflows.",
+      href: "/ai-native/",
+    },
+    {
+      name: "Funds and accelerators",
+      body: "Labs for portfolio teams, scoped with the platform team and kept confidential.",
+      href: "/investors/",
+    },
+  ]}
+  builds={[
+    { name: "Agents on Cloudflare", body: "Build and deploy an agent on a modern edge platform, from tools to state to deployment." },
+    { name: "AI apps with Next.js", body: "Chat, tools, and workflows with the Vercel AI SDK and Mastra." },
+    { name: "Voice agents", body: "A realtime voice agent with LiveKit, including handoff to a person." },
+    { name: "AI-assisted engineering", body: "Claude Code, MCP, evaluation, and keeping cost under control." },
+    { name: "Any web stack", body: "React, Vite, Next.js, or Dioxus. We adapt the lab to the framework your team uses." },
+    { name: "Marketing and content", body: "Posters and promotional content with image models, plus review steps that keep a brand consistent." },
+  ]}
+  process={[
+    { name: "Scope", body: "A short call about who attends, what they already know, the stack, and what you want them to leave with." },
+    { name: "Design", body: "We tailor the lab and examples to your team, and agree confidentiality in writing." },
+    { name: "Run", body: "A live, hands-on session, remote or in person, with time for questions on your own use cases." },
+    { name: "Follow up", body: "Starter code, a recording if everyone agrees, a one-page summary, and office hours." },
+  ]}
+  deliverables={[
+    "Working starter code or examples your team can reuse",
+    "A recording, if everyone agrees",
+    "A one-page summary of the decisions and next steps",
+    "Office hours for follow-up questions",
+    "A list of resources matched to your stack",
+  ]}
+  notIncluded={[
+    "Certification or accreditation",
+    "A promise of a particular business result",
+    "Teaching tools we do not use ourselves. We will say so and suggest someone else.",
+    "Sharing your team's materials with anyone else",
+  ]}
+  proof={{
+    body: "We run ClawBuilders, a community where AI agent builders ship together, with labs written and sponsored by AI companies and a Toronto chapter. That is where we practise explaining how things are really built.",
+    links: [
+      { label: "ClawBuilders case study", href: "/work/clawbuilders/" },
+      { label: "How to build an AI agent on Cloudflare", href: "/insights/how-to-build-an-ai-agent-on-cloudflare/" },
+      { label: "Labs for portfolio teams", href: "/investors/" },
+    ],
+  }}
+  faqs={[
+    {
+      q: "How long is a workshop?",
+      a: "A half day for one focused topic, a full day for a deeper build, or a series of four to six sessions with office hours between them. We recommend the format after a short scoping call.",
+    },
+    {
+      q: "How many people can attend?",
+      a: "Small groups work best because people build rather than watch. We will suggest a group size for the topic, and can run more than one session for a larger team.",
+    },
+    {
+      q: "Can you run it remotely or in person?",
+      a: "Both. We are based in Toronto and can run sessions in person in the area or by video anywhere.",
+    },
+    {
+      q: "Can you tailor it to our stack?",
+      a: "Yes. We are framework-agnostic and adapt examples to what your team uses, such as React, Vite, Next.js, or Dioxus. If a topic is outside what we know deeply, we will say so.",
+    },
+    {
+      q: "Will our information stay confidential?",
+      a: "Yes. We agree confidentiality in writing before the session, use your team's examples only if you choose to share them, and do not pass your materials to anyone else.",
+    },
+    {
+      q: "How much does it cost?",
+      a: "It depends on the format, group size, and how much we tailor. We scope each engagement and quote a fixed price before work starts, so there are no surprises.",
+    },
+  ]}
+  related={[
+    { label: "AI agent development", href: "/services/ai-agent-development/", note: "Build agents that do real work" },
+    { label: "AI automation", href: "/services/ai-automation/", note: "Take repetitive work off your team" },
+    { label: "Investors and accelerators", href: "/investors/", note: "Labs for portfolio teams" },
+    { label: "Agents on Cloudflare", href: "/cloudflare/", note: "Build, migrate, and run on the platform" },
+  ]}
+  serviceName="AI workshops and hands-on labs"
+  serviceType="AI training and workshops"
+/>
