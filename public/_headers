@@ -21,3 +21,6 @@ https://kabadigitalinc-marketing.kabadigitalinc.workers.dev/*
 
 /llms-full.txt
   Content-Type: text/plain; charset=utf-8
+
+/*
+  Link: </llms.txt>; rel="alternate"; type="text/plain"; title="llms.txt", </sitemap-index.xml>; rel="sitemap"; type="application/xml"

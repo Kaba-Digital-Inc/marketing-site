@@ -52,6 +52,7 @@ const segmentLabels: Record<string, string> = {
   "ai-agent-development": "AI agent development",
   "ai-automation": "AI automation",
   "ai-workshops": "AI workshops and labs",
+  "for-agents": "For AI agents",
   toronto: "Toronto",
 };
 
@@ -164,5 +165,6 @@ const jsonLd = [orgSchema, ...(breadcrumb ? [breadcrumb] : []), ...schema];
     <Footer />
     <Toaster client:load />
     <ConsentBanner client:idle />
+    <script src="/webmcp.js" defer is:inline></script>
   </body>
 </html>

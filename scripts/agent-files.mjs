@@ -55,7 +55,7 @@ export async function buildAgentFiles(distDir) {
   pages.sort((a, b) => a.urlPath.length - b.urlPath.length || a.urlPath.localeCompare(b.urlPath));
 
   const groups = [
-    ["Start here", (p) => ["/", "/about/", "/contact/"].includes(p.urlPath)],
+    ["Start here", (p) => ["/", "/about/", "/contact/", "/for-agents/"].includes(p.urlPath)],
     ["Who we help", (p) => ["/startups/", "/ai-native/", "/enterprise/", "/investors/"].includes(p.urlPath)],
     ["Services", (p) => p.urlPath.startsWith("/services") || p.urlPath === "/cloudflare/" || p.urlPath === "/stack/"],
     ["Work and partners", (p) => p.urlPath.startsWith("/work") || p.urlPath.startsWith("/partners")],
