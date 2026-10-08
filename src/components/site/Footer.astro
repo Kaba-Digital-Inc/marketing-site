@@ -1,13 +1,54 @@
 ---
-import { site, nav } from "@/lib/site";
+import { site } from "@/lib/site";
 import { getVisibleProjects } from "@/lib/projects";
 const projects = await getVisibleProjects();
 const year = new Date().getFullYear();
+
+const groups: { title: string; links: { label: string; href: string }[] }[] = [
+  {
+    title: "Who we help",
+    links: [
+      { label: "Startups", href: "/startups/" },
+      { label: "Small business", href: "/ai-native/" },
+      { label: "Enterprise", href: "/enterprise/" },
+      { label: "Investors", href: "/investors/" },
+    ],
+  },
+  {
+    title: "Services",
+    links: [
+      { label: "AI agent development", href: "/services/ai-agent-development/" },
+      { label: "AI automation", href: "/services/ai-automation/" },
+      { label: "AI workshops", href: "/services/ai-workshops/" },
+      { label: "Agents on Cloudflare", href: "/cloudflare/" },
+      { label: "All services", href: "/services/" },
+    ],
+  },
+  {
+    title: "Work and learn",
+    links: [
+      ...projects.map((p) => ({ label: p.data.title, href: `/work/${p.id}/` })),
+      { label: "All work", href: "/work/" },
+      { label: "Insights", href: "/insights/" },
+      { label: "Our technology", href: "/stack/" },
+      { label: "Partners", href: "/partners/" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about/" },
+      { label: "Locations", href: "/locations/" },
+      { label: "Contact", href: "/contact/" },
+    ],
+  },
+];
+const link = "inline-flex min-h-[40px] items-center text-chalk-soft transition-colors hover:text-chalk lg:min-h-[30px]";
 ---
 
 <footer class="border-t border-line bg-panel">
-  <div class="shell py-16 lg:py-20">
-    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+  <div class="shell py-14 lg:py-16">
+    <div class="grid gap-12 lg:grid-cols-[1.35fr_2.65fr] lg:gap-16">
       <div>
         <div class="flex items-center gap-2.5">
           <svg viewBox="0 0 28 28" class="h-7 w-7" aria-hidden="true">
@@ -19,61 +60,42 @@ const year = new Date().getFullYear();
           </svg>
           <span class="font-display text-[17px] font-semibold tracking-tight">{site.name}</span>
         </div>
-        <p class="mt-6 max-w-xs text-[15px] leading-relaxed text-chalk-mute">
-          An AI engineering studio. We partner with selected startups and help businesses of every size become AI-native.
+        <p class="mt-5 max-w-xs text-[15px] leading-relaxed text-chalk-mute">
+          An AI engineering studio in Toronto. We build and run AI agents and automation, run hands-on AI labs for teams, and partner with selected startups.
         </p>
-        <a
-          href={site.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-underline mt-6 inline-block text-[15px] text-chalk"
-        >
-          Kaba Digital Inc. on LinkedIn
-        </a>
-      </div>
-
-      <div>
-        <p class="text-[13px] font-medium text-chalk-mute">Company</p>
-        <ul class="mt-3 text-[15px]">
-          <li><a href="/" class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">Home</a></li>
-          {nav.map((item) => (
-            <li><a href={item.href} class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">{item.label}</a></li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <p class="text-[13px] font-medium text-chalk-mute">We build</p>
-        <ul class="mt-3 text-[15px]">
-          {projects.map((p) => (
-            <li>
-              <a href={`/work/${p.id}/`} class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">
-                {p.data.title}
-              </a>
-            </li>
-          ))}
-          <li><a href="/services/ai-agent-development/" class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">AI agent development</a></li>
-          <li><a href="/services/ai-automation/" class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">AI automation</a></li>
-          <li><a href="/services/ai-workshops/" class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">AI workshops and labs</a></li>
-          <li><a href="/stack" class="inline-flex min-h-[44px] items-center text-chalk-soft transition-colors hover:text-chalk">Our technology</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="text-[13px] font-medium text-chalk-mute">Contact</p>
-        <ul class="mt-3 space-y-1 text-[15px] text-chalk-soft">
-          <li><a href={`mailto:${site.email}`} class="inline-flex min-h-[44px] items-center transition-colors hover:text-chalk">{site.email}</a></li>
-          <li class="leading-relaxed">
-            <span class="mb-1 block text-[13px] text-chalk-mute">Office address</span>
-            {site.address.street}<br />
-            {site.address.city}, {site.address.region} {site.address.postal}<br />
-            {site.address.country}
+        <ul class="mt-5 space-y-1 text-[15px]">
+          <li><a href={`mailto:${site.email}`} class="link-underline text-chalk">{site.email}</a></li>
+          <li>
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" class="text-chalk-soft transition-colors hover:text-chalk">LinkedIn</a>
           </li>
         </ul>
+        <address class="mt-5 text-[13.5px] not-italic leading-relaxed text-chalk-mute">
+          <span class="mb-0.5 block text-[12px] uppercase tracking-wide">Office address</span>
+          {site.address.street}, {site.address.city}, {site.address.region} {site.address.postal}, {site.address.country}
+        </address>
       </div>
+
+      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4">
+        {
+          groups.map((g) => (
+            <div>
+              <p class="text-[13px] font-medium text-chalk-mute">{g.title}</p>
+              <ul class="mt-3 text-[15px]">
+                {g.links.map((l) => (
+                  <li>
+                    <a href={l.href} class={link}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </nav>
     </div>
 
-    <div class="mt-14 flex flex-col gap-3 border-t border-chalk/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-12 flex flex-col gap-3 border-t border-chalk/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
       <p class="text-[13px] text-chalk-mute">&copy; {year} {site.name} All rights reserved.</p>
 
       <div class="flex flex-wrap items-center gap-x-6 text-[13px] text-chalk-mute">

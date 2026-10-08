@@ -6,18 +6,35 @@ import { useToast } from "@/hooks/use-toast";
 
 const interests = [
   "AI-Native Audit",
-  "AI strategy and scoping",
-  "Agents and workflow automation",
-  "AI product engineering",
+  "AI agent or automation project",
+  "AI workshops and labs for a team",
+  "Startup partnership (paid plus equity)",
   "Enterprise AI governance",
   "Investor or fund inquiry",
   "Something else",
 ];
 
+/** A short pointer under the choice, for the options that have a better first step. */
+const hints: Record<string, { text: string; href?: string; link?: string }> = {
+  "Startup partnership (paid plus equity)": {
+    text: "The fastest route is the short application, which tells us what we need to know.",
+    href: "/startups/#apply",
+    link: "Open the application",
+  },
+  "AI workshops and labs for a team": { text: "Tell us the team, the stack, and what they should learn. We scope a lab around it." },
+  "Investor or fund inquiry": { text: "Tell us about the portfolio and what you would like teams to learn. Everything stays confidential." },
+};
+
+const placeholders: Record<string, string> = {
+  "AI workshops and labs for a team": "Who attends, the stack they use, and what they should be able to do afterwards.",
+  "Investor or fund inquiry": "Your portfolio, the stacks the teams use, and what you would like them to learn.",
+  "Startup partnership (paid plus equity)": "What you are building, your stage, and where you want AI engineering help.",
+};
+
 const fieldClass =
   "h-11 rounded-lg border-line bg-panel-2 text-ink placeholder:text-ink-mute/70 focus-visible:border-ultra focus-visible:ring-1 focus-visible:ring-ultra";
 
-export default function ContactForm() {
+export default function ContactForm({ compact = false }: { compact?: boolean }) {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -69,7 +86,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className={`grid gap-5 ${compact ? "" : "sm:grid-cols-2"}`}>
         <div className="space-y-2">
           <Label htmlFor="name" className="text-[13px] font-medium text-ink-mute">
             Name
@@ -99,7 +116,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className={`grid gap-5 ${compact ? "" : "sm:grid-cols-2"}`}>
         <div className="space-y-2">
           <Label htmlFor="company" className="text-[13px] font-medium text-ink-mute">
             Company
@@ -128,6 +145,16 @@ export default function ContactForm() {
               </option>
             ))}
           </select>
+          {hints[form.interest] && (
+            <p className="text-[13px] leading-relaxed text-ink-mute">
+              {hints[form.interest].text}{" "}
+              {hints[form.interest].href && (
+                <a href={hints[form.interest].href} className="link-underline text-ink">
+                  {hints[form.interest].link}
+                </a>
+              )}
+            </p>
+          )}
         </div>
       </div>
 
@@ -141,7 +168,7 @@ export default function ContactForm() {
           rows={5}
           value={form.message}
           onChange={(e) => update("message", e.target.value)}
-          placeholder="The workflow or product you have in mind, your current stack, and any timeline."
+          placeholder={placeholders[form.interest] ?? "The workflow or product you have in mind, your current stack, and any timeline."}
           className="rounded-lg border-line bg-panel-2 text-ink placeholder:text-ink-mute/70 focus-visible:border-ultra focus-visible:ring-1 focus-visible:ring-ultra"
         />
       </div>
@@ -149,6 +176,10 @@ export default function ContactForm() {
       <button type="submit" disabled={submitting} className="btn-solid w-full disabled:opacity-60">
         {submitting ? "Sending…" : "Send message"}
       </button>
+      <p className="text-center text-[12.5px] text-ink-mute">
+        We reply within one business day and use your details only to answer you.{" "}
+        <a href="/privacy/" className="link-underline">Privacy</a>
+      </p>
     </form>
   );
 }

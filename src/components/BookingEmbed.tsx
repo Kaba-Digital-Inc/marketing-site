@@ -18,5 +18,5 @@ export default function BookingEmbed() {
     })();
   }, []);
 
-  return <div id="cal-inline" className="h-[620px] w-full" />;
+  return <div id="cal-inline" className="min-h-[560px] w-full" />;
 }
