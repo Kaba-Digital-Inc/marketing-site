@@ -29,3 +29,6 @@ pnpm-debug.log*
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# Rive CLI build output
+rive/engagement/build/

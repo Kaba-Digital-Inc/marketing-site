@@ -10,6 +10,8 @@ import {
   Padlock,
   Patch,
   Phone,
+  Phosphor,
+  Riffle,
   Router,
   Terminal,
   Terrain,
@@ -27,6 +29,8 @@ const figures = {
   padlock: Padlock,
   patch: Patch,
   phone: Phone,
+  phosphor: Phosphor,
+  riffle: Riffle,
   router: Router,
   terminal: Terminal,
   terrain: Terrain,
@@ -57,6 +61,10 @@ const paths: Partial<Record<FigureName, Path>> = {
   elevator: (t, p) => [0.5 + 0.2 * Math.sin(t * 0.4 + p), 0.5 + 0.42 * Math.sin(t * 0.95 + p)],
   laptop: (t, p) => [0.5 + 0.2 * Math.sin(t * 0.4 + p), 0.5 + 0.42 * Math.sin(t * 0.55 + p)],
   terminal: (t, p) => [0.5 + 0.15 * Math.sin(t * 0.4 + p), 0.5 + 0.4 * Math.sin(t * 0.5 + p)],
+  // Cards are picked by the pointer's height, so sweep up and down the tray.
+  riffle: (t, p) => [0.5 + 0.12 * Math.sin(t * 0.4 + p), 0.5 + 0.4 * Math.sin(t * 0.6 + p)],
+  // The dot matrix is painted by whatever passes over it, so draw wide slow loops.
+  phosphor: (t, p) => [0.5 + 0.38 * Math.sin(t * 0.8 + p), 0.5 + 0.3 * Math.sin(t * 1.15 + p * 1.4)],
   cabinet: (t, p) => [0.5 + 0.15 * Math.sin(t * 0.4 + p), 0.5 + 0.4 * Math.sin(t * 0.52 + p)],
 };
 

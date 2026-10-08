@@ -1,50 +1,33 @@
 ---
-import Figure from "@/components/Figure";
+import StoryScene from "@/components/StoryScene";
+import EngagementJourney from "@/components/EngagementJourney";
 
 const steps = [
   {
     title: "We scope it",
     body: "We map the workflow, the data, and the constraints, then say plainly whether AI is the right tool.",
+    story: "scope",
+    storyLabel: "A support workflow is mapped step by step, each step's data is traced, each step is tested on security, cost, and accuracy, and each is marked AI or plain rules.",
   },
   {
     title: "We prove it",
     body: "A working prototype on your real data, so the riskiest part is tested before the build is committed.",
+    story: "prove",
+    storyLabel: "The riskiest part is picked, a small prototype is built and run on twelve real samples, and the accuracy result decides whether to build.",
   },
   {
     title: "We build it",
     body: "Production delivery with evaluation, guardrails, and security, released in stages and measured at each one.",
+    story: "build",
+    storyLabel: "A pipeline of builds, tests, guardrails, and a security review, then a release in stages of five, twenty-five, and one hundred percent.",
   },
   {
     title: "We run it",
     body: "We watch quality and cost, tune what drifts, and hand over documentation your team can own.",
+    story: "run",
+    storyLabel: "Live quality and cost charts catch a drift, it is tuned and fixed, and the documentation is handed over to your team.",
   },
 ];
-
-// Illustrative release workflow, not a real client system.
-const code = [
-  { n: 1, t: [["k", "release"], ["p", ": "], ["s", "support-agent-v2"]] },
-  { n: 2, t: [["k", "gates"], ["p", ":"]] },
-  { n: 3, t: [["p", "  - "], ["k", "evals"], ["p", ": "], ["s", "pass_rate"], ["n", " >= 0.92"], ["p", " on real cases"]] },
-  { n: 4, t: [["p", "  - "], ["k", "cost"], ["p", ": "], ["s", "per_conversation"], ["n", " <= $0.04"]] },
-  { n: 5, t: [["p", "  - "], ["k", "safety"], ["p", ": "], ["s", "red_team suite clean"]] },
-  { n: 6, t: [["k", "rollout"], ["p", ": "], ["s", "canary"], ["n", " 5% > 25% > 100%"]] },
-  { n: 7, t: [["k", "on_regression"], ["p", ": "], ["s", "roll back, page the team"]] },
-  { n: 8, t: [["k", "audit"], ["p", ": "], ["s", "every decision logged"]] },
-];
-
-const log = [
-  { time: "09:02:11", mark: "✓", color: "text-emerald-400", step: "evals", msg: "0.94 pass rate on 240 real cases" },
-  { time: "09:02:40", mark: "✓", color: "text-emerald-400", step: "cost", msg: "$0.031 per conversation" },
-  { time: "09:03:05", mark: "!", color: "text-[#f2b35e]", step: "canary", msg: "25% stage: latency up 12%" },
-  { time: "09:03:06", mark: "→", color: "text-signal", step: "hold", msg: "rollout paused, fix queued" },
-];
-
-const tone: Record<string, string> = {
-  k: "text-signal",
-  p: "text-chalk-mute",
-  s: "text-chalk",
-  n: "text-[#f2b35e]",
-};
 ---
 
 <section class="relative overflow-hidden">
@@ -83,17 +66,17 @@ const tone: Record<string, string> = {
 
     <!--md-skip-end-->
 
-    <div id="hero-human" class="mt-8 grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-6">
+    <div id="hero-human" class="mt-8 grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-10">
       <div>
-        <span class="kicker">AI engineering studio</span>
+        <span class="kicker">AI agent development · Toronto</span>
 
         <h1 class="mt-6 max-w-[19ch] font-display text-[clamp(2.4rem,5.2vw,4.2rem)] font-semibold leading-[1.04] tracking-[-0.03em] text-chalk text-balance">
-          AI agent development and automation, built to work in production.
+          AI agents and automation that work in production.
         </h1>
 
         <p class="measure mt-7 text-[17px] leading-relaxed text-chalk-soft text-pretty">
-          For small businesses, startups, and enterprise teams. We run fixed-scope audits, build agents and
-          automations, and operate them after launch. With selected startups, we also partner for equity.
+          For small businesses, startups, and enterprise teams. Start with a fixed-scope audit, get a working agent
+          in weeks, and we run it after launch. Selected startups can partner with us for equity.
         </p>
 
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -109,95 +92,21 @@ const tone: Record<string, string> = {
         <p class="label-mono mt-7">Fixed scope · Enterprise-grade engineering · Toronto, working worldwide</p>
       </div>
 
-      <div class="relative mx-auto w-full max-w-[460px] origin-center sm:scale-[1.15] lg:max-w-none lg:scale-[1.35]">
-        <Figure
-          client:visible
-          name="exploded"
-          label="An application shown in four separated layers, standing for the layers of an AI product"
-          intensity={0.7}
-          plate="#08090a"
-        />
+      <div class="relative mx-auto w-full max-w-[480px] lg:max-w-none">
+        <div class="aspect-[460/420] w-full">
+          <StoryScene
+            client:visible
+            scene="hero"
+            label="An AI support agent takes in customer requests, does the work, and sends the result. Anything it is unsure about passes a guardrail gate where a person approves it first."
+          />
+        </div>
       </div>
     </div>
   </div>
 
   <div id="how" class="shell relative scroll-mt-24 pb-20 pt-12 lg:pb-24">
     <div class="panel relative overflow-hidden">
-      <div class="grid lg:grid-cols-[1.05fr_0.95fr]">
-        <div class="border-b border-line lg:border-b-0 lg:border-r">
-          <div class="flex items-center gap-2 border-b border-line px-5 py-3">
-            <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-line-2"></span>
-            <span class="label-mono ml-3 normal-case tracking-normal">release.yaml</span>
-            <span class="label-mono ml-auto">example</span>
-          </div>
-          <div
-            class="overflow-x-auto px-5 py-6 font-mono text-[13px] leading-[1.9] sm:px-7 sm:text-[13.5px]"
-            role="img"
-            aria-label="Example release workflow: an AI support agent must pass quality, cost, and safety gates, rolls out in stages, and rolls back automatically on a regression."
-          >
-            {
-              code.map((line) => (
-                <div class="flex gap-4">
-                  <span class="w-4 shrink-0 select-none text-right text-chalk-mute/60">{line.n}</span>
-                  <span class="whitespace-pre">
-                    {line.t.map(([c, s]) => (
-                      <span class={tone[c]}>{s}</span>
-                    ))}
-                  </span>
-                </div>
-              ))
-            }
-          </div>
-
-          <div class="border-t border-line px-5 py-5 font-mono text-[12.5px] leading-[1.9] sm:px-7">
-            <p class="label-mono mb-3">Run log · example</p>
-            <ul class="space-y-0.5 overflow-x-auto">
-              {
-                log.map((l) => (
-                  <li class="flex gap-3 whitespace-nowrap">
-                    <span class="text-chalk-mute/60">{l.time}</span>
-                    <span class={l.color}>{l.mark}</span>
-                    <span class="w-[4.5rem] text-chalk-mute">{l.step}</span>
-                    <span class="text-chalk-soft">{l.msg}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-
-        <div class="px-7 py-10 sm:px-10 lg:py-12">
-          <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight text-chalk sm:text-[32px]">
-            <span class="text-signal">How</span> an engagement runs
-          </h2>
-
-          <ol class="mt-8 space-y-7">
-            {
-              steps.map((step, i) => (
-                <li class="flex gap-5">
-                  <span
-                    class={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border text-[13px] font-medium ${
-                      i === 0
-                        ? "border-signal bg-signal text-[#04222a]"
-                        : "border-line-2 text-chalk-mute"
-                    }`}
-                  >
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 class="font-display text-[17px] font-semibold leading-snug text-chalk">{step.title}</h3>
-                    <p class="measure mt-1.5 text-[14.5px] leading-relaxed text-chalk-mute text-pretty">
-                      {step.body}
-                    </p>
-                  </div>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
-      </div>
+      <EngagementJourney client:visible steps={steps} />
     </div>
   </div>
 </section>
